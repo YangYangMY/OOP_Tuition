@@ -1,3 +1,5 @@
+package oop.tuition.java;
+
 public class Tuition {
     public static void main(String[] args){
         People[] stuArray = new Student[100];

@@ -1,3 +1,5 @@
+package oop.tuition.java;
+
 class Student extends People {
     static int stuNum;
     String stuID;

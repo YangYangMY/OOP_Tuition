@@ -1,3 +1,5 @@
+package oop.tuition.java;
+
 class People {
     String name;
     int age;
