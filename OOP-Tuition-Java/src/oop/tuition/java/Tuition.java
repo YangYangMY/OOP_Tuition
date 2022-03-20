@@ -5,7 +5,7 @@ public class Tuition {
         People[] stuArray = new Student[100];
         People[] tutArray = new Tutor[30];
         dummyData(stuArray);
-        dummyData2(tutArray);
+        dummyData2(tutArray); 
         
         System.out.println(stuArray[0].toString());
         System.out.println(stuArray[1].toString());
@@ -14,8 +14,38 @@ public class Tuition {
             System.out.println(tutArray[i].toString());
         }
 
-    }
-    
+        Course Psychology = new Course();
+        Course IT = new Course();
+        Course HR = new Course();
+
+        CourseDummyData(Psychology, IT, HR);
+
+        System.out.println(Psychology.toString());
+        System.out.println(IT.toString());
+        System.out.println(HR.toString());
+
+        Psychology[] psyCourse = new Psychology[3];
+        IT[] itCourse = new IT[3];
+        HR[] hrCourse = new HR[3];
+
+        psyCourseDummyData(psyCourse);
+        itCourseDummyDate(itCourse);
+        hrCourseDummyDate(hrCourse);
+
+        for (int x = 0; x < psyCourse.length; x++) {
+            System.out.println(psyCourse[x]);
+        }
+
+        for (int y = 0; y < itCourse.length; y++) {
+            System.out.println(itCourse[y]);
+        }
+
+        for (int z = 0; z < hrCourse.length; z++) {
+            System.out.println(hrCourse[z]);
+        }
+
+        }
+
     public static void dummyData(People[] stuArray){
         stuArray[0] = new Student("Zhi Lin Wei ", 24, 'F', "+6014-5371 2077", "linwei88@gmail.com", "Student", 0.0);
         stuArray[1] = new Student("Adam Hanif Bin Hisham", 21, 'M', "+6012-273 7001", "adamhanif232@hotmail.com", "", 40.0);
@@ -90,5 +120,37 @@ public class Tuition {
         tutArray[17] = new Tutor("Wendye Maplethorpe", 33, 'F', "+6016-722 5421", "wmaplethorpe1b@so-net.ne.jp","PSY","Bachelor's Degree");
         tutArray[18] = new Tutor("Isaac Jeanneau", 36, 'M', "+6017-787 3252", "ijeanneau1m@simplemachines.org","IT","Bachelor's Degree");
         tutArray[19] = new Tutor("Eddy Picker", 28, 'M', "+6017-717 8234", "epicker2d@wix.com","HR","Bachelor's Degree");
+    }
+
+    public static void CourseDummyData(Course Psychology, Course IT, Course HR){
+        Psychology.description = "This course aim to develop students' critical thinking, analytical and \n" + 
+        "practical skills to approach problems that are related to human behaviour and mental processes.";
+        Psychology.maxStudentNo = 75;
+
+        IT.description = "Students will be introduced to computer software, hardware, and network technologies, \n" + 
+        "as well as information security, privacy, and social issues inherent in information technologies.";
+        IT.maxStudentNo = 150;
+
+        HR.description = "The course develops a critical understanding of the role and functions of the various \n" +
+        "human resource activities in an organisation.";
+        HR.maxStudentNo = 120;
+    }
+
+    public static void psyCourseDummyData(Psychology[] psyCourse){
+        psyCourse[0] = new Psychology("SP01", "Social Psychology", 550.00);
+        psyCourse[1] = new Psychology("EP02", "Economic Psychology", 410.55);
+        psyCourse[2] = new Psychology("CP03", "Clinical Psychology", 795.50);
+    }
+
+    public static void itCourseDummyDate(IT[] itCourse){
+        itCourse[0] = new IT("IS01", "Information Security", 575.65);
+        itCourse[1] = new IT("IT02", "Internet Technology", 570.00);
+        itCourse[2] =  new IT("CCD03", "Cloud Computing", 895.99);
+    }
+
+    public static void hrCourseDummyDate(HR[] hrCourse){
+        hrCourse[0] = new HR("HRA01", "Human Resources Analytics", 370.25);
+        hrCourse[1] = new HR("AHR02", "Administrative Human Resources", 290.95);
+        hrCourse[2] =  new HR("HRO03", "Human Resources Operations", 305.85);
     }
 }
