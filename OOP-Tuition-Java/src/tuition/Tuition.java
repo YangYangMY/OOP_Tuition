@@ -3,6 +3,7 @@ package tuition;
 import java.util.Scanner;
 import java.util.Formatter;
 
+
 public class Tuition {
     
     private final static String username = "admin";
@@ -44,7 +45,7 @@ public class Tuition {
     public static void menu(){
         Scanner input = new Scanner(System.in);
         People[] stuArray = new Student[100];
-        People[] tutArray = new Tutor[30];
+        People[] tutArray = new Tutor[50];
         Course Psychology = new Course();
         Course IT = new Course();
         Course HR = new Course();
@@ -99,7 +100,7 @@ public class Tuition {
                     break;
                 case 11:
                     //new peopleTable(tutArray);
-                    for (int i = 0; i < 20; i++) {
+                    for (int i = 0; i < Tutor.getTutorNum(); i++) {
                         System.out.println(tutArray[i].toString());
                     }
                     break;
@@ -140,7 +141,7 @@ public class Tuition {
     
     public static void addPeople(People[] peopleArr){
         Scanner input = new Scanner(System.in);
-        String name, phoneNum, email, description, major, level, stringAge, stringSex;
+        String name, phoneNum, email, description, stringAge, stringSex;
         char sex;
         int age;
         double balance;
@@ -165,12 +166,14 @@ public class Tuition {
             System.out.print("Enter balance: ");
             balance = input.nextDouble();
             peopleArr[((Student)peopleArr[0]).getStuNum()] = new Student(name, age, sex, phoneNum, email, description, balance);
-        } else {
-            System.out.print("Enter major: ");
-            major = input.nextLine();
-            System.out.print("Enter level: ");
-            level = input.nextLine();
-            peopleArr[((Tutor)peopleArr[0]).getTutorNum()] = new Tutor(name, age, sex, phoneNum, email, major, level);
+        } 
+        else{
+            System.out.print("Enter major (IT, PSY, HR): ");
+            String major = input.nextLine();
+            System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
+            String level = input.nextLine();
+            
+            peopleArr[((Tutor)peopleArr[0]).getTutorNum()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor)peopleArr[0]).getMajor(major), ((Tutor)peopleArr[0]).getLevel(level));
         }
     }
     
@@ -277,12 +280,12 @@ public class Tuition {
                     case 6:
                         System.out.print("Enter new major: ");
                         String newMajor = input.nextLine();
-                        ((Tutor) peopleArr[tempI]).setMajor(newMajor);
+                        ((Tutor) peopleArr[tempI]).setMajor(((Tutor)peopleArr[tempI]).getMajor(newMajor));
                         break;
                     case 7:
                         System.out.print("Enter new level: ");
                         String newLevel = input.nextLine();
-                        ((Tutor) peopleArr[tempI]).setLevel(newLevel);
+                        ((Tutor) peopleArr[tempI]).setLevel(((Tutor)peopleArr[tempI]).getLevel(newLevel));
                         break;
                 }
             }
@@ -327,8 +330,8 @@ public class Tuition {
                 ((Student) peopleArr[tempI]).setBalance(0.0);
                 System.out.println("The Student ID " + id + "has been deleted");
             } else {
-                ((Tutor) peopleArr[tempI]).setMajor("");
-                ((Tutor) peopleArr[tempI]).setLevel("");
+                ((Tutor) peopleArr[tempI]).setMajor(Tutor.Major.IT);
+                ((Tutor) peopleArr[tempI]).setLevel(Tutor.Level.BachelorDegree);
                 System.out.println("The Tutor ID " + id + "has been deleted");
             }
         } else {

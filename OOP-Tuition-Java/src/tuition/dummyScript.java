@@ -56,26 +56,26 @@ public class dummyScript {
     };
     
     public static void dummyData2(People[] tutArray){
-        tutArray[0] = new Tutor("Selestina Greson", 41, 'F', "+6011-959 9542", "sgreson0@fastcompany.com","IT","Doctorate");
-        tutArray[1] = new Tutor("Rebbecca Collings", 33, 'F', "+6013-449 9112", "rcollings1@dailymotion.com","PSY","Bachelor's Degree");
-        tutArray[2] = new Tutor("Ewan Noto", 28, 'M', "+6019-422 9134", "enoto3@spotify.com","HR","Bachelor's Degree");
-        tutArray[3] = new Tutor("Marcelo Hexum", 34, 'M', "+6011-229 9133", "mhexum4@irs.com","PSY","Master's Degree");
-        tutArray[4] = new Tutor("Mona Rignoldes", 29, 'F', "+6014-321 2654", "mhexum4@irs.com","PSY","Bachelor's Degree");
-        tutArray[5] = new Tutor("Irita Broggini", 37, 'F', "+6014-379 2707", "ibroggini6@vinaora.com","IT","Master's Degree");
-        tutArray[6] = new Tutor("Rubin Bullman", 30, 'M', "+6013-189 7421", "rbullman7@parallels.com","HR","Bachelor's Degree");
-        tutArray[7] = new Tutor("Raff Pietasch", 35, 'M', "+6013-147 0811", "rrpietasch8@state.tx.us","HR","Bachelor's Degree");
-        tutArray[8] = new Tutor("Stefan Makepeace", 39, 'M', "+6017-147 0121", "smakepeace9@discovery.com","IT","Master's Degree");
-        tutArray[9] = new Tutor("Lorrie Leport", 29, 'F', "+6012-057 0296", "lleportb@people.com.cn","IT","Bachelor's Degree");
-        tutArray[10] = new Tutor("Willamina Michell", 31, 'F', "+6011-187 3433", "wmichellf@so-net.ne.jp","IT","Bachelor's Degree");
-        tutArray[11] = new Tutor("Herbert Farfalameev", 30, 'M', "+6015-756 3963", "hfarfalameevj@weather.com","HR","Bachelor's Degree");
-        tutArray[12] = new Tutor("Vitoria Priddie", 39, 'F', "+6018-7656 3432", "vpriddien@cargocollective.com","PSY","Bachelor's Degree");
-        tutArray[13] = new Tutor("Bevin Cod", 44, 'M', "+6016-884 1039", "bcodp@huffingtonpost.com","HR","Doctorate");
-        tutArray[14] = new Tutor("Tanner Ratlee", 31, 'M', "+6015-553 3747", "tratlees@time.com","PSY","Bachelor's Degree");
-        tutArray[15] = new Tutor("Goober Krop", 30, 'M', "+6012-712 3346", "gkropx@zimbio.com","HR","Bachelor's Degree");
-        tutArray[16] = new Tutor("Rozella Paskin", 28, 'F', "+6011-719 9356", "rpaskin16@fotki.com","IT","Bachelor's Degree");
-        tutArray[17] = new Tutor("Wendye Maplethorpe", 33, 'F', "+6016-722 5421", "wmaplethorpe1b@so-net.ne.jp","PSY","Bachelor's Degree");
-        tutArray[18] = new Tutor("Isaac Jeanneau", 36, 'M', "+6017-787 3252", "ijeanneau1m@simplemachines.org","IT","Bachelor's Degree");
-        tutArray[19] = new Tutor("Eddy Picker", 28, 'M', "+6017-717 8234", "epicker2d@wix.com","HR","Bachelor's Degree");
+        tutArray[0] = new Tutor("Selestina Greson", 41, 'F', "+6011-959 9542", "sgreson0@fastcompany.com",Tutor.Major.IT,Tutor.Level.Doctorate);
+        tutArray[1] = new Tutor("Rebbecca Collings", 33, 'F', "+6013-449 9112", "rcollings1@dailymotion.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[2] = new Tutor("Ewan Noto", 28, 'M', "+6019-422 9134", "enoto3@spotify.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[3] = new Tutor("Marcelo Hexum", 34, 'M', "+6011-229 9133", "mhexum4@irs.com",Tutor.Major.PSY,Tutor.Level.MasterDegree);
+        tutArray[4] = new Tutor("Mona Rignoldes", 29, 'F', "+6014-321 2654", "mhexum4@irs.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[5] = new Tutor("Irita Broggini", 37, 'F', "+6014-379 2707", "ibroggini6@vinaora.com",Tutor.Major.IT,Tutor.Level.MasterDegree);
+        tutArray[6] = new Tutor("Rubin Bullman", 30, 'M', "+6013-189 7421", "rbullman7@parallels.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[7] = new Tutor("Raff Pietasch", 35, 'M', "+6013-147 0811", "rrpietasch8@state.tx.us",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[8] = new Tutor("Stefan Makepeace", 39, 'M', "+6017-147 0121", "smakepeace9@discovery.com",Tutor.Major.IT,Tutor.Level.MasterDegree);
+        tutArray[9] = new Tutor("Lorrie Leport", 29, 'F', "+6012-057 0296", "lleportb@people.com.cn",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[10] = new Tutor("Willamina Michell", 31, 'F', "+6011-187 3433", "wmichellf@so-net.ne.jp",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[11] = new Tutor("Herbert Farfalameev", 30, 'M', "+6015-756 3963", "hfarfalameevj@weather.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[12] = new Tutor("Vitoria Priddie", 39, 'F', "+6018-7656 3432", "vpriddien@cargocollective.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[13] = new Tutor("Bevin Cod", 44, 'M', "+6016-884 1039", "bcodp@huffingtonpost.com",Tutor.Major.HR,Tutor.Level.Doctorate);
+        tutArray[14] = new Tutor("Tanner Ratlee", 31, 'M', "+6015-553 3747", "tratlees@time.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[15] = new Tutor("Goober Krop", 30, 'M', "+6012-712 3346", "gkropx@zimbio.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[16] = new Tutor("Rozella Paskin", 28, 'F', "+6011-719 9356", "rpaskin16@fotki.com",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[17] = new Tutor("Wendye Maplethorpe", 33, 'F', "+6016-722 5421", "wmaplethorpe1b@so-net.ne.jp",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[18] = new Tutor("Isaac Jeanneau", 36, 'M', "+6017-787 3252", "ijeanneau1m@simplemachines.org",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[19] = new Tutor("Eddy Picker", 28, 'M', "+6017-717 8234", "epicker2d@wix.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
     }
     
     public static void CourseDummyData(Course Psychology, Course IT, Course HR) {
