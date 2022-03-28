@@ -4,7 +4,7 @@ public class Tutor extends People{
     private String tutorID;
     private String major;
     private String level;
-    private static int tutorNum = 1;
+    private static int tutorNum;
     
     public Tutor(){
         super();
@@ -17,7 +17,7 @@ public class Tutor extends People{
         super(name, age, sex, phoneNum, email);
         this.major = major;
         this.level = level;
-        
+        this.tutorNum++;
         if (major == "IT"){
             this.tutorID = "TIT" + tutorNum;
         }
@@ -30,7 +30,7 @@ public class Tutor extends People{
         else{
             this.tutorID = "T" + tutorNum;
         }
-        tutorNum++;
+        
     }
 
     public String getTutorID() {
