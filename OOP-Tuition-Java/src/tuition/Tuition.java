@@ -3,49 +3,13 @@ package tuition;
 import java.util.Scanner;
 import java.util.Formatter;
 
-
 public class Tuition {
-    
+
     private final static String username = "admin";
     private final static String password = "rsf1s3g2";
-    
+
     public static void main(String[] args) {
 
-        Course Psychology = new Course();
-        Course IT = new Course();
-        Course Language = new Course();
-        dummyScript.CourseDummyData(Psychology, IT, Language);
-
-        System.out.println("Psychology Course \n" + Psychology.toString());
-        System.out.println("IT Course \n" + IT.toString());
-        System.out.println("Language Course \n" + Language.toString());
-
-        Psychology[] psyCourse = new Psychology[3];
-        IT[] itCourse = new IT[3];
-        Language[] langCourse = new Language[3];
-
-        dummyScript.psyCourseDummyData(psyCourse);
-        dummyScript.itCourseDummyDate(itCourse);
-        dummyScript.langCourseDummyDate(langCourse);
-
-        System.out.println(Psychology.toString());
-        System.out.println(IT.toString());
-        System.out.println(Language.toString());
-
-        for (int x = 0; x < psyCourse.length; x++) {
-            System.out.println(psyCourse[x]);
-        }
-
-        for (int y = 0; y < itCourse.length; y++) {
-            System.out.println(itCourse[y]);
-        }
-
-        for (int z = 0; z < langCourse.length; z++) {
-            System.out.println(langCourse[z]);
-        }
-        
-        //menu();
-        
         Scanner input = new Scanner(System.in);
         int times = 3;
         boolean contactManagement = false;
@@ -66,29 +30,42 @@ public class Tuition {
                 contactManagement = true;
             }
         } while (times > 0);
-        
-        if(contactManagement){
+
+        if (contactManagement) {
             System.out.println("Sorry, you have reached the maximum times of login. Please contact the management for the username and password\n");
         }
-        
+
         System.out.println("Logout.");
-        
+
     }
-    
-    public static void menu(){
+
+    public static void menu() {
         Scanner input = new Scanner(System.in);
         People[] stuArray = new Student[100];
         People[] tutArray = new Tutor[50];
         dummyScript.dummyData(stuArray);
         dummyScript.dummyData2(tutArray);
-        
+
+        Course Psychology = new Course();
+        Course IT = new Course();
+        Course Language = new Course();
+        dummyScript.CourseDummyData(Psychology, IT, Language);
+
+        Psychology[] psyCourse = new Psychology[3];
+        IT[] itCourse = new IT[3];
+        Language[] langCourse = new Language[3];
+
+        dummyScript.psyCourseDummyData(psyCourse);
+        dummyScript.itCourseDummyDate(itCourse);
+        dummyScript.langCourseDummyDate(langCourse);
+
         int taskChoice = 0;
-        System.out.println(Tutor.getTutorNum());
+        
         do {
             System.out.print("TTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
                     + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
                     + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
-                    + "\nList\n\t10. Student\n\t11. Tutor\nSelect task to perform: ");
+                    + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n\t13. Language\nSelect task to perform: ");
             taskChoice = input.nextInt();
 
             switch (taskChoice) {
@@ -128,18 +105,37 @@ public class Tuition {
                         System.out.println(tutArray[i].toString());
                     }
                     break;
+                case 12:
+                    //new Course
+                    System.out.println(Psychology.toString());
+                    System.out.println(IT.toString());
+                    System.out.println(Language.toString());
+                    break;
+                case 13:
+                    for (int x = 0; x < psyCourse.length; x++) {
+                        System.out.println(psyCourse[x]);
+                    }
+
+                    for (int y = 0; y < itCourse.length; y++) {
+                        System.out.println(itCourse[y]);
+                    }
+
+                    for (int z = 0; z < langCourse.length; z++) {
+                        System.out.println(langCourse[z]);
+                    }
+                    break;
             }
         } while (taskChoice != 0);
-    
+
     }
-    
-    public static void addPeople(People[] peopleArr){
+
+    public static void addPeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
         String name, phoneNum, email, description, stringAge, stringSex;
         char sex;
         int age;
         double balance;
-        
+
         System.out.print("Enter name: ");
         name = input.nextLine();
         System.out.print("Enter age: ");
@@ -150,27 +146,26 @@ public class Tuition {
         phoneNum = input.nextLine();
         System.out.print("Enter email: ");
         email = input.nextLine();
-        
+
         sex = stringSex.charAt(0);
-        age = Integer.parseInt(stringAge); 
-        
+        age = Integer.parseInt(stringAge);
+
         if (peopleArr[0] instanceof Student) {
             System.out.print("Enter description: ");
             description = input.nextLine();
             System.out.print("Enter balance: ");
             balance = input.nextDouble();
-            peopleArr[((Student)peopleArr[0]).getStuNum()] = new Student(name, age, sex, phoneNum, email, description, balance);
-        } 
-        else{
+            peopleArr[((Student) peopleArr[0]).getStuNum()] = new Student(name, age, sex, phoneNum, email, description, balance);
+        } else {
             System.out.print("Enter major (IT, PSY, HR): ");
             String major = input.nextLine();
             System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
             String level = input.nextLine();
-            
-            peopleArr[((Tutor)peopleArr[0]).getTutorNum()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor)peopleArr[0]).getMajor(major), ((Tutor)peopleArr[0]).getLevel(level));
+
+            peopleArr[((Tutor) peopleArr[0]).getTutorNum()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor) peopleArr[0]).getMajor(major), ((Tutor) peopleArr[0]).getLevel(level));
         }
     }
-    
+
     public static void modifyPeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
         boolean peopleExist = false;
@@ -180,7 +175,7 @@ public class Tuition {
 
         if (peopleArr[0] instanceof Student) {
             for (int i = 0; i < Student.getStuNum(); i++) {
-                if ((((Student)peopleArr[i]).getStuID()).equals(id)) {
+                if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
                     System.out.println("Yes Student");
                     peopleExist = true;
                     tempI = i;
@@ -188,7 +183,7 @@ public class Tuition {
             }
         } else {
             for (int i = 0; i < Tutor.getTutorNum(); i++) {
-                if ((((Tutor)peopleArr[i]).getTutorID()).equals(id)) {
+                if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
                     System.out.println("Yes Tutor");
                     peopleExist = true;
                     tempI = i;
@@ -274,12 +269,12 @@ public class Tuition {
                     case 6:
                         System.out.print("Enter new major: ");
                         String newMajor = input.nextLine();
-                        ((Tutor) peopleArr[tempI]).setMajor(((Tutor)peopleArr[tempI]).getMajor(newMajor));
+                        ((Tutor) peopleArr[tempI]).setMajor(((Tutor) peopleArr[tempI]).getMajor(newMajor));
                         break;
                     case 7:
                         System.out.print("Enter new level: ");
                         String newLevel = input.nextLine();
-                        ((Tutor) peopleArr[tempI]).setLevel(((Tutor)peopleArr[tempI]).getLevel(newLevel));
+                        ((Tutor) peopleArr[tempI]).setLevel(((Tutor) peopleArr[tempI]).getLevel(newLevel));
                         break;
                 }
             }
@@ -287,14 +282,14 @@ public class Tuition {
             System.out.println("The ID doesn't exist");
         }
     }
-    
-    public static void deletePeople(People[] peopleArr){
+
+    public static void deletePeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
         boolean peopleExist = false;
         int tempI = 0;
         System.out.print("Enter ID to delete: ");
         String id = input.nextLine();
-        
+
         if (peopleArr[0] instanceof Student) {
             for (int i = 0; i < Student.getStuNum(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
@@ -312,7 +307,7 @@ public class Tuition {
                 }
             }
         }
-        
+
         if (peopleExist) {
             peopleArr[tempI].setName("");
             peopleArr[tempI].setAge(0);
@@ -331,9 +326,5 @@ public class Tuition {
         } else {
             System.out.println("The ID doesn't exist");
         }
-
     }
-
-    
-    
 }
