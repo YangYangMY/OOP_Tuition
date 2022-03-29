@@ -46,25 +46,35 @@ public class Tuition {
         Scanner input = new Scanner(System.in);
         People[] stuArray = new Student[100];
         People[] tutArray = new Tutor[50];
+        
         Course Psychology = new Course();
         Course IT = new Course();
-        Course HR = new Course();
+        Course Language = new Course();
+        dummyScript.CourseDummyData(Psychology, IT, Language);
+
+        System.out.println("Psychology Course \n" + Psychology.toString());
+        System.out.println("IT Course \n" + IT.toString());
+        System.out.println("Language Course \n" + Language.toString());
+
         Psychology[] psyCourse = new Psychology[3];
         IT[] itCourse = new IT[3];
-        HR[] hrCourse = new HR[3];
-        dummyScript.dummyData(stuArray);
-        dummyScript.dummyData2(tutArray);
-        dummyScript.CourseDummyData(Psychology, IT, HR);
+//        Language[] langCourse = new Language[3];
+
         dummyScript.psyCourseDummyData(psyCourse);
         dummyScript.itCourseDummyDate(itCourse);
-        dummyScript.hrCourseDummyDate(hrCourse);
+//        dummyScript.langCourseDummyDate(langCourse);
+        
+        
+        dummyScript.dummyData(stuArray);
+        dummyScript.dummyData2(tutArray);
+
         int taskChoice = 0;
         System.out.println(Tutor.getTutorNum());
         do {
             System.out.print("TTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
                     + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
                     + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
-                    + "\nList\n\t10. Student\n\t11. Tutor\nSelect task to perform: ");
+                    + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n\t 13. Language\nSelect task to perform: ");
             taskChoice = input.nextInt();
 
             switch (taskChoice) {
@@ -103,6 +113,25 @@ public class Tuition {
                     for (int i = 0; i < Tutor.getTutorNum(); i++) {
                         System.out.println(tutArray[i].toString());
                     }
+                    break;
+                case 12:
+                    //new Course
+                    System.out.println(Psychology.toString());
+                    System.out.println(IT.toString());
+                    System.out.println(Language.toString());
+                    break;
+                case 13:
+                    for (int x = 0; x < psyCourse.length; x++) {
+                        System.out.println(psyCourse[x]);
+                    }
+
+                    for (int y = 0; y < itCourse.length; y++) {
+                        System.out.println(itCourse[y]);
+                    }
+
+//                    for (int z = 0; z < langCourse.length; z++) {
+//                        System.out.println(langCourse[z]);
+//                    }
                     break;
             }
         } while (taskChoice != 0);
@@ -320,20 +349,15 @@ public class Tuition {
         }
         
         if (peopleExist) {
-            peopleArr[tempI].setName("");
-            peopleArr[tempI].setAge(0);
-            peopleArr[tempI].setSex('X');
-            peopleArr[tempI].setPhoneNum("");
-            peopleArr[tempI].setEmail("");
             if (peopleArr[0] instanceof Student) {
-                ((Student) peopleArr[tempI]).setDescription("");
-                ((Student) peopleArr[tempI]).setBalance(0.0);
+                ((Student) peopleArr[tempI]).setStuNum(((Student) peopleArr[tempI]).getStuNum());
                 System.out.println("The Student ID " + id + "has been deleted");
             } else {
-                ((Tutor) peopleArr[tempI]).setMajor(Tutor.Major.IT);
-                ((Tutor) peopleArr[tempI]).setLevel(Tutor.Level.BachelorDegree);
+                ((Tutor) peopleArr[tempI]).setTutorNum(((Tutor) peopleArr[tempI]).getTutorNum());
+                
                 System.out.println("The Tutor ID " + id + "has been deleted");
             }
+            peopleArr[tempI] = null;
         } else {
             System.out.println("The ID doesn't exist");
         }
