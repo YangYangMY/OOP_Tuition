@@ -1,61 +1,55 @@
 package tuition;
 
 public class IT extends Course {
+    private String preRequisite;
+    private String programmingLanguage;
+    static int numOfStudents;
 
-    private String code;
-    private String name;
-    private double fee;
-    private int numOfStudent;
-
+    //Constructor
     public IT() {
-        this(null, null, 0.0);
+        super();
+        this.preRequisite = "Introduction to Web Design";
+        this.programmingLanguage = "HTML";
     }
 
-    public IT(String courseCode, String courseName, double courseFee) {
-        this.code = courseCode;
-        this.name = courseName;
-        this.fee = courseFee;
+    public IT(String preRequisite, String programmingLanguage){
+        this.preRequisite = preRequisite;
+        this.programmingLanguage = programmingLanguage;
     }
 
-    public String getCode() {
-        return code;
+    public IT(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String preRequisite, String programmingLanguage) {
+        super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
+        this.preRequisite = preRequisite;
+        this.programmingLanguage = programmingLanguage;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    //Getter & Setter
+    public String getPreRequisite() {
+        return this.preRequisite;
     }
 
-    public String getName() {
-        return name;
+    public void setPreRequisite(String preRequisite) {
+        this.preRequisite = preRequisite;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getProgrammingLanguage() {
+        return this.programmingLanguage;
     }
 
-    public double getFee() {
-        return fee;
-    }
-
-    public void setFee(double fee) {
-        this.fee = fee;
-    }
-
-    public int getNumOfStudent() {
-        return numOfStudent;
-    }
-
-    public void setNumOfStudent(int numOfStudent) {
-        this.numOfStudent = numOfStudent;
+    public void setProgrammingLanguage(String programmingLanguage) {
+        this.programmingLanguage = programmingLanguage;
     }
     
+    //Methods
     @Override
     public String toString() {
         String output = "";
 
-        output += "Course code: " + this.code + "\n"
-                + "Course title: " + this.name + "\n"
-                + "Course fee: " + this.fee + "\n";
+        output += super.getTitle() + "\n"
+                + "Course Code: " + super.getCode()
+                + super.toString()
+                + "Pre-requisite: " + this.preRequisite + "\n"
+                + "Programming Language(s): " + this.programmingLanguage + "\n";
 
         return output;
     }

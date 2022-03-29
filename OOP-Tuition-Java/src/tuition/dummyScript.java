@@ -56,58 +56,71 @@ public class dummyScript {
     };
     
     public static void dummyData2(People[] tutArray){
-        tutArray[0] = new Tutor("Selestina Greson", 41, 'F', "+6011-959 9542", "sgreson0@fastcompany.com","IT","Doctorate");
-        tutArray[1] = new Tutor("Rebbecca Collings", 33, 'F', "+6013-449 9112", "rcollings1@dailymotion.com","PSY","Bachelor's Degree");
-        tutArray[2] = new Tutor("Ewan Noto", 28, 'M', "+6019-422 9134", "enoto3@spotify.com","HR","Bachelor's Degree");
-        tutArray[3] = new Tutor("Marcelo Hexum", 34, 'M', "+6011-229 9133", "mhexum4@irs.com","PSY","Master's Degree");
-        tutArray[4] = new Tutor("Mona Rignoldes", 29, 'F', "+6014-321 2654", "mhexum4@irs.com","PSY","Bachelor's Degree");
-        tutArray[5] = new Tutor("Irita Broggini", 37, 'F', "+6014-379 2707", "ibroggini6@vinaora.com","IT","Master's Degree");
-        tutArray[6] = new Tutor("Rubin Bullman", 30, 'M', "+6013-189 7421", "rbullman7@parallels.com","HR","Bachelor's Degree");
-        tutArray[7] = new Tutor("Raff Pietasch", 35, 'M', "+6013-147 0811", "rrpietasch8@state.tx.us","HR","Bachelor's Degree");
-        tutArray[8] = new Tutor("Stefan Makepeace", 39, 'M', "+6017-147 0121", "smakepeace9@discovery.com","IT","Master's Degree");
-        tutArray[9] = new Tutor("Lorrie Leport", 29, 'F', "+6012-057 0296", "lleportb@people.com.cn","IT","Bachelor's Degree");
-        tutArray[10] = new Tutor("Willamina Michell", 31, 'F', "+6011-187 3433", "wmichellf@so-net.ne.jp","IT","Bachelor's Degree");
-        tutArray[11] = new Tutor("Herbert Farfalameev", 30, 'M', "+6015-756 3963", "hfarfalameevj@weather.com","HR","Bachelor's Degree");
-        tutArray[12] = new Tutor("Vitoria Priddie", 39, 'F', "+6018-7656 3432", "vpriddien@cargocollective.com","PSY","Bachelor's Degree");
-        tutArray[13] = new Tutor("Bevin Cod", 44, 'M', "+6016-884 1039", "bcodp@huffingtonpost.com","HR","Doctorate");
-        tutArray[14] = new Tutor("Tanner Ratlee", 31, 'M', "+6015-553 3747", "tratlees@time.com","PSY","Bachelor's Degree");
-        tutArray[15] = new Tutor("Goober Krop", 30, 'M', "+6012-712 3346", "gkropx@zimbio.com","HR","Bachelor's Degree");
-        tutArray[16] = new Tutor("Rozella Paskin", 28, 'F', "+6011-719 9356", "rpaskin16@fotki.com","IT","Bachelor's Degree");
-        tutArray[17] = new Tutor("Wendye Maplethorpe", 33, 'F', "+6016-722 5421", "wmaplethorpe1b@so-net.ne.jp","PSY","Bachelor's Degree");
-        tutArray[18] = new Tutor("Isaac Jeanneau", 36, 'M', "+6017-787 3252", "ijeanneau1m@simplemachines.org","IT","Bachelor's Degree");
-        tutArray[19] = new Tutor("Eddy Picker", 28, 'M', "+6017-717 8234", "epicker2d@wix.com","HR","Bachelor's Degree");
+        tutArray[0] = new Tutor("Selestina Greson", 41, 'F', "+6011-959 9542", "sgreson0@fastcompany.com",Tutor.Major.IT,Tutor.Level.Doctorate);
+        tutArray[1] = new Tutor("Rebbecca Collings", 33, 'F', "+6013-449 9112", "rcollings1@dailymotion.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[2] = new Tutor("Ewan Noto", 28, 'M', "+6019-422 9134", "enoto3@spotify.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[3] = new Tutor("Marcelo Hexum", 34, 'M', "+6011-229 9133", "mhexum4@irs.com",Tutor.Major.PSY,Tutor.Level.MasterDegree);
+        tutArray[4] = new Tutor("Mona Rignoldes", 29, 'F', "+6014-321 2654", "mhexum4@irs.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[5] = new Tutor("Irita Broggini", 37, 'F', "+6014-379 2707", "ibroggini6@vinaora.com",Tutor.Major.IT,Tutor.Level.MasterDegree);
+        tutArray[6] = new Tutor("Rubin Bullman", 30, 'M', "+6013-189 7421", "rbullman7@parallels.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[7] = new Tutor("Raff Pietasch", 35, 'M', "+6013-147 0811", "rrpietasch8@state.tx.us",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[8] = new Tutor("Stefan Makepeace", 39, 'M', "+6017-147 0121", "smakepeace9@discovery.com",Tutor.Major.IT,Tutor.Level.MasterDegree);
+        tutArray[9] = new Tutor("Lorrie Leport", 29, 'F', "+6012-057 0296", "lleportb@people.com.cn",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[10] = new Tutor("Willamina Michell", 31, 'F', "+6011-187 3433", "wmichellf@so-net.ne.jp",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[11] = new Tutor("Herbert Farfalameev", 30, 'M', "+6015-756 3963", "hfarfalameevj@weather.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[12] = new Tutor("Vitoria Priddie", 39, 'F', "+6018-7656 3432", "vpriddien@cargocollective.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[13] = new Tutor("Bevin Cod", 44, 'M', "+6016-884 1039", "bcodp@huffingtonpost.com",Tutor.Major.HR,Tutor.Level.Doctorate);
+        tutArray[14] = new Tutor("Tanner Ratlee", 31, 'M', "+6015-553 3747", "tratlees@time.com",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[15] = new Tutor("Goober Krop", 30, 'M', "+6012-712 3346", "gkropx@zimbio.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
+        tutArray[16] = new Tutor("Rozella Paskin", 28, 'F', "+6011-719 9356", "rpaskin16@fotki.com",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[17] = new Tutor("Wendye Maplethorpe", 33, 'F', "+6016-722 5421", "wmaplethorpe1b@so-net.ne.jp",Tutor.Major.PSY,Tutor.Level.BachelorDegree);
+        tutArray[18] = new Tutor("Isaac Jeanneau", 36, 'M', "+6017-787 3252", "ijeanneau1m@simplemachines.org",Tutor.Major.IT,Tutor.Level.BachelorDegree);
+        tutArray[19] = new Tutor("Eddy Picker", 28, 'M', "+6017-717 8234", "epicker2d@wix.com",Tutor.Major.HR,Tutor.Level.BachelorDegree);
     }
     
-    public static void CourseDummyData(Course Psychology, Course IT, Course HR) {
+    public static void CourseDummyData(Course Psychology, Course IT, Course Language) {
+        //Assigning course description
         String psyDesc = "This course aim to develop students' critical thinking, analytical and \n"
                 + "practical skills to approach problems that are related to human behaviour and mental processes.";
         Psychology.setDescription(psyDesc);
-        Psychology.setMaxStudentNo(75);
 
-        IT.setDescription("Students will be introduced to computer software, hardware, and network technologies, \n"
-                + "as well as information security, privacy, and social issues inherent in information technologies.");
-        IT.setMaxStudentNo(150);
+        String itDesc = "Students will be introduced to computer software, hardware, and network technologies, \n"
+        + "as well as information security, privacy, and social issues inherent in information technologies.";
+        IT.setDescription(itDesc);
 
-        HR.setDescription("The course develops a critical understanding of the role and functions of the various \n"
-                + "human resource activities in an organisation.");
-        HR.setMaxStudentNo(120);
+        String langDesc = "This course is designed for students who are preparing for specific language proficiency tests \n" +
+        "and offer them the skills, practice, strategies to score in those exams.";
+        Language.setDescription(langDesc);
+
+        //Assigning course details
+        String psyDetail = "There are different branches of psychology such as cognitive, clinical, \n" +
+        "social and etc which impart distinct skills";
+        Psychology.setDetails(psyDetail);
+
+        String itDetail = "Some courses would require students to have prior knowledge to ensure they could communicate in \n"+
+        "certain programming language.";
+        IT.setDetails(itDetail);
+
+        String langDetail = "Only English language has a few different language proficiency exam systems offered to students to choose from \n" +
+        "and two different levels for Korean Language.";
+        Language.setDetails(langDetail);
     }
 
     public static void psyCourseDummyData(Psychology[] psyCourse) {
-        psyCourse[0] = new Psychology("SP01", "Social Psychology", 550.00);
-        psyCourse[1] = new Psychology("EP02", "Economic Psychology", 410.55);
-        psyCourse[2] = new Psychology("CP03", "Clinical Psychology", 795.50);
+        psyCourse[0] = new Psychology("IC01","Intercultural communication", "Looks at group behavious, social perception, non-verbal behavior, conformity, aggresion, prejudice and leadership.", "It refers to the effects on communication behavious when different cultures interact together", 95, "Social Psychology", "Critical Thinking, Emotion Regulation");
+        psyCourse[1] = new Psychology("HRM02","Human Resource Management", "Topics include are education, environment, sports and exercise.", "This course will be exploring the human mind in a business context.", 75, "Applied Psychology", "Problem-solving within human behaviour such as health issues, workplace issues or education.");
+        psyCourse[2] = new Psychology("HD03","Human Development", "Factors include emotions, personality, self-concept and identity formation.", "Students able to understand people how they develop, grow, and change throughout their lives.", 45, "Developmental Psychology", "Communication skills, Critical Thinking skills");
     }
 
     public static void itCourseDummyDate(IT[] itCourse) {
-        itCourse[0] = new IT("IS01", "Information Security", 575.65);
-        itCourse[1] = new IT("IT02", "Internet Technology", 570.00);
-        itCourse[2] = new IT("CCD03", "Cloud Computing", 895.99);
+        itCourse[0] = new IT("MAD01","Mobile App Development", "Lecture 3 hours per week.", "Introduce students to programming technologies, design and development related to mobile application", 150, "Introduction to Web Design", "HTML, CSS, Javascript, Java, Python, Swift");
+        itCourse[1] = new IT("OOP02","Object-Oriented Programming", "Lecture 2.5 hours per week.", "Brief review of control structures and data types with emphasis on structured data types and array processing", 100, "Problem Solving and Programming", "Java, C++, Python");
+        itCourse[2] = new IT("ADM03", "Advanced Database Management", "Lecture 1.5 hours per week.", "Advanced aspects of database management including query optimization, distributed databases and etc.", 75, "Database Management", "SQL");
     }
 
-    public static void hrCourseDummyDate(HR[] hrCourse) {
-        hrCourse[0] = new HR("HRA01", "Human Resources Analytics", 370.25);
-        hrCourse[1] = new HR("AHR02", "Administrative Human Resources", 290.95);
-        hrCourse[2] = new HR("HRO03", "Human Resources Operations", 305.85);
+    public static void langCourseDummyDate(Language[] langCourse) {
+        langCourse[0] = new Language("LAN01", "International English Language Proficiency Programme", "Measure in listening, reading, writing and speaking", "Designed to help you work, study and migrate to a country where English is native language", 250, "English", "IELTS");
+        langCourse[1] = new Language("LAN02", "Malaysia English Language Proficiency Programme", "Measure in listening, writing and speaking", "Language proficiency test that measures English language skills for Malaysia student", 200, "English", "MUET");
+        langCourse[2] = new Language("LAN03", "Korea Language Proficiency Programme", "Measure in reading, writing and listening", "Aims to measure the level of fluency of individuals in the Korean language.", 150, "Korean", "TOPIK");
     }
 }

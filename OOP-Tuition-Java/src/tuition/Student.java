@@ -21,6 +21,10 @@ class Student extends People {
         this.balance = balance;
     }
 
+    public String getStuID() {
+        return stuID;
+    }
+    
     public static int getStuNum() {
         return stuNum;
     }

@@ -2,37 +2,75 @@ package tuition;
 
 public class Tutor extends People{
     private String tutorID;
-    private String major;
-    private String level;
-    private static int tutorNum = 1;
+    private Major major;
+    private Level level;
+    private static int tutorNum;
+    
+    enum Level {
+        Doctorate,
+        BachelorDegree,
+        MasterDegree;
+    }
+    
+    enum Major {
+        IT,
+        PSY,
+        HR;
+    }
     
     public Tutor(){
         super();
         this.tutorID = null;
         this.major = null;
         this.level = null;
+        this.tutorNum++;
     }
     
-    public Tutor(String name, int age, char sex, String phoneNum, String email, String major, String level) {
+    public Tutor(String name, int age, char sex, String phoneNum, String email, Major major, Level level) {
         super(name, age, sex, phoneNum, email);
         this.major = major;
         this.level = level;
-        
-        if (major == "IT"){
+        this.tutorNum++;
+        if (major == Major.IT){
             this.tutorID = "TIT" + tutorNum;
         }
-        else if (major == "PSY"){
+        else if (major == Major.PSY){
             this.tutorID = "TPSY" + tutorNum;
         }
-        else if (major == "HR"){
+        else if (major == Major.HR){
             this.tutorID = "THR" + tutorNum;
         }
-        else{
-            this.tutorID = "T" + tutorNum;
-        }
-        tutorNum++;
+        
     }
 
+    public Major getMajor(String major){
+        switch(major){
+            case "IT":
+                return Major.IT;
+            case "HR":
+                return Major.HR;
+            case "PSY":
+                return Major.PSY;
+            default:
+                return Major.IT;
+        }
+    }
+    
+    public Level getLevel(String level){
+        switch(level){
+            case "Doctorate":
+                return Level.Doctorate;
+            case "BachelorDegree":
+                return Level.BachelorDegree;
+            case "MasterDegree":
+                return Level.MasterDegree;
+            default:
+                return Level.BachelorDegree;
+        }
+    }
+    
+    
+    
     public String getTutorID() {
         return tutorID;
     }
@@ -41,19 +79,16 @@ public class Tutor extends People{
         return tutorNum;
     }
     
-    public String getMajor() {
+    public Major getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
+    public void setMajor(Major major) {
         this.major = major;
     }
 
-    public String getLevel() {
-        return level;
-    }
 
-    public void setLevel(String level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
     

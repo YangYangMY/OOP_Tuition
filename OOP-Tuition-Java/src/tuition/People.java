@@ -19,6 +19,8 @@ class People {
         this.email = email;
     }
 
+    
+    
     public String getName() {
         return name;
     }

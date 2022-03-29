@@ -1,61 +1,55 @@
 package tuition;
 
 public class Psychology extends Course {
+    private String type;
+    private String skillLearned;
+    static int numOfStudents;
 
-    private String code;
-    private String name;
-    private double fee;
-    private int numOfStudent;
-
+    //Constructor
     public Psychology() {
-        this(null, null, 0.0);
+        super();
+        this.type = "Clinical";
+        this.skillLearned = "Communication";
     }
 
-    public Psychology(String courseCode, String courseName, double courseFee) {
-        this.code = courseCode;
-        this.name = courseName;
-        this.fee = courseFee;
+    public Psychology(String type, String skillLearned){
+        this.type = type;
+        this.skillLearned = skillLearned;
     }
 
-    public String getCode() {
-        return code;
+    public Psychology(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String type, String skillLearned) {
+        super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
+        this.type = type;
+        this.skillLearned = skillLearned;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    //Getter & Setter
+    public String getType() {
+        return this.type;
     }
 
-    public String getName() {
-        return name;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getSkillLearned() {
+        return this.skillLearned;
     }
 
-    public double getFee() {
-        return fee;
+    public void setSkillLearned(String skillLearned) {
+        this.skillLearned = skillLearned;
     }
 
-    public void setFee(double fee) {
-        this.fee = fee;
-    }
-
-    public int getNumOfStudent() {
-        return numOfStudent;
-    }
-
-    public void setNumOfStudent(int numOfStudent) {
-        this.numOfStudent = numOfStudent;
-    }
-
+    //Methods
     @Override
     public String toString() {
         String output = "";
 
-        output += "Course code: " + this.code + "\n"
-                + "Course title: " + this.name + "\n"
-                + "Course fee: " + this.fee + "\n";
+        output += super.getTitle() + "\n"
+                + "Course Code: " + super.getCode()
+                + super.toString() 
+                + "Type: " + this.type + "\n"
+                + "Skill(s) Learned: " + this.skillLearned + "\n";
 
         return output;
     }
