@@ -20,7 +20,6 @@ class People {
     }
 
     
-    
     public String getName() {
         return name;
     }

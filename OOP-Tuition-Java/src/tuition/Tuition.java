@@ -21,7 +21,24 @@ public class Tuition {
             String enteredPassword = input.nextLine();
 
             if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
-                menu();
+                People[] stuArray = new Student[100];
+                People[] tutArray = new Tutor[50];
+                dummyScript.dummyData(stuArray);
+                dummyScript.dummyData2(tutArray);
+
+                Course Psychology = new Course();
+                Course IT = new Course();
+                Course Language = new Course();
+                dummyScript.CourseDummyData(Psychology, IT, Language);
+
+                Psychology[] psyCourse = new Psychology[3];
+                IT[] itCourse = new IT[3];
+                Language[] langCourse = new Language[3];
+
+                dummyScript.psyCourseDummyData(psyCourse);
+                dummyScript.itCourseDummyDate(itCourse);
+                dummyScript.langCourseDummyDate(langCourse);
+                menu(stuArray, tutArray, Psychology, IT, Language, psyCourse, itCourse, langCourse);
                 times = 0;
                 contactManagement = false;
             } else {
@@ -38,26 +55,10 @@ public class Tuition {
         System.out.println("Logout.");
 
     }
-
-    public static void menu() {
+    
+    public static void menu(People[] stuArray, People[] tutArray, Course Psychology, Course IT, Course Language, Psychology[] psyCourse, IT[] itCourse, Language[] langCourse) {
         Scanner input = new Scanner(System.in);
-        People[] stuArray = new Student[100];
-        People[] tutArray = new Tutor[50];
-        dummyScript.dummyData(stuArray);
-        dummyScript.dummyData2(tutArray);
 
-        Course Psychology = new Course();
-        Course IT = new Course();
-        Course Language = new Course();
-        dummyScript.CourseDummyData(Psychology, IT, Language);
-
-        Psychology[] psyCourse = new Psychology[3];
-        IT[] itCourse = new IT[3];
-        Language[] langCourse = new Language[3];
-
-        dummyScript.psyCourseDummyData(psyCourse);
-        dummyScript.itCourseDummyDate(itCourse);
-        dummyScript.langCourseDummyDate(langCourse);
 
         int taskChoice = 0;
         
@@ -95,13 +96,13 @@ public class Tuition {
                     break;
                 case 10:
                     //new peopleTable(stuArray);
-                    for (int i = 0; i < Student.getStuNum(); i++) {
+                    for (int i = 0; i < Student.getStuCount(); i++) {
                         System.out.println(stuArray[i]);
                     }
                     break;
                 case 11:
                     //new peopleTable(tutArray);
-                    for (int i = 0; i < Tutor.getTutorNum(); i++) {
+                    for (int i = 0; i < Tutor.getTutorCount(); i++) {
                         System.out.println(tutArray[i].toString());
                     }
                     break;
@@ -174,7 +175,7 @@ public class Tuition {
         String id = input.nextLine();
 
         if (peopleArr[0] instanceof Student) {
-            for (int i = 0; i < Student.getStuNum(); i++) {
+            for (int i = 0; i < Student.getStuCount(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
                     System.out.println("Yes Student");
                     peopleExist = true;
@@ -182,7 +183,7 @@ public class Tuition {
                 }
             }
         } else {
-            for (int i = 0; i < Tutor.getTutorNum(); i++) {
+            for (int i = 0; i < Tutor.getTutorCount(); i++) {
                 if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
                     System.out.println("Yes Tutor");
                     peopleExist = true;
@@ -309,19 +310,38 @@ public class Tuition {
         }
 
         if (peopleExist) {
-            peopleArr[tempI].setName("");
-            peopleArr[tempI].setAge(0);
-            peopleArr[tempI].setSex('X');
-            peopleArr[tempI].setPhoneNum("");
-            peopleArr[tempI].setEmail("");
             if (peopleArr[0] instanceof Student) {
-                ((Student) peopleArr[tempI]).setDescription("");
-                ((Student) peopleArr[tempI]).setBalance(0.0);
-                System.out.println("The Student ID " + id + "has been deleted");
+                ((Student)peopleArr[0]).reduceStuCount();
+                People[] tempPeople = new Student[((Student)peopleArr[0]).getStuCount()];
+                int tempCount = Student.getStuCount();
+                tempPeople = peopleArr;
+            
+                
+                int a = 0;
+                // Move Entire student array to a temp array except the chosen delete id
+                for (int i = 0; i < tempCount+1; i++){
+                    if (! ((Student)peopleArr[i]).getStuID().equals(id)){
+                        tempPeople[a] = peopleArr[i];
+                        a++;
+                    }
+                }
+                System.out.println("The Student ID " + id + " has been deleted");
             } else {
-                ((Tutor) peopleArr[tempI]).setMajor(Tutor.Major.IT);
-                ((Tutor) peopleArr[tempI]).setLevel(Tutor.Level.BachelorDegree);
-                System.out.println("The Tutor ID " + id + "has been deleted");
+                People[] tempPeople1 = new Tutor[((Tutor)peopleArr[0]).getTutorCount()-1];
+                ((Tutor)peopleArr[0]).reduceTutorCount();
+                int tempCount = Tutor.getTutorCount();
+                tempPeople1 = peopleArr;
+
+                int a = 0;
+                // Move Entire tutor array to a temp array except the chosen delete id
+                for (int i = 0; i < tempCount+1; i++){
+                    if (! ((Tutor)peopleArr[i]).getTutorID().equals(id)){
+                        tempPeople1[a] = peopleArr[i];
+                        a++;
+                    }
+
+                }
+                System.out.println("The Tutor ID " + id + " has been deleted");
             }
         } else {
             System.out.println("The ID doesn't exist");

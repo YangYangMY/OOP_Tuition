@@ -5,20 +5,36 @@ class Student extends People {
     private String stuID;
     private String description;
     private double balance;
+    private static int StuCount;
     
     public Student(){
         super();
         this.stuID = null;
         this.description = null;
         this.balance = 0.0;
+        this.stuNum++;
+        this.StuCount++;
     }
     
     public Student(String name, int age, char sex, String phoneNum, String email, String description, double balance) {
         super(name, age, sex, phoneNum, email);
         this.stuNum++;
+        this.StuCount++;
         this.stuID = "W" + stuNum;
         this.description = description;
         this.balance = balance;
+    }
+
+    public static int getStuCount(){
+        return StuCount;
+    }
+
+    public void setStuCount(int stuCount){
+        Student.StuCount = stuCount;
+    } 
+
+    public void reduceStuCount(){
+        Student.StuCount --;
     }
 
     public String getStuID() {

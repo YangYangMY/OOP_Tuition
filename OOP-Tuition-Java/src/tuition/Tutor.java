@@ -5,7 +5,9 @@ public class Tutor extends People{
     private Major major;
     private Level level;
     private static int tutorNum;
-    
+    private static int tutorCount;
+
+
     enum Level {
         Doctorate,
         BachelorDegree,
@@ -15,7 +17,7 @@ public class Tutor extends People{
     enum Major {
         IT,
         PSY,
-        HR;
+        LANG;
     }
     
     public Tutor(){
@@ -23,32 +25,43 @@ public class Tutor extends People{
         this.tutorID = null;
         this.major = null;
         this.level = null;
-        this.tutorNum++;
+        Tutor.tutorNum++;
+        Tutor.tutorCount++;
     }
     
     public Tutor(String name, int age, char sex, String phoneNum, String email, Major major, Level level) {
         super(name, age, sex, phoneNum, email);
         this.major = major;
         this.level = level;
-        this.tutorNum++;
+        Tutor.tutorNum++;
+        Tutor.tutorCount++;
         if (major == Major.IT){
             this.tutorID = "TIT" + tutorNum;
         }
         else if (major == Major.PSY){
             this.tutorID = "TPSY" + tutorNum;
         }
-        else if (major == Major.HR){
-            this.tutorID = "THR" + tutorNum;
+        else if (major == Major.LANG){
+            this.tutorID = "TLANG" + tutorNum;
         }
         
     }
+
+    public static int getTutorCount(){
+        return tutorCount;
+    }
+
+    public void reduceTutorCount(){
+        Tutor.tutorCount--;
+    }
+
 
     public Major getMajor(String major){
         switch(major){
             case "IT":
                 return Major.IT;
-            case "HR":
-                return Major.HR;
+            case "LANG":
+                return Major.LANG;
             case "PSY":
                 return Major.PSY;
             default:
