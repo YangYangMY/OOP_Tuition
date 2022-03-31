@@ -11,10 +11,6 @@ public class Course {
         this("","", "", "", 75);
     }
 
-    public Course(int capacity){
-        this.maxStudentNo = capacity;
-    }
-
     public Course(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity){
         this.code = courseCode;
         this.title = courseTitle;
@@ -28,10 +24,6 @@ public class Course {
         return this.code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getTitle() {
         return this.title;
     }
@@ -42,6 +34,14 @@ public class Course {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public int getCapacity(){
+        return this.maxStudentNo;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public void setTitle(String courseTitle){
@@ -61,18 +61,8 @@ public class Course {
     public String toString() {
         String output = "";
 
-        if(this.description == ""){
-            output += "\nCourse Details: " + this.details + 
-            "\nEnrollment Limit : " + this.maxStudentNo + " students\n";
-        }else{
-            output += "\nCourse Details: " + this.details + 
-        "\nCourse Description: " + this.description + 
-        "\nEnrollment Limit : " + this.maxStudentNo + " students\n";
-        }
-
-        // output += "\nCourse Details: " + this.details + 
-        // "\nCourse Description: " + this.description + 
-        // "\nEnrollment Limit : " + this.maxStudentNo + " students\n";
+        output += "\nDetails: " + this.details + 
+        "\nDescription: " + this.description + "\n";
 
         return output;
     }

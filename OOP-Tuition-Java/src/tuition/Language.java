@@ -45,11 +45,13 @@ public class Language extends Course {
     public String toString() {
         String output = "";
 
-        output +=  super.getTitle() + "\n"
-                + "Course Code: " + super.getCode()
-                + super.toString()
-                + "Language: " + this.language + "\n"
-                + "Exam System: " + this.system + "\n";
+        output += "Course Title: " + super.getTitle()
+                + "\nCourse Code: " + super.getCode()
+                + "\nCourse Details: " + super.getDetails()
+                + "\nCourse Description: " + super.getDescription()
+                + "\nLanguage: " + this.language
+                + "\nExam System: " + this.system
+                + "\nEnrollment Limit : " + this.getCapacity() + " students\n";
 
         return output;
     }

@@ -94,7 +94,7 @@ public class dummyScript {
 
         //Assigning course details
         String psyDetail = "There are different branches of psychology such as cognitive, clinical, \n" +
-        "social and etc which impart distinct skills";
+        "social and etc which impart distinct skills.";
         Psychology.setDetails(psyDetail);
 
         String itDetail = "Some courses would require students to have prior knowledge to ensure they could communicate in \n"+
@@ -107,14 +107,14 @@ public class dummyScript {
     }
 
     public static void psyCourseDummyData(Psychology[] psyCourse) {
-        psyCourse[0] = new Psychology("IC01","Intercultural communication", "Looks at group behavious, social perception, non-verbal behavior, conformity, aggresion, prejudice and leadership.", "It refers to the effects on communication behavious when different cultures interact together", 95, "Social Psychology", "Critical Thinking, Emotion Regulation");
+        psyCourse[0] = new Psychology("IC01","Intercultural communication", "Looks at group behavious, social perception, non-verbal behavior, conformity, aggresion, prejudice and leadership.", "It refers to the effects on communication behavious when different cultures interact together.", 95, "Social Psychology", "Critical Thinking, Emotion Regulation");
         psyCourse[1] = new Psychology("HRM02","Human Resource Management", "Topics include are education, environment, sports and exercise.", "This course will be exploring the human mind in a business context.", 75, "Applied Psychology", "Problem-solving within human behaviour such as health issues, workplace issues or education.");
         psyCourse[2] = new Psychology("HD03","Human Development", "Factors include emotions, personality, self-concept and identity formation.", "Students able to understand people how they develop, grow, and change throughout their lives.", 45, "Developmental Psychology", "Communication skills, Critical Thinking skills");
     }
 
     public static void itCourseDummyDate(IT[] itCourse) {
-        itCourse[0] = new IT("MAD01","Mobile App Development", "Lecture 3 hours per week.", "Introduce students to programming technologies, design and development related to mobile application", 150, "Introduction to Web Design", "HTML, CSS, Javascript, Java, Python, Swift");
-        itCourse[1] = new IT("OOP02","Object-Oriented Programming", "Lecture 2.5 hours per week.", "Brief review of control structures and data types with emphasis on structured data types and array processing", 100, "Problem Solving and Programming", "Java, C++, Python");
+        itCourse[0] = new IT("MAD01","Mobile App Development", "Lecture 3 hours per week.", "Introduce students to programming technologies, design and development related to mobile application.", 150, "Introduction to Web Design", "HTML, CSS, Javascript, Java, Python, Swift");
+        itCourse[1] = new IT("OOP02","Object-Oriented Programming", "Lecture 2.5 hours per week.", "Brief review of control structures and data types with emphasis on structured data types and array processing.", 100, "Problem Solving and Programming", "Java, C++, Python");
         itCourse[2] = new IT("ADM03", "Advanced Database Management", "Lecture 1.5 hours per week.", "Advanced aspects of database management including query optimization, distributed databases and etc.", 75, "Database Management", "SQL");
     }
 

@@ -45,11 +45,13 @@ public class Psychology extends Course {
     public String toString() {
         String output = "";
 
-        output += super.getTitle() + "\n"
-                + "Course Code: " + super.getCode()
-                + super.toString() 
-                + "Type: " + this.type + "\n"
-                + "Skill(s) Learned: " + this.skillLearned + "\n";
+        output += "Course Title: " + super.getTitle()
+                + "\nCourse Code: " + super.getCode()
+                + "\nCourse Details: " + super.getDetails()
+                + "\nCourse Description: " + super.getDescription()
+                + "\nType: " + this.type
+                + "\nSkill(s) Learned: " + this.skillLearned
+                + "\nEnrollment Limit : " + this.getCapacity() + " students\n";
 
         return output;
     }

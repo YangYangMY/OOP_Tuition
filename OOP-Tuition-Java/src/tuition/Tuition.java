@@ -66,7 +66,7 @@ public class Tuition {
             System.out.print("TTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
                     + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
                     + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
-                    + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n\t13. Language\nSelect task to perform: ");
+                    + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Psychology Courses\n\t13. IT Courses\n\t14. Language Courses\nSelect task to perform: ");
             taskChoice = input.nextInt();
 
             switch (taskChoice) {
@@ -107,24 +107,36 @@ public class Tuition {
                     }
                     break;
                 case 12:
-                    //new Course
+                    //Psychology Course
+                    System.out.print("\nPSYCHOLOGY");
                     System.out.println(Psychology.toString());
-                    System.out.println(IT.toString());
-                    System.out.println(Language.toString());
-                    break;
-                case 13:
+
                     for (int x = 0; x < psyCourse.length; x++) {
+                        System.out.println((x+1) + ".");
                         System.out.println(psyCourse[x]);
                     }
+                    break;
+                case 13:
+                    // IT Course
+                    System.out.print("\nINOFRMATION TECHNOLOGY (IT)");
+                    System.out.println(IT.toString());
 
                     for (int y = 0; y < itCourse.length; y++) {
+                        System.out.println((y+1) + ".");
                         System.out.println(itCourse[y]);
                     }
+                    break;
+                case 14:
+                    // Language Course
+                    System.out.print("\nLANGUAGE");
+                    System.out.println(Language.toString());
 
                     for (int z = 0; z < langCourse.length; z++) {
+                        System.out.println((z+1) + ".");
                         System.out.println(langCourse[z]);
                     }
                     break;
+
             }
         } while (taskChoice != 0);
 

@@ -45,11 +45,13 @@ public class IT extends Course {
     public String toString() {
         String output = "";
 
-        output += super.getTitle() + "\n"
-                + "Course Code: " + super.getCode()
-                + super.toString()
-                + "Pre-requisite: " + this.preRequisite + "\n"
-                + "Programming Language(s): " + this.programmingLanguage + "\n";
+        output += "Course Title: " + super.getTitle()
+                + "\nCourse Code: " + super.getCode()
+                + "\nCourse Details: " + super.getDetails()
+                + "\nCourse Description: " + super.getDescription()
+                + "\nPre-requisite: " + this.preRequisite
+                + "\nProgramming Language(s): " + this.programmingLanguage
+                + "\nEnrollment Limit : " + this.getCapacity() + " students\n";
 
         return output;
     }
