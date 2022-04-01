@@ -189,12 +189,12 @@ public class Tuition {
             balance = BalanceInputValidate();
             peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
         } else {
-            System.out.print("Enter major (IT, PSY, HR): ");
+            System.out.print("Enter major (IT, PSY, LANG): ");
             String major = input.nextLine();
             System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
             String level = input.nextLine();
 
-            peopleArr[((Tutor) peopleArr[0]).getTutorNum()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor) peopleArr[0]).getMajor(major), ((Tutor) peopleArr[0]).getLevel(level));
+            peopleArr[((Tutor) peopleArr[0]).getTutorCount()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor) peopleArr[0]).getMajor(major), ((Tutor) peopleArr[0]).getLevel(level));
         }
     }
     
@@ -470,7 +470,7 @@ public class Tuition {
                 }
             }
         } else {
-            for (int i = 0; i < Tutor.getTutorNum(); i++) {
+            for (int i = 0; i < Tutor.getTutorCount(); i++) {
                 if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
                     System.out.println("Yes Tutor");
                     peopleExist = true;
@@ -495,25 +495,24 @@ public class Tuition {
                     }
                 }
                 clonePeople[((Student)peopleArr[0]).getStuCount()] = null;
-                System.out.println(((Student)peopleArr[0]).getStuCount());
                 System.out.println("The Student ID " + id + " has been deleted");
             } else {
-                People[] tempPeople1 = new Tutor[((Tutor)peopleArr[0]).getTutorCount()-1];
                 ((Tutor)peopleArr[0]).reduceTutorCount();
+                People[] tempPeople = new Tutor[((Tutor)peopleArr[0]).getTutorCount()];
                 int tempCount = Tutor.getTutorCount();
-                tempPeople1 = peopleArr.clone();
+                tempPeople = peopleArr;
 
                 int a = 0;
                 // Move Entire tutor array to a temp array except the chosen delete id
                 for (int i = 0; i < tempCount+1; i++){
                     if (! ((Tutor)peopleArr[i]).getTutorID().equals(id)){
-                        tempPeople1[a] = peopleArr[i];
+                        tempPeople[a] = peopleArr[i];
                         a++;
                     }
 
                 }
                 
-                peopleArr = tempPeople1;
+                tempPeople[((Tutor)peopleArr[0]).getTutorCount()] = null;
                 System.out.println("The Tutor ID " + id + " has been deleted");
             }
         } else {
