@@ -187,7 +187,7 @@ public class Tuition {
             System.out.print("Enter description: ");
             description = input.nextLine();
             balance = BalanceInputValidate();
-            peopleArr[((Student) peopleArr[0]).getStuNum()] = new Student(name, age, sex, phoneNum, email, description, balance);
+            peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
         } else {
             System.out.print("Enter major (IT, PSY, HR): ");
             String major = input.nextLine();
@@ -265,12 +265,12 @@ public class Tuition {
                 valid = true;
             }
             else{
-                System.out.println("Only M or F are allowed!");
+                System.out.println("One character Only!");
                 valid = false;
             }
             sex = stringSex.charAt(0); 
             if(sex != 'm' && sex != 'f' && sex != 'M' && sex != 'F'){
-                System.out.println("Only M or F are allowed!");
+                System.out.println("Only (m,f,M,F) are allowed!");
                 valid = false;
             }
             else{
@@ -338,21 +338,27 @@ public class Tuition {
    }
     
    public static double BalanceInputValidate(){
-       double balance;
+       double balance = 0;
        boolean valid;
        Scanner input = new Scanner(System.in);
        
        do{
-           valid = true;
-           System.out.print("Enter balance: ");
-           balance = input.nextDouble();
-           if(balance > 0 ){
-               valid = true;
-           }
-           else{
-               valid = false;
-               System.out.println("Balance cannot be lower than 0!");
-           }
+           try{
+                valid = true;
+                System.out.print("Enter balance: ");
+                balance = input.nextDouble();
+                if(balance > 0 ){
+                    valid = true;
+                }
+                else{
+                    valid = false;
+                    System.out.println("Balance cannot be lower than 0!");
+                }
+            } catch (Exception e){
+                System.out.println("Invalid Input, please make sure you enter correctly!");
+                input.next();
+                valid = false;
+            }
        }while(!valid);
        
        return balance;
@@ -456,7 +462,7 @@ public class Tuition {
         String id = input.nextLine();
 
         if (peopleArr[0] instanceof Student) {
-            for (int i = 0; i < Student.getStuNum(); i++) {
+            for (int i = 0; i < Student.getStuCount(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
                     System.out.println("Yes Student");
                     peopleExist = true;
@@ -477,24 +483,19 @@ public class Tuition {
             if (peopleArr[0] instanceof Student) {
                 ((Student)peopleArr[0]).reduceStuCount();
                 People[] clonePeople = new Student[((Student)peopleArr[0]).getStuCount()];
-                People[] tempPeople = new Student[((Student)peopleArr[0]).getStuCount()];
                 int tempCount = Student.getStuCount();
-                clonePeople = peopleArr.clone();
-                System.out.println(clonePeople[0]);
-                tempPeople = peopleArr;
+                clonePeople = peopleArr;
                 
                 int a = 0;
                 // Move Entire student array to a temp array except the chosen delete id
                 for (int i = 0; i < tempCount+1; i++){
                     if (! ((Student)peopleArr[i]).getStuID().equals(id)){
-                        System.out.println(a + " to " + i);
                         clonePeople[a] = peopleArr[i];
-//                        System.out.println(a);
-//                        System.out.println(tempPeople[a]);
                         a++;
                     }
                 }
-                tempPeople = clonePeople;
+                clonePeople[((Student)peopleArr[0]).getStuCount()] = null;
+                System.out.println(((Student)peopleArr[0]).getStuCount());
                 System.out.println("The Student ID " + id + " has been deleted");
             } else {
                 People[] tempPeople1 = new Tutor[((Tutor)peopleArr[0]).getTutorCount()-1];
@@ -511,6 +512,7 @@ public class Tuition {
                     }
 
                 }
+                
                 peopleArr = tempPeople1;
                 System.out.println("The Tutor ID " + id + " has been deleted");
             }
