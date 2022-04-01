@@ -224,7 +224,6 @@ public class Tuition {
     
     public static int AgeInputValidate(){
         int age = 0;
-
         boolean valid;
         Scanner input = new Scanner(System.in);
         
@@ -303,17 +302,12 @@ public class Tuition {
                 System.out.println("Incorrect Format");
             }
         }while(!valid);
-            
-            
-        
         return phoneNum;
     }
     
     public static boolean PhoneIsValid(String s){
         Pattern p = Pattern.compile("^\\+601\\d-\\d{3}\\s\\d{4}");
-        
         Matcher m = p.matcher(s);
-        
         return (m.matches());
     }
 
@@ -348,7 +342,6 @@ public class Tuition {
        boolean valid;
        Scanner input = new Scanner(System.in);
        
-       
        do{
            valid = true;
            System.out.print("Enter balance: ");
@@ -361,8 +354,6 @@ public class Tuition {
                System.out.println("Balance cannot be lower than 0!");
            }
        }while(!valid);
-       
-
        
        return balance;
    }
@@ -394,86 +385,63 @@ public class Tuition {
         }
 
         if (peopleExist) {
+            String message;
             if (peopleArr[0] instanceof Student) {
-                System.out.print("Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Description\n7. Balance");
-                String stringModifyChoice = input.nextLine();
-                int modifyChoice = Integer.parseInt(stringModifyChoice);
+                message = "Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Description\n7. Balance";
+            } else{
+                message = "Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Level";
+            }    
+            System.out.println(message);
+            String stringModifyChoice = input.nextLine();
+            int modifyChoice = Integer.parseInt(stringModifyChoice);
 
-                switch (modifyChoice) {
-                    case 1:
-                        System.out.print("Enter new name: ");
-                        String newName = input.nextLine();
-                        peopleArr[tempI].setName(newName);
-                        break;
-                    case 2:
-                        System.out.print("Enter new age: ");
-                        int newAge = input.nextInt();
-                        peopleArr[tempI].setAge(newAge);
-                        break;
-                    case 3:
-                        System.out.print("Enter new sex: ");
-                        char newSex = input.next().charAt(0);
-                        peopleArr[tempI].setSex(newSex);
-                        break;
-                    case 4:
-                        System.out.print("Enter new phone number: ");
-                        String newNumber = input.nextLine();
-                        peopleArr[tempI].setPhoneNum(newNumber);
-                        break;
-                    case 5:
-                        System.out.print("Enter new email: ");
-                        String newEmail = input.nextLine();
-                        peopleArr[tempI].setEmail(newEmail);
-                        break;
-                    case 6:
+            switch (modifyChoice) {
+                case 1:
+                    System.out.print("Enter new name: ");
+                    String newName = input.nextLine();
+                    peopleArr[tempI].setName(newName);
+                    break;
+                case 2:
+                    System.out.print("Enter new age: ");
+                    int newAge = input.nextInt();
+                    peopleArr[tempI].setAge(newAge);
+                    break;
+                case 3:
+                    System.out.print("Enter new sex: ");
+                    char newSex = input.next().charAt(0);
+                    peopleArr[tempI].setSex(newSex);
+                    break;
+                case 4:
+                    System.out.print("Enter new phone number: ");
+                    String newNumber = input.nextLine();
+                    peopleArr[tempI].setPhoneNum(newNumber);
+                    break;
+                case 5:
+                    System.out.print("Enter new email: ");
+                    String newEmail = input.nextLine();
+                    peopleArr[tempI].setEmail(newEmail);
+                    break;
+                case 6:
+                    if (peopleArr[0] instanceof Student) {
                         System.out.print("Enter new description: ");
                         String newDescription = input.nextLine();
                         ((Student) peopleArr[tempI]).setDescription(newDescription);
                         break;
-                    case 7:
-                        System.out.print("Enter new balance: ");
-                        double newBalance = input.nextDouble();
-                        ((Student) peopleArr[tempI]).setBalance(newBalance);
-                        break;
-                }
-
-            } else {
-                System.out.print("Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Level");
-                String stringModifyChoice = input.nextLine();
-                int modifyChoice = Integer.parseInt(stringModifyChoice);
-
-                switch (modifyChoice) {
-                    case 1:
-                        System.out.print("Enter new name: ");
-                        String newName = input.nextLine();
-                        peopleArr[tempI].setName(newName);
-                        break;
-                    case 2:
-                        System.out.print("Enter new age: ");
-                        int newAge = input.nextInt();
-                        peopleArr[tempI].setAge(newAge);
-                        break;
-                    case 3:
-                        System.out.print("Enter new sex: ");
-                        char newSex = input.next().charAt(0);
-                        peopleArr[tempI].setSex(newSex);
-                        break;
-                    case 4:
-                        System.out.print("Enter new phone number: ");
-                        String newNumber = input.nextLine();
-                        peopleArr[tempI].setPhoneNum(newNumber);
-                        break;
-                    case 5:
-                        System.out.print("Enter new email: ");
-                        String newEmail = input.nextLine();
-                        peopleArr[tempI].setEmail(newEmail);
-                        break;
-                    case 6:
+                    } else {
                         System.out.print("Enter new level: ");
                         String newLevel = input.nextLine();
                         ((Tutor) peopleArr[tempI]).setLevel(((Tutor) peopleArr[tempI]).getLevel(newLevel));
                         break;
-                }
+                    }
+                case 7:
+                    if (peopleArr[0] instanceof Student) {
+                        System.out.print("Enter new balance: ");
+                        double newBalance = input.nextDouble();
+                        ((Student) peopleArr[tempI]).setBalance(newBalance);
+                        break;
+                    } else {
+                        System.out.print("Invalid Input");
+                    }
             }
         } else {
             System.out.println("The ID doesn't exist");

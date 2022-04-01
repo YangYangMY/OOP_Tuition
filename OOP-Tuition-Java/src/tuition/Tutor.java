@@ -29,8 +29,8 @@ public class Tutor extends People{
         Tutor.tutorCount++;
     }
     
-    public Tutor(String name, int age, char sex, String phoneNum, String email, Major major, Level level) {
-        super(name, age, sex, phoneNum, email);
+    public Tutor(String name, int age, char sexChar, String phoneNum, String email, Major major, Level level) {
+        super(name, age, sexChar, phoneNum, email);
         this.major = major;
         this.level = level;
         Tutor.tutorNum++;
