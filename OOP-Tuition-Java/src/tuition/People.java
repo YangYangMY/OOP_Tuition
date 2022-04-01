@@ -3,29 +3,18 @@ package tuition;
 class People {
     private String name;
     private int age;
-    private Sex sex;
+    private char sex;
     private String phoneNum;
     private String email;
-    
-    enum Sex{
-        M,
-        F
-    }
-    
+
     public People() {
+        this(null,0,'0',null,null);
     }   
 
-    public People(String name, int age, char sexChar, String phoneNum, String email) {
+    public People(String name, int age, char sex, String phoneNum, String email) {
         this.name = name;
         this.age = age;
-        switch(sexChar){
-            case 'M':
-                this.sex = Sex.M;
-                break;
-            case 'F':
-                this.sex = Sex.F;
-                break;
-        }
+        this.sex = sex;
         this.phoneNum = phoneNum;
         this.email = email;
     }
@@ -47,19 +36,12 @@ class People {
         this.age = age;
     }
 
-    public Sex getSex() {
+    public char getSex() {
         return sex;
     }
 
-    public void setSex(char sexChar) {
-        switch(sexChar){
-            case 'M':
-                this.sex = Sex.M;
-                break;
-            case 'F':
-                this.sex = Sex.F;
-                break;
-        }
+    public void setSex(char sex) {
+        this.sex = sex;
     }
 
     public String getPhoneNum() {
