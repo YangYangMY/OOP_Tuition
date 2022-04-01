@@ -38,6 +38,9 @@ public class Tuition {
                 dummyScript.psyCourseDummyData(psyCourse);
                 dummyScript.itCourseDummyDate(itCourse);
                 dummyScript.langCourseDummyDate(langCourse);
+                
+                Enroll[] enrollArr = new Enroll[50];
+                dummyScript.enrollment(enrollArr, stuArray, psyCourse, itCourse, langCourse);
                 menu(stuArray, tutArray, Psychology, IT, Language, psyCourse, itCourse, langCourse);
                 times = 0;
                 contactManagement = false;
@@ -58,7 +61,6 @@ public class Tuition {
     
     public static void menu(People[] stuArray, People[] tutArray, Course Psychology, Course IT, Course Language, Psychology[] psyCourse, IT[] itCourse, Language[] langCourse) {
         Scanner input = new Scanner(System.in);
-
 
         int taskChoice = 0;
         
@@ -112,7 +114,7 @@ public class Tuition {
                     System.out.println(Psychology.toString());
 
                     for (int x = 0; x < psyCourse.length; x++) {
-                        System.out.println((x+1) + ".");
+                        System.out.print((x+1) + ".");
                         System.out.println(psyCourse[x]);
                     }
                     break;
@@ -122,7 +124,7 @@ public class Tuition {
                     System.out.println(IT.toString());
 
                     for (int y = 0; y < itCourse.length; y++) {
-                        System.out.println((y+1) + ".");
+                        System.out.print((y+1) + ".");
                         System.out.println(itCourse[y]);
                     }
                     break;
@@ -132,7 +134,7 @@ public class Tuition {
                     System.out.println(Language.toString());
 
                     for (int z = 0; z < langCourse.length; z++) {
-                        System.out.println((z+1) + ".");
+                        System.out.print((z+1) + ".");
                         System.out.println(langCourse[z]);
                     }
                     break;
@@ -205,91 +207,66 @@ public class Tuition {
         }
 
         if (peopleExist) {
+            String message;
             if (peopleArr[0] instanceof Student) {
-                System.out.print("Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Description\n7. Balance");
-                String stringModifyChoice = input.nextLine();
-                int modifyChoice = Integer.parseInt(stringModifyChoice);
+                message = "Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Description\n7. Balance";
+            } else{
+                message = "Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Major\n7. Level";
+            }    
+            System.out.println(message);
+            String stringModifyChoice = input.nextLine();
+            int modifyChoice = Integer.parseInt(stringModifyChoice);
 
-                switch (modifyChoice) {
-                    case 1:
-                        System.out.print("Enter new name: ");
-                        String newName = input.nextLine();
-                        peopleArr[tempI].setName(newName);
-                        break;
-                    case 2:
-                        System.out.print("Enter new age: ");
-                        int newAge = input.nextInt();
-                        peopleArr[tempI].setAge(newAge);
-                        break;
-                    case 3:
-                        System.out.print("Enter new sex: ");
-                        char newSex = input.next().charAt(0);
-                        peopleArr[tempI].setSex(newSex);
-                        break;
-                    case 4:
-                        System.out.print("Enter new phone number: ");
-                        String newNumber = input.nextLine();
-                        peopleArr[tempI].setPhoneNum(newNumber);
-                        break;
-                    case 5:
-                        System.out.print("Enter new email: ");
-                        String newEmail = input.nextLine();
-                        peopleArr[tempI].setEmail(newEmail);
-                        break;
-                    case 6:
+            switch (modifyChoice) {
+                case 1:
+                    System.out.print("Enter new name: ");
+                    String newName = input.nextLine();
+                    peopleArr[tempI].setName(newName);
+                    break;
+                case 2:
+                    System.out.print("Enter new age: ");
+                    int newAge = input.nextInt();
+                    peopleArr[tempI].setAge(newAge);
+                    break;
+                case 3:
+                    System.out.print("Enter new sex: ");
+                    char newSex = input.next().charAt(0);
+                    peopleArr[tempI].setSex(newSex);
+                    break;
+                case 4:
+                    System.out.print("Enter new phone number: ");
+                    String newNumber = input.nextLine();
+                    peopleArr[tempI].setPhoneNum(newNumber);
+                    break;
+                case 5:
+                    System.out.print("Enter new email: ");
+                    String newEmail = input.nextLine();
+                    peopleArr[tempI].setEmail(newEmail);
+                    break;
+                case 6:
+                    if (peopleArr[0] instanceof Student) {
                         System.out.print("Enter new description: ");
                         String newDescription = input.nextLine();
                         ((Student) peopleArr[tempI]).setDescription(newDescription);
                         break;
-                    case 7:
-                        System.out.print("Enter new balance: ");
-                        double newBalance = input.nextDouble();
-                        ((Student) peopleArr[tempI]).setBalance(newBalance);
-                        break;
-                }
-
-            } else {
-                System.out.print("Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Major\n7. Level");
-                String stringModifyChoice = input.nextLine();
-                int modifyChoice = Integer.parseInt(stringModifyChoice);
-
-                switch (modifyChoice) {
-                    case 1:
-                        System.out.print("Enter new name: ");
-                        String newName = input.nextLine();
-                        peopleArr[tempI].setName(newName);
-                        break;
-                    case 2:
-                        System.out.print("Enter new age: ");
-                        int newAge = input.nextInt();
-                        peopleArr[tempI].setAge(newAge);
-                        break;
-                    case 3:
-                        System.out.print("Enter new sex: ");
-                        char newSex = input.next().charAt(0);
-                        peopleArr[tempI].setSex(newSex);
-                        break;
-                    case 4:
-                        System.out.print("Enter new phone number: ");
-                        String newNumber = input.nextLine();
-                        peopleArr[tempI].setPhoneNum(newNumber);
-                        break;
-                    case 5:
-                        System.out.print("Enter new email: ");
-                        String newEmail = input.nextLine();
-                        peopleArr[tempI].setEmail(newEmail);
-                        break;
-                    case 6:
+                    } else {
                         System.out.print("Enter new major: ");
                         String newMajor = input.nextLine();
                         ((Tutor) peopleArr[tempI]).setMajor(((Tutor) peopleArr[tempI]).getMajor(newMajor));
                         break;
-                    case 7:
+                    }
+                case 7:
+                    if (peopleArr[0] instanceof Student) {
+                        System.out.print("Enter new balance: ");
+                        double newBalance = input.nextDouble();
+                        ((Student) peopleArr[tempI]).setBalance(newBalance);
+                        break;
+                    } else {
                         System.out.print("Enter new level: ");
                         String newLevel = input.nextLine();
                         ((Tutor) peopleArr[tempI]).setLevel(((Tutor) peopleArr[tempI]).getLevel(newLevel));
                         break;
-                }
+                    }
             }
         } else {
             System.out.println("The ID doesn't exist");

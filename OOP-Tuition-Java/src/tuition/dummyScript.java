@@ -123,4 +123,8 @@ public class dummyScript {
         langCourse[1] = new Language("LAN02", "Malaysia English Language Proficiency Programme", "Measure in listening, writing and speaking", "Language proficiency test that measures English language skills for Malaysia student", 200, "English", "MUET");
         langCourse[2] = new Language("LAN03", "Korea Language Proficiency Programme", "Measure in reading, writing and listening", "Aims to measure the level of fluency of individuals in the Korean language.", 150, "Korean", "TOPIK");
     }
+    
+    public static void enrollment(Enroll[] enrollArr, People[] stuArray, Psychology[] psyCourse, IT[] itCourse, Language[] langCourse){
+        enrollArr[0] = new Enroll();
+    }
 }
