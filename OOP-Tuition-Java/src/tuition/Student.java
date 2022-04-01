@@ -7,12 +7,6 @@ class Student extends People {
     private double balance;
     private static int StuCount;
     
-    enum description{
-        Student,
-        Learner,
-        Teacher
-    }
-    
     public Student(){
         super();
         this.stuID = null;
@@ -22,8 +16,8 @@ class Student extends People {
         this.StuCount++;
     }
     
-    public Student(String name, int age, char sexChar, String phoneNum, String email, String description, double balance) {
-        super(name, age, sexChar, phoneNum, email);
+    public Student(String name, int age, char sex, String phoneNum, String email, String description, double balance) {
+        super(name, age, sex, phoneNum, email);
         this.stuNum++;
         this.StuCount++;
         this.stuID = "W" + stuNum;
