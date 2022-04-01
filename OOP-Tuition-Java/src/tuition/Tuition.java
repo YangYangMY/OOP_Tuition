@@ -26,19 +26,19 @@ public class Tuition {
                 dummyScript.dummyData(stuArray);
                 dummyScript.dummyData2(tutArray);
 
-                Course psy = new Course();
-                Course it = new Course();
-                Course lang = new Course();
-                dummyScript.CourseDummyData(psy, it, lang);
+                Course Psychology = new Course();
+                Course IT = new Course();
+                Course Language = new Course();
+                dummyScript.CourseDummyData(Psychology, IT, Language);
 
-                Course[] psyCourse = new Psychology[10];
-                Course[] itCourse = new IT[10];
-                Course[] langCourse = new Language[10];
+                Psychology[] psyCourse = new Psychology[3];
+                IT[] itCourse = new IT[3];
+                Language[] langCourse = new Language[3];
 
                 dummyScript.psyCourseDummyData(psyCourse);
                 dummyScript.itCourseDummyDate(itCourse);
                 dummyScript.langCourseDummyDate(langCourse);
-                menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+                menu(stuArray, tutArray, Psychology, IT, Language, psyCourse, itCourse, langCourse);
                 times = 0;
                 contactManagement = false;
             } else {
@@ -56,7 +56,7 @@ public class Tuition {
 
     }
     
-    public static void menu(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
+    public static void menu(People[] stuArray, People[] tutArray, Course Psychology, Course IT, Course Language, Psychology[] psyCourse, IT[] itCourse, Language[] langCourse) {
         Scanner input = new Scanner(System.in);
 
 
@@ -71,7 +71,6 @@ public class Tuition {
 
             switch (taskChoice) {
                 case 1:
-                    addCourse(psyCourse, itCourse, langCourse);
                     break;
                 case 2:
                     break;
@@ -110,19 +109,19 @@ public class Tuition {
                 case 12:
                     //Psychology Course
                     System.out.print("\nPSYCHOLOGY");
-                    System.out.println(psy.toString());
+                    System.out.println(Psychology.toString());
 
-                    for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
+                    for (int x = 0; x < psyCourse.length; x++) {
                         System.out.println((x+1) + ".");
                         System.out.println(psyCourse[x]);
                     }
                     break;
                 case 13:
                     // IT Course
-                    System.out.print("\nINFORMATION TECHNOLOGY (IT)");
-                    System.out.println(it.toString());
+                    System.out.print("\nINOFRMATION TECHNOLOGY (IT)");
+                    System.out.println(IT.toString());
 
-                    for (int y = 0; y < IT.getNumOfItCourse(); y++) {
+                    for (int y = 0; y < itCourse.length; y++) {
                         System.out.println((y+1) + ".");
                         System.out.println(itCourse[y]);
                     }
@@ -130,9 +129,9 @@ public class Tuition {
                 case 14:
                     // Language Course
                     System.out.print("\nLANGUAGE");
-                    System.out.println(lang.toString());
+                    System.out.println(Language.toString());
 
-                    for (int z = 0; z < Language.getNumOfLangCourse(); z++) {
+                    for (int z = 0; z < langCourse.length; z++) {
                         System.out.println((z+1) + ".");
                         System.out.println(langCourse[z]);
                     }
@@ -141,56 +140,6 @@ public class Tuition {
             }
         } while (taskChoice != 0);
 
-    }
-
-    public static void addCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse){
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("\nCourses:\n1. Psychology\n2. Information Technology\n3. Language");
-        System.out.print("Enter course to add: ");
-        int choice = input.nextInt();
-
-        switch(choice){
-            case 1: 
-            addPsyCourse(psyCourse);
-            break;
-            case 2:
-            // addItCourse(itCourse);
-            break;
-            case 3:
-            // addLangCourse(langCourse);
-            break;
-        }
-        
-    }
-
-    public static void addPsyCourse(Course[] psyCourse){
-        String code, title, details, description, type, skillLearned; 
-        int capacity;
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter course code: ");
-        code = input.nextLine();
-
-        System.out.print("Enter course title: ");
-        title = input.nextLine();
-
-        System.out.print("Enter course details: ");
-        details = input.nextLine();
-
-        System.out.print("Enter course description: ");
-        description = input.nextLine();
-
-        System.out.print("Enter enrollment limit: ");
-        capacity = input.nextInt();
-        input.nextLine();
-
-        System.out.print("Enter type of the Psychology course: ");
-        type = input.nextLine();
-
-        System.out.print("Enter skill(s) learnt in this course: ");
-        skillLearned = input.nextLine();
-
-        
     }
 
     public static void addPeople(People[] peopleArr) {

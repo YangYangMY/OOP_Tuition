@@ -3,34 +3,27 @@ package tuition;
 public class IT extends Course {
     private String preRequisite;
     private String programmingLanguage;
-    private static int numOfItCourse;
+    static int numOfStudents;
 
     //Constructor
     public IT() {
         super();
         this.preRequisite = "Introduction to Web Design";
         this.programmingLanguage = "HTML";
-        this.numOfItCourse++;
     }
 
     public IT(String preRequisite, String programmingLanguage){
         this.preRequisite = preRequisite;
         this.programmingLanguage = programmingLanguage;
-        this.numOfItCourse++;
     }
 
     public IT(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String preRequisite, String programmingLanguage) {
         super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
         this.preRequisite = preRequisite;
         this.programmingLanguage = programmingLanguage;
-        this.numOfItCourse++;
     }
 
     //Getter & Setter
-    public static int getNumOfItCourse(){
-        return numOfItCourse;
-    }
-    
     public String getPreRequisite() {
         return this.preRequisite;
     }

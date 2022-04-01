@@ -3,34 +3,27 @@ package tuition;
 public class Language extends Course {
     private String language;
     private String system;
-    private static int numOfLangCourse;
+    static int numOfStudents;
 
     //Constructor
     public Language() {
         super();
         this.language = "English";
         this.system = "MUET";
-        this.numOfLangCourse++;
     }
 
     public Language(String language, String system){
         this.language = language;
         this.system = system;
-        this.numOfLangCourse++;
     }
 
     public Language(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String language, String system) {
         super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
         this.language = language;
         this.system = system;
-        this.numOfLangCourse++;
     }
 
     //Getter & Setter
-    public static int getNumOfLangCourse(){
-        return numOfLangCourse;
-    }
-
     public String getLanguage() {
         return this.language;
     }

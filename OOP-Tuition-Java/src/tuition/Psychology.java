@@ -3,34 +3,27 @@ package tuition;
 public class Psychology extends Course {
     private String type;
     private String skillLearned;
-    private static int numOfPsyCourse;
+    static int numOfStudents;
 
     //Constructor
     public Psychology() {
         super();
         this.type = "Clinical";
         this.skillLearned = "Communication";
-        this.numOfPsyCourse++;
     }
 
     public Psychology(String type, String skillLearned){
         this.type = type;
         this.skillLearned = skillLearned;
-        this.numOfPsyCourse++;
     }
 
     public Psychology(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String type, String skillLearned) {
         super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
         this.type = type;
         this.skillLearned = skillLearned;
-        this.numOfPsyCourse++;
     }
 
     //Getter & Setter
-    public static int getNumOfPsyCourse(){
-        return numOfPsyCourse;
-    }
-
     public String getType() {
         return this.type;
     }
