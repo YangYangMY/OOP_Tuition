@@ -100,6 +100,7 @@ public class Tuition {
                         addCourse(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
                         break;
                     case 2:
+                        modifyCourse(psyCourse, itCourse, langCourse);
                         break;
                     case 3:
                         break;
@@ -177,6 +178,13 @@ public class Tuition {
             
             
         }while (taskChoice != 13);    
+    }
+
+    public static void displayMenu(){
+        System.out.print("\nTTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
+                                + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
+                                + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
+                                + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n13. Exit\nSelect task to perform: ");
     }
 
     public static int chooseCourse(){
@@ -294,14 +302,233 @@ public class Tuition {
 
         langCourse[(Language.getNumOfLangCourse())] = new Language(code, title, details, description, capacity, language, system);
     }
-    
-    public static void displayMenu(){
-        System.out.print("\nTTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
-                                + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
-                                + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
-                                + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n13. Exit\nSelect task to perform: ");
+
+    public static void modifyPsyCourse(Course[] psyCourse, Course modifyCourse){
+        Scanner input = new Scanner(System.in);
+        int psyModifyChoice = 0;
+        boolean isValid = false;
+
+        System.out.println("\n==========\nPSYCHOLOGY\n==========");
+
+        do {
+            System.out.print(
+                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Psychology type\n\t6. Skill(s) learned\nChoose what to modify: ");
+            psyModifyChoice = input.nextInt();
+            input.nextLine();
+
+            if (psyModifyChoice >= 1 && psyModifyChoice <= 6) {
+                isValid = true;
+            } else {
+                System.out.println("\nOnly (1-6) is allowed. Please try again!");
+            }
+        } while (isValid == false);
+
+        switch (psyModifyChoice) {
+            case 1:
+                // Modify course code
+                System.out.print("Enter new course code: ");
+                String courseCode = input.nextLine();
+                modifyCourse.setCode(courseCode);
+                break;
+
+            case 2:
+                // Modify course title
+                System.out.print("Enter new course title: ");
+                String courseTitle = input.nextLine();
+                modifyCourse.setTitle(courseTitle);
+                break;
+
+            case 3:
+                // Modify course details
+                System.out.print("Enter new course details: ");
+                String courseDetails = input.nextLine();
+                modifyCourse.setDetails(courseDetails);
+                break;
+
+            case 4:
+                // Modyfy course description
+                System.out.print("Enter new course description: ");
+                String courseDescription = input.nextLine();
+                modifyCourse.setDescription(courseDescription);
+                break;
+
+            case 5:
+                // Modify type
+                System.out.print("Enter new psychology type: ");
+                String type = input.nextLine();
+                ((Psychology)modifyCourse).setType(type);
+                break;
+
+            case 6:
+                // Modify skill learned
+                System.out.print("Enter new skill(s) learned: ");
+                String skillLearned = input.nextLine();
+                ((Psychology)modifyCourse).setSkillLearned(skillLearned);
+                break;
+        }
     }
-    
+
+    public static void modifyitCourse(Course[] itCourse, Course modifyCourse){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("\n======================\nINFORMATION TECHNOLOGY\n======================");
+        int itModifyChoice = 0;
+        boolean isValid = false;
+
+        do {
+            System.out.print(
+                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Pre-Requisite\n\t6. Programming Language\nChoose what to modify: ");
+            itModifyChoice = input.nextInt();
+            input.nextLine();
+            
+            if (itModifyChoice >= 1 && itModifyChoice <= 6) {
+                isValid = true;
+            } else {
+                System.out.println("\nOnly (1-6) is allowed. Please try again!");
+            }
+        } while (isValid == false);
+
+        switch (itModifyChoice) {
+            case 1:
+                // Modify course code
+                System.out.print("Enter new course code: ");
+                String courseCode = input.nextLine();
+                modifyCourse.setCode(courseCode);
+                break;
+
+            case 2:
+                // Modify course title
+                System.out.print("Enter new course title: ");
+                String courseTitle = input.nextLine();
+                modifyCourse.setTitle(courseTitle);
+                break;
+
+            case 3:
+                // Modify course details
+                System.out.print("Enter new course details: ");
+                String courseDetails = input.nextLine();
+                modifyCourse.setDetails(courseDetails);
+                break;
+
+            case 4:
+                // Modyfy course description
+                System.out.print("Enter new course description: ");
+                String courseDescription = input.nextLine();
+                modifyCourse.setDescription(courseDescription);
+                break;
+
+            case 5:
+                // Modify pre-requisite
+                System.out.print("Enter new Pre-Requisite: ");
+                String preRequisite = input.nextLine();
+                ((IT)modifyCourse).setPreRequisite(preRequisite);
+                break;
+
+            case 6:
+                // Modify programming language
+                System.out.print("Enter new programming language: ");
+                String programmingLanguage = input.nextLine();
+                ((IT)modifyCourse).setProgrammingLanguage(programmingLanguage);
+                break;
+        }
+    }
+
+    public static void modifyLangCourse(Course[] itCourse, Course modifyCourse){
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n========\nLANGUAGE\n========");
+        int langModifyChoice = 0;
+        boolean isValid = false;
+        do {
+            System.out.print(
+                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Language\n\t6. System\nChoose what to modify: ");
+            langModifyChoice = input.nextInt();
+            input.nextLine();
+
+            if (langModifyChoice >= 1 && langModifyChoice <= 6) {
+                isValid = true;
+            } else {
+                System.out.println("\nOnly (1-6) is allowed. Please try again!");
+            }
+        } while (isValid == false);
+
+        switch (langModifyChoice) {
+            case 1:
+                // Modify course code
+                System.out.print("Enter new course code: ");
+                String courseCode = input.nextLine();
+                modifyCourse.setCode(courseCode);
+                break;
+
+            case 2:
+                // Modify course title
+                System.out.print("Enter new course title: ");
+                String courseTitle = input.nextLine();
+                modifyCourse.setTitle(courseTitle);
+                break;
+
+            case 3:
+                // Modify course details
+                System.out.print("Enter new course details: ");
+                String courseDetails = input.nextLine();
+                modifyCourse.setDetails(courseDetails);
+                break;
+
+            case 4:
+                // Modyfy course description
+                System.out.print("Enter new course description: ");
+                String courseDescription = input.nextLine();
+                modifyCourse.setDescription(courseDescription);
+                break;
+
+            case 5:
+                // Modify language
+                System.out.print("Enter new languahe: ");
+                String language = input.nextLine();
+                ((Language)modifyCourse).setLanguage(language);
+                break;
+
+            case 6:
+                // Modify system
+                System.out.print("Enter new examination system: ");
+                String system = input.nextLine();
+                ((Language)modifyCourse).setSystem(system);
+                break;
+        }
+    }
+
+    public static void modifyCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
+        Scanner input = new Scanner(System.in);
+        boolean isValid = false;
+
+        System.out.print("\nEnter course code to modify: ");
+        String code = input.nextLine();
+
+        for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
+            if ((psyCourse[x].getCode()).equals(code)) {
+                isValid = true;
+                modifyPsyCourse(psyCourse, psyCourse[x]);
+            }
+        }
+
+        for (int y = 0; y < IT.getNumOfItCourse(); y++) {
+            if ((itCourse[y].getCode()).equals(code)) {
+                isValid = true;
+                modifyitCourse(itCourse, itCourse[y]);
+            }
+        }
+
+        for (int z = 0; z < Language.getNumOfLangCourse(); z++) {
+            if ((langCourse[z].getCode()).equals(code)) {
+                isValid = true;
+                modifyLangCourse(itCourse, langCourse[z]);
+            }
+        }
+
+        if(isValid == false){
+            System.out.print("\nThis course code does not exist. Please try again!");
+            modifyCourse(psyCourse, itCourse, langCourse);
+        }
+    }
 
     public static void addPeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
