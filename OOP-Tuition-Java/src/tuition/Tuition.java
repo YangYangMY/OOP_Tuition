@@ -45,9 +45,9 @@ public class Tuition {
                     Course Language = new Course();
                     dummyScript.CourseDummyData(Psychology, IT, Language);
 
-                    Course[] psyCourse = new Psychology[5];
-                    Course[] itCourse = new IT[5];
-                    Course[] langCourse = new Language[5];
+                    Course[] psyCourse = new Psychology[10];
+                    Course[] itCourse = new IT[10];
+                    Course[] langCourse = new Language[10];
 
                     dummyScript.psyCourseDummyData(psyCourse);
                     dummyScript.itCourseDummyDate(itCourse);
@@ -97,6 +97,7 @@ public class Tuition {
             Screen.clear();
              switch (taskChoice) {
                     case 1:
+                        addCourse(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
                         break;
                     case 2:
                         break;
@@ -134,9 +135,7 @@ public class Tuition {
                         break;
                     case 12:
                         // new Course
-                        System.out.println("\nCourses\n\t1. Psychology\n\t2. Information Technology\n\t3. Language\n\t4. Back to menu");
-                        System.out.print("Enter a course: ");
-                        int courseChoice = input.nextInt();
+                        int courseChoice = chooseCourse();
 
                         switch (courseChoice) {
                             case 1:
@@ -160,12 +159,14 @@ public class Tuition {
                             case 3:
                                 System.out.println("\n========\nLANGUAGE\n========");
                                 System.out.println(lang.toString());
-                                for (int z = 0; z < Language.getNumOfItCourse(); z++) {
+                                for (int z = 0; z < Language.getNumOfLangCourse(); z++) {
                                     System.out.println((z+1) + ".");
                                     System.out.println(langCourse[z]);
                                 }
+                                break;
 
                             case 4:
+                                Screen.clear();
                                 menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
                         }
                         break;
@@ -175,7 +176,123 @@ public class Tuition {
         }
             
             
-        }while (taskChoice != 14);    
+        }while (taskChoice != 13);    
+    }
+
+    public static int chooseCourse(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("\nCourses\n\t1. Psychology\n\t2. Information Technology\n\t3. Language\n\t4. Back to menu");
+        System.out.print("Enter a course: ");
+        int courseChoice = input.nextInt();
+
+        return courseChoice;
+    }
+
+    public static void addCourse(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+        int courseChoice = chooseCourse();
+
+        if(courseChoice == 1){
+            addPsyCourse(psyCourse);
+        }else if(courseChoice == 2){
+            addItCourse(itCourse);
+        }else if(courseChoice == 3){
+            addLangCourse(langCourse);
+        }else{
+            Screen.clear();
+            menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+        }
+
+    }
+
+    public static void addPsyCourse(Course[] psyCourse){
+        Scanner input = new Scanner(System.in);
+        String code, title, details, description, type, skillLearned;
+        int capacity;
+
+        System.out.print("Enter course code: ");
+        code = input.nextLine();
+
+        System.out.print("Enter course title: ");
+        title = input.nextLine();
+
+        System.out.print("Enter course details: ");
+        details = input.nextLine();
+
+        System.out.print("Enter course description: ");
+        description = input.nextLine();
+
+        System.out.print("Enter enrollment limit: ");
+        capacity = input.nextInt();
+        input.nextLine();
+
+        System.out.print("Enter psychology type: ");
+        type = input.nextLine();
+
+        System.out.print("Enter skill(s) learned: ");
+        skillLearned = input.nextLine();
+
+        psyCourse[(Psychology.getNumOfPsyCourse())] = new Psychology(code, title, details, description, capacity, type, skillLearned);
+    }
+
+    public static void addItCourse(Course[] itCourse){
+        Scanner input = new Scanner(System.in);
+        String code, title, details, description, preRequisite, language;
+        int capacity;
+
+        System.out.print("Enter course code: ");
+        code = input.nextLine();
+
+        System.out.print("Enter course title: ");
+        title = input.nextLine();
+
+        System.out.print("Enter course details: ");
+        details = input.nextLine();
+
+        System.out.print("Enter course description: ");
+        description = input.nextLine();
+
+        System.out.print("Enter enrollment limit: ");
+        capacity = input.nextInt();
+        input.nextLine();
+
+        System.out.print("Enter Pre-Requisite course: ");
+        preRequisite = input.nextLine();
+
+        System.out.print("Enter programming language used: ");
+        language = input.nextLine();
+
+        itCourse[(IT.getNumOfItCourse())] = new IT(code, title, details, description, capacity, preRequisite, language);
+    }
+
+    public static void addLangCourse(Course[] langCourse){
+        Scanner input = new Scanner(System.in);
+        String code, title, details, description, language, system;
+        int capacity;
+
+        System.out.print("Enter course code: ");
+        code = input.nextLine();
+
+        System.out.print("Enter course title: ");
+        title = input.nextLine();
+
+        System.out.print("Enter course details: ");
+        details = input.nextLine();
+
+        System.out.print("Enter course description: ");
+        description = input.nextLine();
+
+        System.out.print("Enter enrollment limit: ");
+        capacity = input.nextInt();
+        input.nextLine();
+
+        System.out.print("Enter language of the course: ");
+        language = input.nextLine();
+
+        System.out.print("Enter examination system: ");
+        system = input.nextLine();
+
+        langCourse[(Language.getNumOfLangCourse())] = new Language(code, title, details, description, capacity, language, system);
     }
     
     public static void displayMenu(){

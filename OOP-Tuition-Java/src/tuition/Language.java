@@ -27,7 +27,7 @@ public class Language extends Course {
     }
 
     //Getter & Setter
-    public static int getNumOfItCourse(){
+    public static int getNumOfLangCourse(){
         return numOfLangCourse;
     }
 
