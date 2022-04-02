@@ -60,7 +60,7 @@ public class Tuition {
 
             }
             catch(InvalidException e){
-                System.out.print(e.getErrorMsg());
+                Font.print(Font.ANSI_RED, e.getErrorMsg());
                 times--;
                 contactManagement = true;
             }
@@ -87,14 +87,15 @@ public class Tuition {
                 displayMenu();
                 taskChoice = input.nextInt();
                 if(taskChoice != 1 && taskChoice!= 2 && taskChoice!= 3 && taskChoice!= 4 && taskChoice!= 5 && taskChoice!= 6 && taskChoice!= 7 && taskChoice!= 8 && taskChoice!= 9 && taskChoice!= 10 && taskChoice!= 11 && taskChoice!= 12 && taskChoice!= 13 && taskChoice != 14){
-                    System.out.print("Only (1-14) is allowed, please try again!\n");
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED,"Only (1-14) is allowed, please try again!\n");
                 }
 
             } catch (Exception e){
-                System.out.print("Only (1-14) is allowed, please try again!\n");
+                Screen.clear();
+                Font.print(Font.ANSI_RED,"Only (1-14) is allowed, please try again!\n");
                 input.next();
             }
-            Screen.clear();
              switch (taskChoice) {
                     case 1:
                         addCourse(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
@@ -171,12 +172,16 @@ public class Tuition {
                         }
                         break;
                     case 13:
+                        Screen.clear();
+                        report(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+                        break;
+                    case 14:
                         System.out.println("Thank YOU!!");
                         break;
         }
             
             
-        }while (taskChoice != 13);    
+        }while (taskChoice != 14);    
     }
 
     public static int chooseCourse(){
@@ -299,7 +304,7 @@ public class Tuition {
         System.out.print("\nTTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
                                 + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
                                 + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
-                                + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n13. Exit\nSelect task to perform: ");
+                                + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n13.Report\n14. Exit\nSelect task to perform: ");
     }
     
 
@@ -347,11 +352,11 @@ public class Tuition {
             if(isWord(name)){
                 valid = true;
             } else{
-                System.out.println("Invalid Input!!");               
+                Font.print(Font.ANSI_RED,"Invalid Input!!");               
                 valid = false;
             }
            if(name.length() > 50){
-               System.out.println("Name cannot be longer than 50 letters!");
+            Font.print(Font.ANSI_RED,"Name cannot be longer than 50 letters!");
                valid = false;
            }
         }while(!valid);
@@ -373,11 +378,11 @@ public class Tuition {
                     valid = true;
                 }
                 else{
-                    System.out.println("Age is not valid!");
+                    Font.print(Font.ANSI_RED,"Age is not valid!");
                     valid = false;
                 }
             }catch (Exception e){
-                System.out.println("Invalid Input, please make sure you enter correctly!");
+                Font.print(Font.ANSI_RED,"Invalid Input, please make sure you enter correctly!");
                 input.next();
                 valid = false;
             }
@@ -402,12 +407,12 @@ public class Tuition {
                 valid = true;
             }
             else{
-                System.out.println("One character Only!");
+                Font.print(Font.ANSI_RED,"One character Only!");
                 valid = false;
             }
             sex = stringSex.charAt(0); 
             if(sex != 'm' && sex != 'f' && sex != 'M' && sex != 'F'){
-                System.out.println("Only (m,f,M,F) are allowed!");
+                Font.print(Font.ANSI_RED,"Only (m,f,M,F) are allowed!");
                 valid = false;
             }
             else{
@@ -436,7 +441,7 @@ public class Tuition {
             }
             else{
                 valid = false;
-                System.out.println("Incorrect Format");
+                Font.print(Font.ANSI_RED,"Incorrect Format");
             }
         }while(!valid);
         return phoneNum;
@@ -462,7 +467,7 @@ public class Tuition {
             }
             else{
                 valid = false;
-                System.out.println("Please enter a valid email!");
+                Font.print(Font.ANSI_RED,"Please enter a valid email!");
             }
         }while(!valid);
         
@@ -489,10 +494,10 @@ public class Tuition {
                 }
                 else{
                     valid = false;
-                    System.out.println("Balance cannot be lower than 0!");
+                    Font.print(Font.ANSI_RED,"Balance cannot be lower than 0!");
                 }
             } catch (Exception e){
-                System.out.println("Invalid Input, please make sure you enter correctly!");
+                Font.print(Font.ANSI_RED,"Invalid Input, please make sure you enter correctly!");
                 input.next();
                 valid = false;
             }
@@ -512,7 +517,7 @@ public class Tuition {
         major = input.nextLine();
         if (!major.equals("IT") && !major.equals("PSY") && !major.equals("LANG")){
             valid = false;
-            System.out.println("Only IT, PSY, LANG are allowed!");
+            Font.print(Font.ANSI_RED,"Only IT, PSY, LANG are allowed!");
         }
         else{
             valid = true;
@@ -535,7 +540,7 @@ public class Tuition {
         level = input.nextLine();
         if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")){
             valid = false;
-            System.out.println("Only Doctorate, BachelorDegree, MasterDegree are allowed!");
+            Font.print(Font.ANSI_RED,"Only Doctorate, BachelorDegree, MasterDegree are allowed!");
         }
         else{
             valid = true;
@@ -619,7 +624,7 @@ public class Tuition {
                         ((Student) peopleArr[tempI]).setBalance(newBalance);
                         break;
                     } else {
-                        System.out.print("Invalid Input");
+                        Font.print(Font.ANSI_RED,"Invalid Input");
                     }
             }
         } else {
@@ -696,6 +701,54 @@ public class Tuition {
     private static boolean isWord(String name) {
         return Pattern.matches("[a-zA-Z]+", name);
     }
+  
+    public static void report(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+        int userChoice;
+        Scanner input = new Scanner(System.in);
+        
+        do{
+            try{
+                
+                System.out.println("Report");
+                System.out.println("1. Course Report");
+                System.out.println("2. Student Report");
+                System.out.println("3. Tutor Report");
+                System.out.println("4. Summary Report");
+                System.out.println("5. Back");
+                System.out.print("Enter Choice: ");
+                userChoice = input.nextInt();
+                if(userChoice != 1 && userChoice != 2 && userChoice != 3 && userChoice != 4 && userChoice != 5){
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED,"Only (1-5) are allowed!");
+                }
+            }catch(Exception e){
+                Screen.clear();
+                Font.print(Font.ANSI_RED,"Invalid Input");
+                input.next();
+                userChoice = 100;
+            }
+
+        } while(userChoice != 5);
+        Screen.clear();
+        switch(userChoice){
+            case 1:
+                Font.print(Font.ANSI_BLUE, "Course Report");
+                break;
+            case 2:
+                Font.print(Font.ANSI_BLUE, "Student Report");
+                break;
+            case 3:
+                Font.print(Font.ANSI_BLUE, "Tutor Report");
+                break;
+            case 4:
+                Font.print(Font.ANSI_BLUE, "Summary Report");
+                break;
+            case 5:
+                menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+        }
+
+    }
+    
     
     // Exception for handling invalid username or password
   private static class InvalidException extends Exception {
