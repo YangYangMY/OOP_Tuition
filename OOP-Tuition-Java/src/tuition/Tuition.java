@@ -156,7 +156,6 @@ public class Tuition {
 
                             case 4:
                                 Screen.clear();
-                                menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
                         }
                         break;
                     case 11:
@@ -741,10 +740,10 @@ public class Tuition {
     return major;
    }
 
-         public static String LevelInputValidate(){
-    String level;
-    boolean valid;
-    Scanner input = new Scanner(System.in);
+    public static String LevelInputValidate(){
+        String level;
+        boolean valid;
+        Scanner input = new Scanner(System.in);
     
     do{
         valid = true;
@@ -957,7 +956,7 @@ public class Tuition {
                     Font.print(Font.ANSI_BLUE, "Summary Report");
                     break;
                 case 5:
-                    menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+                    Screen.clear();
             }
         } while(userChoice != 5);
     }
