@@ -770,23 +770,24 @@ public class Tuition {
     return major;
    }
 
-   public static String LevelInputValidate() {
-       String level;
-       boolean valid;
-       Scanner input = new Scanner(System.in);
-
-       do {
-           valid = true;
-           System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
-           level = input.nextLine();
-           if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")) {
-               valid = false;
-               Font.print(Font.ANSI_RED, "Only Doctorate, BachelorDegree, MasterDegree are allowed!");
-           } else {
-               valid = true;
-           }
-       } while (!valid);
-       return level;
+    public static String LevelInputValidate(){
+        String level;
+        boolean valid;
+        Scanner input = new Scanner(System.in);
+    
+    do{
+        valid = true;
+        System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
+        level = input.nextLine();
+        if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")){
+            valid = false;
+            Font.print(Font.ANSI_RED,"Only Doctorate, BachelorDegree, MasterDegree are allowed!");
+        }
+        else{
+            valid = true;
+        }
+    }while(!valid);
+    return level;
    }
 
    
@@ -985,7 +986,7 @@ public class Tuition {
                     Font.print(Font.ANSI_BLUE, "Summary Report");
                     break;
                 case 5:
-                    menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+                    Screen.clear();
             }
         } while(userChoice != 5);
     }
