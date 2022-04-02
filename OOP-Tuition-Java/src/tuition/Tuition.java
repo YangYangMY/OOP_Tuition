@@ -18,6 +18,7 @@ public class Tuition {
         boolean contactManagement = false;
         
         //Start Login
+        Screen.clear();
         System.out.println("Login Page");
         do {
             try{
@@ -53,6 +54,7 @@ public class Tuition {
                     dummyScript.langCourseDummyDate(langCourse);
                     
                     //Enter menu with all objects made
+                    Screen.clear();
                     menu(stuArray, tutArray, Psychology, IT, Language, psyCourse, itCourse, langCourse);
                 }
 
@@ -65,6 +67,7 @@ public class Tuition {
         } while (times > 0);
 
         if (contactManagement) {
+            Screen.clear();
             System.out.println("Sorry, you have reached the maximum times of login. Please contact the management for the username and password\n");
             System.out.println("Logout.");
         }
@@ -91,6 +94,7 @@ public class Tuition {
                 System.out.print("Only (1-14) is allowed, please try again!\n");
                 input.next();
             }
+            Screen.clear();
              switch (taskChoice) {
                     case 1:
                         break;
