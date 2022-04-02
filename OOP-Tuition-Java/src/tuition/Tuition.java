@@ -129,25 +129,43 @@ public class Tuition {
                         }
                         break;
                     case 12:
-                        //new Course
-                        System.out.println(psy.toString());
-                        System.out.println(it.toString());
-                        System.out.println(lang.toString());
+                        // new Course
+                        System.out.println("\nCourses\n\t1. Psychology\n\t2. Information Technology\n\t3. Language\n\t4. Back to menu");
+                        System.out.print("Enter a course: ");
+                        int courseChoice = input.nextInt();
+
+                        switch (courseChoice) {
+                            case 1:
+                                System.out.println("\n==========\nPSYCHOLOGY\n==========");
+                                System.out.println(psy.toString());
+                                for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
+                                    System.out.println((x+1) + ".");
+                                    System.out.println(psyCourse[x]);
+                                }
+                                break;
+
+                            case 2:
+                                System.out.println("\n======================\nINFORMATION TECHNOLOGY\n======================");
+                                System.out.println(it.toString());
+                                for (int y = 0; y < IT.getNumOfItCourse(); y++) {
+                                    System.out.println((y+1) + ".");
+                                    System.out.println(itCourse[y]);
+                                }
+                                break;
+
+                            case 3:
+                                System.out.println("\n========\nLANGUAGE\n========");
+                                System.out.println(lang.toString());
+                                for (int z = 0; z < Language.getNumOfItCourse(); z++) {
+                                    System.out.println((z+1) + ".");
+                                    System.out.println(langCourse[z]);
+                                }
+
+                            case 4:
+                                menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+                        }
                         break;
                     case 13:
-                        for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
-                            System.out.println(psyCourse[x]);
-                        }
-
-                        for (int y = 0; y < IT.getNumOfItCourse(); y++) {
-                            System.out.println(itCourse[y]);
-                        }
-
-                        for (int z = 0; z < Language.getNumOfItCourse(); z++) {
-                            System.out.println(langCourse[z]);
-                        }
-                        break;
-                    case 14:
                         System.out.println("Thank YOU!!");
                         break;
         }
@@ -157,10 +175,10 @@ public class Tuition {
     }
     
     public static void displayMenu(){
-        System.out.print("TTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
+        System.out.print("\nTTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
                                 + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
                                 + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
-                                + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n\t13. Language\n14. Exit\nSelect task to perform: ");
+                                + "\nList\n\t10. Student\n\t11. Tutor\n\t12. Course\n13. Exit\nSelect task to perform: ");
     }
     
 
