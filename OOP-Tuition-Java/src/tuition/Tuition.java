@@ -18,6 +18,7 @@ public class Tuition {
         boolean contactManagement = false;
         
         //Start Login
+        Screen.clear();
         System.out.println("Login Page");
         do {
             try{
@@ -53,6 +54,7 @@ public class Tuition {
                     dummyScript.langCourseDummyDate(langCourse);
                     
                     //Enter menu with all objects made
+                    Screen.clear();
                     menu(stuArray, tutArray, Psychology, IT, Language, psyCourse, itCourse, langCourse);
                 }
 
@@ -65,6 +67,7 @@ public class Tuition {
         } while (times > 0);
 
         if (contactManagement) {
+            Screen.clear();
             System.out.println("Sorry, you have reached the maximum times of login. Please contact the management for the username and password\n");
             System.out.println("Logout.");
         }
@@ -91,6 +94,7 @@ public class Tuition {
                 System.out.print("Only (1-14) is allowed, please try again!\n");
                 input.next();
             }
+            Screen.clear();
              switch (taskChoice) {
                     case 1:
                         break;
@@ -207,10 +211,8 @@ public class Tuition {
             balance = BalanceInputValidate();
             peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
         } else {
-            System.out.print("Enter major (IT, PSY, LANG): ");
-            String major = input.nextLine();
-            System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
-            String level = input.nextLine();
+            String major = MajorInputValidate();
+            String level = LevelInputValidate();
 
             peopleArr[((Tutor) peopleArr[0]).getTutorCount()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor) peopleArr[0]).getMajor(major), ((Tutor) peopleArr[0]).getLevel(level));
         }
@@ -382,6 +384,49 @@ public class Tuition {
        return balance;
    }
    
+   public static String MajorInputValidate(){
+    String major;
+    boolean valid;
+    Scanner input = new Scanner(System.in);
+    
+    do{
+        valid = true;
+        System.out.print("Enter major (IT, PSY, LANG): ");
+        major = input.nextLine();
+        if (!major.equals("IT") && !major.equals("PSY") && !major.equals("LANG")){
+            valid = false;
+            System.out.println("Only IT, PSY, LANG are allowed!");
+        }
+        else{
+            valid = true;
+        }
+
+    }while(!valid);
+
+
+    return major;
+   }
+
+         public static String LevelInputValidate(){
+    String level;
+    boolean valid;
+    Scanner input = new Scanner(System.in);
+    
+    do{
+        valid = true;
+        System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
+        level = input.nextLine();
+        if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")){
+            valid = false;
+            System.out.println("Only Doctorate, BachelorDegree, MasterDegree are allowed!");
+        }
+        else{
+            valid = true;
+        }
+    }while(!valid);
+    return level;
+   }
+
    
     public static void modifyPeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
@@ -421,28 +466,23 @@ public class Tuition {
 
             switch (modifyChoice) {
                 case 1:
-                    System.out.print("Enter new name: ");
-                    String newName = input.nextLine();
+                    String newName = NameInputValidate();
                     peopleArr[tempI].setName(newName);
                     break;
                 case 2:
-                    System.out.print("Enter new age: ");
-                    int newAge = input.nextInt();
+                    int newAge = AgeInputValidate();
                     peopleArr[tempI].setAge(newAge);
                     break;
                 case 3:
-                    System.out.print("Enter new sex: ");
-                    char newSex = input.next().charAt(0);
+                    char newSex = SexInputValidate();
                     peopleArr[tempI].setSex(newSex);
                     break;
                 case 4:
-                    System.out.print("Enter new phone number: ");
-                    String newNumber = input.nextLine();
+                    String newNumber = PhoneInputValidate();
                     peopleArr[tempI].setPhoneNum(newNumber);
                     break;
                 case 5:
-                    System.out.print("Enter new email: ");
-                    String newEmail = input.nextLine();
+                    String newEmail = EmailInputValidate();
                     peopleArr[tempI].setEmail(newEmail);
                     break;
                 case 6:
@@ -452,15 +492,13 @@ public class Tuition {
                         ((Student) peopleArr[tempI]).setDescription(newDescription);
                         break;
                     } else {
-                        System.out.print("Enter new level: ");
-                        String newLevel = input.nextLine();
+                        String newLevel = LevelInputValidate();
                         ((Tutor) peopleArr[tempI]).setLevel(((Tutor) peopleArr[tempI]).getLevel(newLevel));
                         break;
                     }
                 case 7:
                     if (peopleArr[0] instanceof Student) {
-                        System.out.print("Enter new balance: ");
-                        double newBalance = input.nextDouble();
+                        double newBalance = BalanceInputValidate();
                         ((Student) peopleArr[tempI]).setBalance(newBalance);
                         break;
                     } else {
