@@ -69,6 +69,10 @@ public class Tutor extends People{
         }
     }
     
+    public Level getLevelName(){
+        return this.level;
+    }
+    
     public Level getLevel(String level){
         switch(level){
             case "Doctorate":
