@@ -19,8 +19,8 @@ public class Language extends Course {
         this.numOfLangCourse++;
     }
 
-    public Language(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String language, String system) {
-        super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
+    public Language(String courseCode, String courseTitle, String courseDetails, String courseDescription, double courseFee, int capacity, String language, String system) {
+        super(courseCode, courseTitle, courseDetails, courseDescription, courseFee, capacity);
         this.language = language;
         this.system = system;
         this.numOfLangCourse++;
@@ -56,6 +56,7 @@ public class Language extends Course {
                 + "\nCourse Code: " + super.getCode()
                 + "\nCourse Details: " + super.getDetails()
                 + "\nCourse Description: " + super.getDescription()
+                + "\nCourse Fee: RM" + String.format("%.2f", getFee())
                 + "\nLanguage: " + this.language
                 + "\nExam System: " + this.system
                 + "\nEnrollment Limit : " + this.getCapacity() + " students\n";

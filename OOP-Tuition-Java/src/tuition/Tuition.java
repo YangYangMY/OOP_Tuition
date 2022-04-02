@@ -71,9 +71,6 @@ public class Tuition {
             System.out.println("Sorry, you have reached the maximum times of login. Please contact the management for the username and password\n");
             System.out.println("Logout.");
         }
-
-
-
     }
     
     public static void menu(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
@@ -156,7 +153,6 @@ public class Tuition {
 
                             case 4:
                                 Screen.clear();
-                                menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
                         }
                         break;
                     case 11:
@@ -178,6 +174,7 @@ public class Tuition {
     }
 
     public static int chooseCourse(){
+        Screen.clear();
         Scanner input = new Scanner(System.in);
 
         System.out.println("\nCourses\n\t1. Psychology\n\t2. Information Technology\n\t3. Language\n\t4. Back to menu");
@@ -198,7 +195,6 @@ public class Tuition {
             addLangCourse(langCourse);
         }else{
             Screen.clear();
-            menu(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
         }
 
     }
@@ -206,6 +202,7 @@ public class Tuition {
     public static void addPsyCourse(Course[] psyCourse){
         Scanner input = new Scanner(System.in);
         String code, title, details, description, type, skillLearned;
+        double fee;
         int capacity;
 
         System.out.print("Enter course code: ");
@@ -219,6 +216,9 @@ public class Tuition {
 
         System.out.print("Enter course description: ");
         description = input.nextLine();
+
+        System.out.print("Enter course fee: ");
+        fee = input.nextDouble();
 
         System.out.print("Enter enrollment limit: ");
         capacity = input.nextInt();
@@ -230,12 +230,13 @@ public class Tuition {
         System.out.print("Enter skill(s) learned: ");
         skillLearned = input.nextLine();
 
-        psyCourse[(Psychology.getNumOfPsyCourse())] = new Psychology(code, title, details, description, capacity, type, skillLearned);
+        psyCourse[(Psychology.getNumOfPsyCourse())] = new Psychology(code, title, details, description, fee, capacity, type, skillLearned);
     }
 
     public static void addItCourse(Course[] itCourse){
         Scanner input = new Scanner(System.in);
         String code, title, details, description, preRequisite, language;
+        double fee;
         int capacity;
 
         System.out.print("Enter course code: ");
@@ -249,6 +250,9 @@ public class Tuition {
 
         System.out.print("Enter course description: ");
         description = input.nextLine();
+
+        System.out.print("Enter course fee: ");
+        fee = input.nextDouble();
 
         System.out.print("Enter enrollment limit: ");
         capacity = input.nextInt();
@@ -260,12 +264,13 @@ public class Tuition {
         System.out.print("Enter programming language used: ");
         language = input.nextLine();
 
-        itCourse[(IT.getNumOfItCourse())] = new IT(code, title, details, description, capacity, preRequisite, language);
+        itCourse[(IT.getNumOfItCourse())] = new IT(code, title, details, description, fee, capacity, preRequisite, language);
     }
 
     public static void addLangCourse(Course[] langCourse){
         Scanner input = new Scanner(System.in);
         String code, title, details, description, language, system;
+        double fee;
         int capacity;
 
         System.out.print("Enter course code: ");
@@ -280,6 +285,9 @@ public class Tuition {
         System.out.print("Enter course description: ");
         description = input.nextLine();
 
+        System.out.print("Enter course fee: ");
+        fee = input.nextDouble();
+
         System.out.print("Enter enrollment limit: ");
         capacity = input.nextInt();
         input.nextLine();
@@ -290,7 +298,7 @@ public class Tuition {
         System.out.print("Enter examination system: ");
         system = input.nextLine();
 
-        langCourse[(Language.getNumOfLangCourse())] = new Language(code, title, details, description, capacity, language, system);
+        langCourse[(Language.getNumOfLangCourse())] = new Language(code, title, details, description, fee, capacity, language, system);
     }
 
     public static void modifyPsyCourse(Course[] psyCourse, Course modifyCourse){
@@ -302,14 +310,14 @@ public class Tuition {
 
         do {
             System.out.print(
-                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Psychology type\n\t6. Skill(s) learned\nChoose what to modify: ");
+                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Course Fee\n\t6. Psychology type\n\t7. Skill(s) learned\nChoose what to modify: ");
             psyModifyChoice = input.nextInt();
             input.nextLine();
 
-            if (psyModifyChoice >= 1 && psyModifyChoice <= 6) {
+            if (psyModifyChoice >= 1 && psyModifyChoice <= 7) {
                 isValid = true;
             } else {
-                System.out.println("\nOnly (1-6) is allowed. Please try again!");
+                System.out.println("\nOnly (1-7) is allowed. Please try again!");
             }
         } while (isValid == false);
 
@@ -343,13 +351,20 @@ public class Tuition {
                 break;
 
             case 5:
+                // Modyfy course fee
+                System.out.print("Enter new course fee: ");
+                double fee = input.nextDouble();
+                modifyCourse.setFee(fee);
+                break;
+
+            case 6:
                 // Modify type
                 System.out.print("Enter new psychology type: ");
                 String type = input.nextLine();
                 ((Psychology)modifyCourse).setType(type);
                 break;
 
-            case 6:
+            case 7:
                 // Modify skill learned
                 System.out.print("Enter new skill(s) learned: ");
                 String skillLearned = input.nextLine();
@@ -367,14 +382,14 @@ public class Tuition {
 
         do {
             System.out.print(
-                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Pre-Requisite\n\t6. Programming Language\nChoose what to modify: ");
+                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Course Fee\n\t6. Pre-Requisite\n\t7. Programming Language\nChoose what to modify: ");
             itModifyChoice = input.nextInt();
             input.nextLine();
             
-            if (itModifyChoice >= 1 && itModifyChoice <= 6) {
+            if (itModifyChoice >= 1 && itModifyChoice <= 7) {
                 isValid = true;
             } else {
-                System.out.println("\nOnly (1-6) is allowed. Please try again!");
+                System.out.println("\nOnly (1-7) is allowed. Please try again!");
             }
         } while (isValid == false);
 
@@ -408,13 +423,20 @@ public class Tuition {
                 break;
 
             case 5:
+                // Modyfy course fee
+                System.out.print("Enter new course fee: ");
+                double fee = input.nextDouble();
+                modifyCourse.setFee(fee);
+                break;
+
+            case 6:
                 // Modify pre-requisite
                 System.out.print("Enter new Pre-Requisite: ");
                 String preRequisite = input.nextLine();
                 ((IT)modifyCourse).setPreRequisite(preRequisite);
                 break;
 
-            case 6:
+            case 7:
                 // Modify programming language
                 System.out.print("Enter new programming language: ");
                 String programmingLanguage = input.nextLine();
@@ -430,14 +452,14 @@ public class Tuition {
         boolean isValid = false;
         do {
             System.out.print(
-                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Language\n\t6. System\nChoose what to modify: ");
+                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Course Fee\n\t6. Language\n\t7. System\nChoose what to modify: ");
             langModifyChoice = input.nextInt();
             input.nextLine();
 
-            if (langModifyChoice >= 1 && langModifyChoice <= 6) {
+            if (langModifyChoice >= 1 && langModifyChoice <= 7) {
                 isValid = true;
             } else {
-                System.out.println("\nOnly (1-6) is allowed. Please try again!");
+                System.out.println("\nOnly (1-7) is allowed. Please try again!");
             }
         } while (isValid == false);
 
@@ -471,13 +493,20 @@ public class Tuition {
                 break;
 
             case 5:
+                // Modyfy course fee
+                System.out.print("Enter new course fee: ");
+                double fee = input.nextDouble();
+                modifyCourse.setFee(fee);
+                break;  
+
+            case 6:
                 // Modify language
-                System.out.print("Enter new languahe: ");
+                System.out.print("Enter new language: ");
                 String language = input.nextLine();
                 ((Language)modifyCourse).setLanguage(language);
                 break;
 
-            case 6:
+            case 7:
                 // Modify system
                 System.out.print("Enter new examination system: ");
                 String system = input.nextLine();
@@ -741,24 +770,23 @@ public class Tuition {
     return major;
    }
 
-         public static String LevelInputValidate(){
-    String level;
-    boolean valid;
-    Scanner input = new Scanner(System.in);
-    
-    do{
-        valid = true;
-        System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
-        level = input.nextLine();
-        if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")){
-            valid = false;
-            Font.print(Font.ANSI_RED,"Only Doctorate, BachelorDegree, MasterDegree are allowed!");
-        }
-        else{
-            valid = true;
-        }
-    }while(!valid);
-    return level;
+   public static String LevelInputValidate() {
+       String level;
+       boolean valid;
+       Scanner input = new Scanner(System.in);
+
+       do {
+           valid = true;
+           System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
+           level = input.nextLine();
+           if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")) {
+               valid = false;
+               Font.print(Font.ANSI_RED, "Only Doctorate, BachelorDegree, MasterDegree are allowed!");
+           } else {
+               valid = true;
+           }
+       } while (!valid);
+       return level;
    }
 
    

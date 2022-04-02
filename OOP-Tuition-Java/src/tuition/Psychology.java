@@ -19,8 +19,8 @@ public class Psychology extends Course {
         this.numOfPsyCourse++;
     }
 
-    public Psychology(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String type, String skillLearned) {
-        super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
+    public Psychology(String courseCode, String courseTitle, String courseDetails, String courseDescription, double courseFee,int capacity, String type, String skillLearned) {
+        super(courseCode, courseTitle, courseDetails, courseDescription, courseFee, capacity);
         this.type = type;
         this.skillLearned = skillLearned;
         this.numOfPsyCourse++;
@@ -56,6 +56,7 @@ public class Psychology extends Course {
                 + "\nCourse Code: " + super.getCode()
                 + "\nCourse Details: " + super.getDetails()
                 + "\nCourse Description: " + super.getDescription()
+                + "\nCourse Fee: RM" + String.format("%.2f", getFee())
                 + "\nType: " + this.type
                 + "\nSkill(s) Learned: " + this.skillLearned
                 + "\nEnrollment Limit : " + this.getCapacity() + " students\n";

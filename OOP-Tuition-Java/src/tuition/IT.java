@@ -19,8 +19,8 @@ public class IT extends Course {
         this.numOfItCourse++;
     }
 
-    public IT(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity, String preRequisite, String programmingLanguage) {
-        super(courseCode, courseTitle, courseDetails, courseDescription, capacity);
+    public IT(String courseCode, String courseTitle, String courseDetails, String courseDescription, double courseFee, int capacity, String preRequisite, String programmingLanguage) {
+        super(courseCode, courseTitle, courseDetails, courseDescription, courseFee, capacity);
         this.preRequisite = preRequisite;
         this.programmingLanguage = programmingLanguage;
         this.numOfItCourse++;
@@ -56,6 +56,7 @@ public class IT extends Course {
                 + "\nCourse Code: " + super.getCode()
                 + "\nCourse Details: " + super.getDetails()
                 + "\nCourse Description: " + super.getDescription()
+                + "\nCourse Fee: RM" + String.format("%.2f", getFee())
                 + "\nPre-requisite: " + this.preRequisite
                 + "\nProgramming Language(s): " + this.programmingLanguage
                 + "\nEnrollment Limit : " + this.getCapacity() + " students\n";

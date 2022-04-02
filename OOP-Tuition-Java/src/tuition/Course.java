@@ -5,17 +5,20 @@ public class Course {
     private String title;
     private String details;
     private String description;
+    private double fee;
     final private int maxStudentNo;
+
     //Constructor
     public Course() {
-        this("","", "", "", 75);
+        this("","", "", "", 150.0, 75);
     }
 
-    public Course(String courseCode, String courseTitle, String courseDetails, String courseDescription, int capacity){
+    public Course(String courseCode, String courseTitle, String courseDetails, String courseDescription, double courseFee, int capacity){
         this.code = courseCode;
         this.title = courseTitle;
         this.details = courseDetails;
         this.description = courseDescription;
+        this.fee = courseFee;
         this.maxStudentNo = capacity;
     }
 
@@ -34,6 +37,10 @@ public class Course {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public double getFee() {
+        return this.fee;
     }
 
     public int getCapacity(){
@@ -56,6 +63,9 @@ public class Course {
         this.description = description;
     }
 
+    public void setFee(double fee) {
+        this.fee = fee;
+    }
     //Methods
     @Override
     public String toString() {
