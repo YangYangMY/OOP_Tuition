@@ -3,6 +3,7 @@ package tuition;
 public class Enroll {
     Student student;
     Course course;
+    static int enrollNum;
 
     public Enroll(){
     }
@@ -10,6 +11,7 @@ public class Enroll {
     public Enroll(Student student, Course course) {
         this.student = student;
         this.course = course;
+        enrollNum++;
     }
 
     public Student getStudent() {
@@ -28,10 +30,24 @@ public class Enroll {
         this.course = course;
     }
 
-    @Override
-    public String toString() {
-        return "Student = " + student + ", Course: " + course;
+    public static int getEnrollNum() {
+        return enrollNum;
     }
 
+    public static void setEnrollNum(int enrollNum) {
+        Enroll.enrollNum = enrollNum;
+    }
+    
+    @Override
+    public String toString() {
+        return "StudentID: " + student.getStuID() + ", StudentName: " + student.getName() + ", Course: " + course.getCode() + ", Course Name: " + course.getTitle();
+    }
 
 }
+
+//Print All Output
+/*
+for (int i = 0; i < Enroll.getEnrollNum(); i++) {
+    System.out.println(enrollArr[i]);
+}
+*/
