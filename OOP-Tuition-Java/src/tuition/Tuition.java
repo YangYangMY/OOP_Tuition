@@ -172,9 +172,6 @@ public class Tuition {
                 case 14:
                     System.out.println("Thank YOU!!");
                     break;
-                case 15:
-                    EnrollmentReport(enrollArr);
-                    break;
             }
         } while (taskChoice != 14);
     }
