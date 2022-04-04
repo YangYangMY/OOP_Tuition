@@ -1064,7 +1064,7 @@ public class Tuition {
                 case 4:
                     Screen.clear();
                     Font.print(Font.ANSI_BLUE, "Summary Report");
-                    SummaryReport(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+                    SummaryReport(enrollArr, psy, it, lang, psyCourse, itCourse, langCourse);
                     break;
                 case 5:
                     Screen.clear();
@@ -1098,25 +1098,42 @@ public class Tuition {
     }
 
     public static void EnrollmentReport(Enroll[] enrollArr){
+        System.out.println("=========================================================================================================================================================================");
+        System.out.printf("%12s %19s %22s %40s", "Student ID", "Name", "Course ID", "Course Name");
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Enroll.getEnrollNum(); i++) {
-            System.out.println(enrollArr[i]);
+            for(int z = 0; z <Enroll.getEnrollNum(); z++){
+                if(enrollArr[z].student.getStuID().equals("W" + i)){
+                    System.out.printf(" %9s %28s %14s %60s", enrollArr[z].student.getStuID() , enrollArr[z].student.getName() , enrollArr[z].course.getCode() , enrollArr[z].course.getTitle());
+                    System.out.println();
+                }
+            
         }
     }
+        System.out.println("=========================================================================================================================================================================");
+    }
     
-    public static void SummaryReport(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+    public static void SummaryReport(Enroll[] enrollArr, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
         // Course Name + Tutor Name + Number of Student + Total Profit
         System.out.println("=====================================================================================================================================================================");
         System.out.println("1. Psychology");
         for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
+                int count = 0;
+            for(int i = 0; i < Enroll.getEnrollNum(); i++) {
+                if((enrollArr[i].course.getCode()).equals(psyCourse[0].getCode())){
+                      count++;
+                 }
+            }
             System.out.println("\n\t" + psyCourse[x].getTitle()  + "Course cost" + " Number of Student" + " Total Profit");
         }
         System.out.println("2. IT");
         for (int x = 0; x < IT.getNumOfItCourse(); x++) {
-            System.out.println("\n\t" + itCourse[x].getTitle() + "  Tutor Name " + " Number of Student" + " Total Profit");
+            System.out.println("\n\t" + itCourse[x].getTitle() + "Course cost"  + " Number of Student" + " Total Profit");
         }
         System.out.println("3. Language");
         for (int x = 0; x < Language.getNumOfLangCourse(); x++) {
-            System.out.println("\n\t" + langCourse[x].getTitle() + "  Tutor Name " + " Number of Student" + " Total Profit");
+            System.out.println("\n\t" + langCourse[x].getTitle() + "Course cost" + " Number of Student" + " Total Profit");
         }
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("=====================================================================================================================================================================");
