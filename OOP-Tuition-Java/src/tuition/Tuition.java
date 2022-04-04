@@ -111,17 +111,19 @@ public class Tuition {
                 taskChoice = input.nextInt();
                 if (taskChoice < 1 || taskChoice > 14) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "                        Only (1-14) is allowed, please try again!\n");
+                    Font.print(Font.ANSI_RED, "                            Only (1-14) is allowed, please try again!\n");
                 }
 
             } catch (Exception e) {
                 Screen.clear();
-                Font.print(Font.ANSI_RED, "                        Only (1-14) is allowed, please try again!\n");
+                Font.print(Font.ANSI_RED, "                            Only (1-14) is allowed, please try again!\n");
                 input.next();
             }
             switch (taskChoice) {
                 case 1:
-                    addCourse(psy, it, lang, psyCourse, itCourse, langCourse);
+                    int courseChoice = chooseCourse();
+                    Screen.clear();
+                    addCourse(psy, it, lang, psyCourse, itCourse, langCourse, courseChoice);
                     break;
                 case 2:
                     modifyCourse(psyCourse, itCourse, langCourse);
@@ -159,8 +161,9 @@ public class Tuition {
                     break;
                 case 12:
                     // new Course
-                    int courseChoice = chooseCourse();
-                    switch (courseChoice) {
+                    int courseChoice1 = chooseCourse();
+                    Screen.clear();
+                    switch (courseChoice1) {
                         case 1:
                             System.out.println("\n==========\nPSYCHOLOGY\n==========");
                             System.out.println(psy.toString());
@@ -168,6 +171,10 @@ public class Tuition {
                                 System.out.println((x + 1) + ".");
                                 System.out.println(psyCourse[x]);
                             }
+                            System.out.println("\n                                 Press enter to continue...");
+                            try{System.in.read();}
+                            catch(Exception e){}
+                            Screen.clear();
                             break;
 
                         case 2:
@@ -177,6 +184,10 @@ public class Tuition {
                                 System.out.println((y + 1) + ".");
                                 System.out.println(itCourse[y]);
                             }
+                            System.out.println("\n                                 Press enter to continue...");
+                            try{System.in.read();}
+                            catch(Exception e){}
+                            Screen.clear();
                             break;
 
                         case 3:
@@ -186,6 +197,10 @@ public class Tuition {
                                 System.out.println((z + 1) + ".");
                                 System.out.println(langCourse[z]);
                             }
+                            System.out.println("\n                                 Press enter to continue...");
+                            try{System.in.read();}
+                            catch(Exception e){}
+                            Screen.clear();
                             break;
 
                         case 4:
@@ -229,18 +244,34 @@ public class Tuition {
     }
 
     public static int chooseCourse() {
+        int courseChoice = 0;
         Screen.clear();
-        Scanner input = new Scanner(System.in);
+        do{
+            try{
+                Scanner input = new Scanner(System.in);
+                Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Course");
+                Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+                Font.print(Font.ANSI_YELLOW,"\n\t\t\t\t1. Psychology\n\t\t\t\t2. Information Technology\n\t\t\t\t3. Language\n\t\t\t\t4. Back to menu");
+                System.out.print("\n\t\t\t\tEnter a course: ");
+                courseChoice = input.nextInt();
+        
+                if (courseChoice < 1 || courseChoice > 4){
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED, "                            Only (1-4) is allowed, please try again!\n");
+                }
+            }catch (Exception e){
+                Screen.clear();
+                Font.print(Font.ANSI_RED, "                            Only (1-4) is allowed, please try again!\n");
+            }
 
-        System.out.println("\nCourses\n\t1. Psychology\n\t2. Information Technology\n\t3. Language\n\t4. Back to menu");
-        System.out.print("Enter a course: ");
-        int courseChoice = input.nextInt();
+
+        }while(courseChoice != 4 && courseChoice != 1 && courseChoice != 2 && courseChoice != 3);
+
 
         return courseChoice;
     }
 
-    public static void addCourse(Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
-        int courseChoice = chooseCourse();
+    public static void addCourse(Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse, int courseChoice){
 
         if (courseChoice == 1) {
             addPsyCourse(psyCourse);
@@ -372,7 +403,7 @@ public class Tuition {
             if (psyModifyChoice >= 1 && psyModifyChoice <= 7) {
                 isValid = true;
             } else {
-                System.out.println("\nOnly (1-7) is allowed. Please try again!");
+                Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
             }
         } while (isValid == false);
 
@@ -444,7 +475,7 @@ public class Tuition {
             if (itModifyChoice >= 1 && itModifyChoice <= 7) {
                 isValid = true;
             } else {
-                System.out.println("\nOnly (1-7) is allowed. Please try again!");
+                Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
             }
         } while (isValid == false);
 
@@ -514,7 +545,7 @@ public class Tuition {
             if (langModifyChoice >= 1 && langModifyChoice <= 7) {
                 isValid = true;
             } else {
-                System.out.println("\nOnly (1-7) is allowed. Please try again!");
+                Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
             }
         } while (isValid == false);
 
@@ -598,7 +629,7 @@ public class Tuition {
             }
         }
         if(isValid == false){
-            System.out.print("The course code does not exist.\n");
+            Font.print(Font.ANSI_RED, "                            The course code does not exist.\n");
         }
     }
 
@@ -606,7 +637,7 @@ public class Tuition {
         Scanner input = new Scanner(System.in);
         boolean isCodeExist = false;
         
-        System.out.print("Enter course code to delete: ");
+        System.out.print("                                   Enter course code to delete: ");
         String code = input.nextLine();
 
         for (int x = 0; x < ((Psychology) psyCourse[0]).getPsyCount(); x++) {
@@ -674,7 +705,7 @@ public class Tuition {
         }
 
         if(isCodeExist == false){
-            System.out.println("The course code does not exist.");
+            Font.print(Font.ANSI_RED, "                            The course code does not exist.");
         }
         }
 
@@ -688,22 +719,35 @@ public class Tuition {
 
         valid = true;
 
-        //Input and Validation
-        name = NameInputValidate();
-        age = AgeInputValidate();
-        sex = SexInputValidate();
-        phoneNum = PhoneInputValidate();
-        email = EmailInputValidate();
+
 
         if (peopleArr[0] instanceof Student) {
-            System.out.print("Enter description: ");
+            //Input and Validation
+            Screen.clear();
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Student");
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+            name = NameInputValidate();
+            age = AgeInputValidate();
+            sex = SexInputValidate();
+            phoneNum = PhoneInputValidate();
+            email = EmailInputValidate();
+            System.out.print("                                   Enter description: ");
             description = input.nextLine();
             balance = BalanceInputValidate();
             peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
         } else {
+            //Input and Validation
+            Screen.clear();
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Tutor");
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+            name = NameInputValidate();
+            age = AgeInputValidate();
+            sex = SexInputValidate();
+            phoneNum = PhoneInputValidate();
+            email = EmailInputValidate();
             String major = MajorInputValidate();
             String level = LevelInputValidate();
-
+            Screen.clear();
             peopleArr[((Tutor) peopleArr[0]).getTutorCount()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor) peopleArr[0]).getMajor(major), ((Tutor) peopleArr[0]).getLevel(level));
         }
     }
@@ -715,16 +759,16 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("Enter name: ");
+            System.out.print("                                   Enter name: ");
             name = input.nextLine();
             if (isWord(name)) {
                 valid = true;
             } else {
-                Font.print(Font.ANSI_RED, "Invalid Input!!");
+                Font.print(Font.ANSI_RED, "\n                                      Invalid Input!!");
                 valid = false;
             }
             if (name.length() > 50) {
-                Font.print(Font.ANSI_RED, "Name cannot be longer than 50 letters!");
+                Font.print(Font.ANSI_RED, " \n                            Name cannot be longer than 50 letters!");
                 valid = false;
             }
         } while (!valid);
@@ -740,16 +784,16 @@ public class Tuition {
         do {
             valid = true;
             try {
-                System.out.print("Enter age: ");
+                System.out.print("                                   Enter age: ");
                 age = input.nextInt();
                 if (age >= 0 && age <= 150) {
                     valid = true;
                 } else {
-                    Font.print(Font.ANSI_RED, "Age is not valid!");
+                    Font.print(Font.ANSI_RED, "\n                                   Age is not valid!");
                     valid = false;
                 }
             } catch (Exception e) {
-                Font.print(Font.ANSI_RED, "Invalid Input, please make sure you enter correctly!");
+                Font.print(Font.ANSI_RED, "\n                         Invalid Input, please make sure you enter correctly!");
                 input.next();
                 valid = false;
             }
@@ -768,17 +812,17 @@ public class Tuition {
         do {
             valid = true;
 
-            System.out.print("Enter sex: ");
+            System.out.print("                                   Enter sex: ");
             stringSex = input.nextLine();
             if (stringSex.length() == 1) {
                 valid = true;
             } else {
-                Font.print(Font.ANSI_RED, "One character Only!");
+                Font.print(Font.ANSI_RED, "\n                                   One character Only!");
                 valid = false;
             }
             sex = stringSex.charAt(0);
             if (sex != 'm' && sex != 'f' && sex != 'M' && sex != 'F') {
-                Font.print(Font.ANSI_RED, "Only (m,f,M,F) are allowed!");
+                Font.print(Font.ANSI_RED, "\n                                Only (m,f,M,F) are allowed!");
                 valid = false;
             } else {
                 valid = true;
@@ -799,13 +843,13 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("Enter phone number(+6017-725 5766): ");
+            System.out.print("                                   Enter phone number(+6017-725 5766): ");
             phoneNum = input.nextLine();
             if (PhoneIsValid(phoneNum)) {
                 valid = true;
             } else {
                 valid = false;
-                Font.print(Font.ANSI_RED, "Incorrect Format");
+                Font.print(Font.ANSI_RED, "\n                                      Incorrect Format");
             }
         } while (!valid);
         return phoneNum;
@@ -824,13 +868,13 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("Enter email: ");
+            System.out.print("                                   Enter email: ");
             email = input.nextLine();
             if (EmailisValid(email)) {
                 valid = true;
             } else {
                 valid = false;
-                Font.print(Font.ANSI_RED, "Please enter a valid email!");
+                Font.print(Font.ANSI_RED, "\n                                  Please enter a valid email!");
             }
         } while (!valid);
 
@@ -850,16 +894,16 @@ public class Tuition {
         do {
             try {
                 valid = true;
-                System.out.print("Enter balance: ");
+                System.out.print("                                   Enter balance: ");
                 balance = input.nextDouble();
                 if (balance > 0) {
                     valid = true;
                 } else {
                     valid = false;
-                    Font.print(Font.ANSI_RED, "Balance cannot be lower than 0!");
+                    Font.print(Font.ANSI_RED, "\n                                 Balance cannot be lower than 0!");
                 }
             } catch (Exception e) {
-                Font.print(Font.ANSI_RED, "Invalid Input, please make sure you enter correctly!");
+                Font.print(Font.ANSI_RED, "\n                            Invalid Input, please make sure you enter correctly!");
                 input.next();
                 valid = false;
             }
@@ -875,11 +919,11 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("Enter major (IT, PSY, LANG): ");
+            System.out.print("                                   Enter major (IT, PSY, LANG): ");
             major = input.nextLine();
             if (!major.equals("IT") && !major.equals("PSY") && !major.equals("LANG")) {
                 valid = false;
-                Font.print(Font.ANSI_RED, "Only IT, PSY, LANG are allowed!");
+                Font.print(Font.ANSI_RED, "                            Only IT, PSY, LANG are allowed!");
             } else {
                 valid = true;
             }
@@ -896,11 +940,11 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("Enter level (Doctorate, BachelorDegree, MasterDegree): ");
+            System.out.print("                                   Enter level (Doctorate, BachelorDegree, MasterDegree): ");
             level = input.nextLine();
             if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")) {
                 valid = false;
-                Font.print(Font.ANSI_RED, "Only Doctorate, BachelorDegree, MasterDegree are allowed!");
+                Font.print(Font.ANSI_RED, "                            Only Doctorate, BachelorDegree, MasterDegree are allowed!");
             } else {
                 valid = true;
             }
@@ -912,21 +956,27 @@ public class Tuition {
         Scanner input = new Scanner(System.in);
         boolean peopleExist = false;
         int tempI = 0;
-        System.out.print("Enter ID to modify: ");
-        String id = input.nextLine();
+        Screen.clear();
+
 
         if (peopleArr[0] instanceof Student) {
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Student");
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+            System.out.print("                                   Enter ID to modify: ");
+            String id = input.nextLine();
             for (int i = 0; i < Student.getStuCount(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
-                    System.out.println("Yes Student");
                     peopleExist = true;
                     tempI = i;
                 }
             }
         } else {
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Tutor");
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+            System.out.print("                                   Enter ID to modify: ");
+            String id = input.nextLine();
             for (int i = 0; i < Tutor.getTutorCount(); i++) {
                 if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
-                    System.out.println("Yes Tutor");
                     peopleExist = true;
                     tempI = i;
                 }
@@ -936,13 +986,18 @@ public class Tuition {
         if (peopleExist) {
             String message;
             if (peopleArr[0] instanceof Student) {
-                message = "Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Description\n7. Balance";
-            } else {
-                message = "Select to modify\n1. Name\n2. Age\n3. Sex\n4. Phone Number\n5. Email\n6. Level";
+                message = " \n                                      Select to modify\n                                1. Name\n                                2. Age\n                                3. Sex\n                                4. Phone Number\n                                5. Email\n                                6. Description\n                                7. Balance";
+            } else {                                
+                message = "\n                                      Select to modify\n                                1. Name\n                                2. Age\n                                3. Sex\n                                4. Phone Number\n                                5. Email\n                                6. Level";
             }
             System.out.println(message);
+            System.out.print("\n                                Choose your option: ");
             String stringModifyChoice = input.nextLine();
             int modifyChoice = Integer.parseInt(stringModifyChoice);
+            if(modifyChoice < 1 || modifyChoice > 7){
+                Font.print(Font.ANSI_RED, "\n                                      Invalid Input");
+            }
+
 
             switch (modifyChoice) {
                 case 1:
@@ -967,7 +1022,7 @@ public class Tuition {
                     break;
                 case 6:
                     if (peopleArr[0] instanceof Student) {
-                        System.out.print("Enter new description: ");
+                        System.out.print("                               Enter new description: ");
                         String newDescription = input.nextLine();
                         ((Student) peopleArr[tempI]).setDescription(newDescription);
                         break;
@@ -982,33 +1037,46 @@ public class Tuition {
                         ((Student) peopleArr[tempI]).setBalance(newBalance);
                         break;
                     } else {
-                        Font.print(Font.ANSI_RED, "Invalid Input");
+                        Font.print(Font.ANSI_RED, "\n                                      Invalid Input");
                     }
             }
         } else {
-            System.out.println("The ID doesn't exist");
+            Font.print(Font.ANSI_RED, "\n                                      The ID doesn't exist");
         }
+        System.out.println("\n                                 Press enter to continue...");
+        try{System.in.read();}
+        catch(Exception e){}
+        Screen.clear();
     }
 
     public static void deletePeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
         boolean peopleExist = false;
         int tempI = 0;
-        System.out.print("Enter ID to delete: ");
-        String id = input.nextLine();
+        String id = "";
+
+        Screen.clear();
+
+
 
         if (peopleArr[0] instanceof Student) {
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Student");
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+            System.out.print("                                   Enter ID to delete: ");
+            id = input.nextLine();
             for (int i = 0; i < Student.getStuCount(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
-                    System.out.println("Yes Student");
                     peopleExist = true;
                     tempI = i;
                 }
             }
         } else {
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Tutor");
+            Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+            System.out.print("                                   Enter ID to delete: ");
+            id = input.nextLine();
             for (int i = 0; i < Tutor.getTutorCount(); i++) {
                 if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
-                    System.out.println("Yes Tutor");
                     peopleExist = true;
                     tempI = i;
                 }
@@ -1031,7 +1099,7 @@ public class Tuition {
                     }
                 }
                 clonePeople[((Student) peopleArr[0]).getStuCount()] = null;
-                System.out.println("The Student ID " + id + " has been deleted");
+                Font.print(Font.ANSI_YELLOW,"\n                             The Student ID " + id + " has been deleted\n");
             } else {
                 ((Tutor) peopleArr[0]).reduceTutorCount();
                 People[] tempPeople = new Tutor[((Tutor) peopleArr[0]).getTutorCount()];
@@ -1049,11 +1117,15 @@ public class Tuition {
                 }
 
                 tempPeople[((Tutor) peopleArr[0]).getTutorCount()] = null;
-                System.out.println("The Tutor ID " + id + " has been deleted");
+                Font.print(Font.ANSI_YELLOW,"\n                              The Tutor ID"  + id + " has been deleted\n");
             }
         } else {
-            System.out.println("The ID doesn't exist");
+            Font.print(Font.ANSI_RED, "\n                                   The ID doesn't exist");
         }
+        System.out.println("\n                                  Press enter to continue...");
+        try{System.in.read();}
+        catch(Exception e){}
+        Screen.clear();
     }
 
     private static boolean isWord(String name) {
@@ -1082,7 +1154,7 @@ public class Tuition {
                 }
             } catch (Exception e) {
                 Screen.clear();
-                Font.print(Font.ANSI_RED, "Invalid Input");
+                Font.print(Font.ANSI_RED, "\n                                      Invalid Input");
                 input.next();
                 userChoice = 100;
             }
