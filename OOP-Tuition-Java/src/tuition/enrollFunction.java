@@ -110,21 +110,13 @@ public class enrollFunction {
             for (int i = 0; i < Enroll.getEnrollNum(); i++) {
                 if (id.equals(enrollArr[i].student.getStuID())) {
                     if(id2.equals(enrollArr[i].course.getCode())){
-                        Enroll.setEnrollNum(Enroll.getEnrollNum() - 1);
                         arrayToDelete = i;
                         match = true;
                     } 
                 }
             }
             if(match){
-                Enroll[] tempArr = enrollArr;
-                for (int i = 0; i < Enroll.getEnrollNum(); i++){
-                    if(i < arrayToDelete){
-                        enrollArr[i] = tempArr[i];
-                    } else {
-                        enrollArr[i] = tempArr[i + 1];
-                    }
-                }
+                deleteEnrollFunction(enrollArr, arrayToDelete);
                 Font.print(Font.ANSI_RED, "\n                                      Enrollment deleted");
             } else {
                 Font.print(Font.ANSI_RED, "\n                                      No enrollment found.");
@@ -134,5 +126,34 @@ public class enrollFunction {
         try{System.in.read();}
         catch(Exception e){}
         Screen.clear();
+    }
+    
+    public static void deleteEnrollFunction(Enroll[] enrollArr, int arrayToDelete) {
+        Enroll.setEnrollNum(Enroll.getEnrollNum() - 1);
+        Enroll[] tempArr = enrollArr;
+        for (int i = 0; i < Enroll.getEnrollNum(); i++) {
+            if (i < arrayToDelete) {
+                enrollArr[i] = tempArr[i];
+            } else {
+                enrollArr[i] = tempArr[i + 1];
+            }
+        }
+    }
+    
+    public static void deleteStuEnroll(Enroll[] enrollArr, People[] stuArray, String id) {
+        int timesToExecute = 0;
+        for(int i = 0; i < Enroll.getEnrollNum(); i++){
+            if((enrollArr[i].student.getStuID()).equals(id)){
+                timesToExecute++;
+            }
+        }
+        
+        for (int j = 0; j < timesToExecute; j++) {
+            for (int i = 0; i < Enroll.getEnrollNum(); i++) {
+                if ((enrollArr[i].student.getStuID()).equals(id)) {
+                    deleteEnrollFunction(enrollArr, i);
+                }
+            }
+        }
     }
 }

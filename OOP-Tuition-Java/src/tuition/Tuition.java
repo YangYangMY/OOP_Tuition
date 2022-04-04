@@ -138,7 +138,7 @@ public class Tuition {
                     modifyPeople(stuArray);
                     break;
                 case 6:
-                    deletePeople(stuArray);
+                    deletePeople(stuArray, enrollArr);
                     break;
                 case 7:
                     addPeople(tutArray);
@@ -147,7 +147,7 @@ public class Tuition {
                     modifyPeople(tutArray);
                     break;
                 case 9:
-                    deletePeople(tutArray);
+                    deletePeople(tutArray, enrollArr);
                     break;
                 case 10:
                     //add enroll
@@ -1049,7 +1049,7 @@ public class Tuition {
         Screen.clear();
     }
 
-    public static void deletePeople(People[] peopleArr) {
+    public static void deletePeople(People[] peopleArr, Enroll[] enrollArr) {
         Scanner input = new Scanner(System.in);
         boolean peopleExist = false;
         int tempI = 0;
@@ -1099,6 +1099,7 @@ public class Tuition {
                     }
                 }
                 clonePeople[((Student) peopleArr[0]).getStuCount()] = null;
+                enrollFunction.deleteStuEnroll(enrollArr, peopleArr, id);
                 Font.print(Font.ANSI_YELLOW,"\n                             The Student ID " + id + " has been deleted\n");
             } else {
                 ((Tutor) peopleArr[0]).reduceTutorCount();
@@ -1113,9 +1114,7 @@ public class Tuition {
                         tempPeople[a] = peopleArr[i];
                         a++;
                     }
-
                 }
-
                 tempPeople[((Tutor) peopleArr[0]).getTutorCount()] = null;
                 Font.print(Font.ANSI_YELLOW,"\n                              The Tutor ID"  + id + " has been deleted\n");
             }
