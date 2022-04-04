@@ -119,9 +119,9 @@ public class dummyScript {
     }
 
     public static void langCourseDummyDate(Course[] langCourse) {
-        langCourse[0] = new Language("LAN01", "International English Language Proficiency Programme", "Measure in listening, reading, writing and speaking", "Designed to help you work, study and migrate to a country where English is native language", 155.45, 250, "English", "IELTS");
-        langCourse[1] = new Language("LAN02", "Malaysia English Language Proficiency Programme", "Measure in listening, writing and speaking", "Language proficiency test that measures English language skills for Malaysia student", 150.55, 200, "English", "MUET");
-        langCourse[2] = new Language("LAN03", "Korea Language Proficiency Programme", "Measure in reading, writing and listening", "Aims to measure the level of fluency of individuals in the Korean language.", 175.0, 150, "Korean", "TOPIK");
+        langCourse[0] = new Language("LAN01", "International English Language", "Measure in listening, reading, writing and speaking", "Designed to help you work, study and migrate to a country where English is native language", 155.45, 250, "English", "IELTS");
+        langCourse[1] = new Language("LAN02", "Malaysia English Language", "Measure in listening, writing and speaking", "Language proficiency test that measures English language skills for Malaysia student", 150.55, 200, "English", "MUET");
+        langCourse[2] = new Language("LAN03", "Korea Language", "Measure in reading, writing and listening", "Aims to measure the level of fluency of individuals in the Korean language.", 175.0, 150, "Korean", "TOPIK");
     }
     
     public static void enrollment(Enroll[] enrollArr, People[] stuArray, Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
