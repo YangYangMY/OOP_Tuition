@@ -20,12 +20,18 @@ public class Tuition {
 
         //Start Login
         Screen.clear();
-        System.out.println("Login Page");
+        Font.print(Font.ANSI_YELLOW,"           _____ _____ __       _____     _ _   _            _____         _           ");
+        Font.print(Font.ANSI_YELLOW,"           |_   _|_   _|  |     |_   _|_ _|_| |_|_|___ ___   |     |___ ___| |_ ___ ___ ");
+        Font.print(Font.ANSI_YELLOW,"             | |   | | |  |__     | | | | | |  _| | . |   |  |   --| -_|   |  _| -_|  _|");
+        Font.print(Font.ANSI_YELLOW,"             |_|   |_| |_____|    |_| |___|_|_| |_|___|_|_|  |_____|___|_|_|_| |___|_|  ");
+        System.out.println("\n");
+        Font.print(Font.ANSI_BLUE,"                                          Login Page");
+        System.out.println("\n");
         do {
             try {
-                System.out.print("Username: ");
+                System.out.print("                                   Username: ");
                 String enteredUsername = input.nextLine();
-                System.out.print("Password: ");
+                System.out.print("                                   Password: ");
                 String enteredPassword = input.nextLine();
                 if (!enteredUsername.equals(username) || !enteredPassword.equals(password)) {
                     throw new InvalidException();
@@ -62,6 +68,14 @@ public class Tuition {
                 }
 
             } catch (InvalidException e) {
+                Screen.clear();
+                Font.print(Font.ANSI_YELLOW,"            _____ _____ __       _____     _ _   _            _____         _           ");
+                Font.print(Font.ANSI_YELLOW,"           |_   _|_   _|  |     |_   _|_ _|_| |_|_|___ ___   |     |___ ___| |_ ___ ___ ");
+                Font.print(Font.ANSI_YELLOW,"             | |   | | |  |__     | | | | | |  _| | . |   |  |   --| -_|   |  _| -_|  _|");
+                Font.print(Font.ANSI_YELLOW,"             |_|   |_| |_____|    |_| |___|_|_| |_|___|_|_|  |_____|___|_|_|_| |___|_|  ");
+                System.out.println("\n");
+                Font.print(Font.ANSI_BLUE,"                                          Login Page");
+                System.out.println("\n");
                 Font.print(Font.ANSI_RED, e.getErrorMsg());
                 times--;
                 contactManagement = true;
@@ -70,8 +84,19 @@ public class Tuition {
 
         if (contactManagement) {
             Screen.clear();
-            System.out.println("Sorry, you have reached the maximum times of login. Please contact the management for the username and password\n");
-            System.out.println("Logout.");
+            Font.print(Font.ANSI_YELLOW,"              _____ _____ __       _____     _ _   _            _____         _           ");
+            Font.print(Font.ANSI_YELLOW,"             |_   _|_   _|  |     |_   _|_ _|_| |_|_|___ ___   |     |___ ___| |_ ___ ___ ");
+            Font.print(Font.ANSI_YELLOW,"               | |   | | |  |__     | | | | | |  _| | . |   |  |   --| -_|   |  _| -_|  _|");
+            Font.print(Font.ANSI_YELLOW,"               |_|   |_| |_____|    |_| |___|_|_| |_|___|_|_|  |_____|___|_|_|_| |___|_|  ");
+            System.out.println("\n");
+            Font.print(Font.ANSI_RED, "   Sorry, you have reached the maximum times of login. Please contact the management for the username and password\n");
+            Screen.pause(2);
+            Screen.clear();
+            Font.print(Font.ANSI_YELLOW,"                                                          __ __ ");
+            Font.print(Font.ANSI_YELLOW,"                _____ _           _      __ __           |  |  |");
+            Font.print(Font.ANSI_YELLOW,"               |_   _| |_ ___ ___| |_   |  |  |___ _ _   |  |  |");
+            Font.print(Font.ANSI_YELLOW,"                 | | |   | .'|   | '_|  |_   _| . | | |  |__|__|");
+            Font.print(Font.ANSI_YELLOW,"                 |_| |_|_|__,|_|_|_,_|    |_| |___|___|  |__|__|");
         }
     }
 
@@ -84,14 +109,14 @@ public class Tuition {
             try {
                 displayMenu();
                 taskChoice = input.nextInt();
-                if (taskChoice < 1 || taskChoice > 15) {
+                if (taskChoice < 1 || taskChoice > 14) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "Only (1-15) is allowed, please try again!\n");
+                    Font.print(Font.ANSI_RED, "                        Only (1-14) is allowed, please try again!\n");
                 }
 
             } catch (Exception e) {
                 Screen.clear();
-                Font.print(Font.ANSI_RED, "Only (1-15) is allowed, please try again!\n");
+                Font.print(Font.ANSI_RED, "                        Only (1-14) is allowed, please try again!\n");
                 input.next();
             }
             switch (taskChoice) {
@@ -172,18 +197,35 @@ public class Tuition {
                     report(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse, enrollArr);
                     break;
                 case 14:
-                    System.out.println("Thank YOU!!");
+                    Screen.clear();
+                    Font.print(Font.ANSI_YELLOW,"                                                          __ __ ");
+                    Font.print(Font.ANSI_YELLOW,"                _____ _           _      __ __           |  |  |");
+                    Font.print(Font.ANSI_YELLOW,"               |_   _| |_ ___ ___| |_   |  |  |___ _ _   |  |  |");
+                    Font.print(Font.ANSI_YELLOW,"                 | | |   | .'|   | '_|  |_   _| . | | |  |__|__|");
+                    Font.print(Font.ANSI_YELLOW,"                 |_| |_|_|__,|_|_|_,_|    |_| |___|___|  |__|__|");
                     break;
             }
         } while (taskChoice != 14);
     }
 
     public static void displayMenu() {
-        System.out.print("\nTTL Tuition Center\nCourse\n\t1. Add course\n\t2. Modify course\n\t3. Remove course"
-                + "\nStudent\n\t4. Add Student\n\t5. Modify Student\n\t6. Remove Student"
-                + "\nTutor\n\t7. Add Tutor\n\t8. Modify Tutor\n\t9. Remove Tutor"
-                + "\nEnroll\n\t10. Add Enroll\n\t11. Remove Enroll"
-                + "\n12. Course\n13. Report\n14. Exit\nSelect task to perform: ");
+        Font.print(Font.ANSI_YELLOW,"              _____ _____ __       _____     _ _   _            _____         _           ");
+        Font.print(Font.ANSI_YELLOW,"             |_   _|_   _|  |     |_   _|_ _|_| |_|_|___ ___   |     |___ ___| |_ ___ ___ ");
+        Font.print(Font.ANSI_YELLOW,"               | |   | | |  |__     | | | | | |  _| | . |   |  |   --| -_|   |  _| -_|  _|");
+        Font.print(Font.ANSI_YELLOW,"               |_|   |_| |_____|    |_| |___|_|_| |_|___|_|_|  |_____|___|_|_|_| |___|_|  ");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tCourse");
+                
+        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   1. Add course\n\t\t\t\t   2. Modify course\n\t\t\t\t   3. Remove course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tStudent");
+        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   4. Add Student\n\t\t\t\t   5. Modify Student\n\t\t\t\t   6. Remove Student");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tTutor");
+        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   7. Add Tutor\n\t\t\t\t   8. Modify Tutor\n\t\t\t\t   9. Remove Tutor");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tEnroll");
+        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   10. Add Enroll\n\t\t\t\t   11. Remove Enroll\n\t\t\t\t   12. Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tReport");
+        Font.print(Font.ANSI_YELLOW, "\t\t\t\t     13. Report");
+        Font.print(Font.ANSI_YELLOW, "\n\t\t\t\t      14. Exit");
+        System.out.print( "\n\t\t\t\tSelect task to perform: ");
     }
 
     public static int chooseCourse() {
@@ -1048,22 +1090,22 @@ public class Tuition {
             switch (userChoice) {
                 case 1:
                     Screen.clear();
-                    Font.print(Font.ANSI_BLUE, "Student Report");
+                    Font.print(Font.ANSI_BLUE, "                                                              Student Report");
                     StudentReport(stuArray);
                     break;
                 case 2:
                     Screen.clear();
-                    Font.print(Font.ANSI_BLUE, "Tutor Report");
+                    Font.print(Font.ANSI_BLUE, "                                                              Tutor Report");
                     TutorReport(tutArray);
                     break;
                 case 3:
                     Screen.clear();
-                    Font.print(Font.ANSI_BLUE, "Enrollment Report");
+                    Font.print(Font.ANSI_BLUE, "                                                         Student Enrollment Report");
                     EnrollmentReport(enrollArr);
                     break;
                 case 4:
                     Screen.clear();
-                    Font.print(Font.ANSI_BLUE, "Summary Report");
+                    Font.print(Font.ANSI_BLUE, "                                                              Summary Report");
                     SummaryReport(enrollArr, psy, it, lang, psyCourse, itCourse, langCourse);
                     break;
                 case 5:
@@ -1099,45 +1141,105 @@ public class Tuition {
 
     public static void EnrollmentReport(Enroll[] enrollArr){
         System.out.println("=========================================================================================================================================================================");
-        System.out.printf("%12s %19s %22s %40s", "Student ID", "Name", "Course ID", "Course Name");
+        System.out.printf("%12s %19s %22s %30s", "Student ID", "Name", "Course ID", "Course Name");
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Enroll.getEnrollNum(); i++) {
             for(int z = 0; z <Enroll.getEnrollNum(); z++){
                 if(enrollArr[z].student.getStuID().equals("W" + i)){
-                    System.out.printf(" %9s %28s %14s %60s", enrollArr[z].student.getStuID() , enrollArr[z].student.getName() , enrollArr[z].course.getCode() , enrollArr[z].course.getTitle());
+                    System.out.printf(" %9s %28s %14s %40s", enrollArr[z].student.getStuID() , enrollArr[z].student.getName() , enrollArr[z].course.getCode() , enrollArr[z].course.getTitle());
                     System.out.println();
                 }
             
         }
     }
         System.out.println("=========================================================================================================================================================================");
-    }
+}
+    
+
     
     public static void SummaryReport(Enroll[] enrollArr, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
-        // Course Name + Tutor Name + Number of Student + Total Profit
-        System.out.println("=====================================================================================================================================================================");
-        System.out.println("1. Psychology");
-        for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
-                int count = 0;
-            for(int i = 0; i < Enroll.getEnrollNum(); i++) {
-                if((enrollArr[i].course.getCode()).equals(psyCourse[0].getCode())){
-                      count++;
-                 }
+        // Calculate number of student for each subject
+        int TotalPsySubjectCount = ((Psychology) psyCourse[0]).getPsyCount();
+        int TotalITSubjectCount = ((IT)itCourse[0]).getItCount();
+        int TotalLangSubjectCount = ((Language)langCourse[0]).getLangCount();
+
+        int[] PsyStudentCount= new int[TotalPsySubjectCount];
+        int[] ITStudentCount= new int[TotalITSubjectCount];
+        int[] LangStudentCount= new int[TotalLangSubjectCount];
+        Double[] PsyProfit = new Double[TotalPsySubjectCount];
+        Double[] ITProfit = new Double[TotalITSubjectCount];
+        Double[] LangProfit = new Double[TotalLangSubjectCount];
+
+
+        for(int i = 0; i < Enroll.getEnrollNum(); i++) {
+            for(int z = 0 ; z < TotalPsySubjectCount; z++){
+                if((enrollArr[i].course.getCode()).equals(psyCourse[z].getCode())){
+                    PsyStudentCount[z]++;
+               }
             }
-            System.out.println("\n\t" + psyCourse[x].getTitle()  + "Course cost" + " Number of Student" + " Total Profit");
+            for(int c = 0 ; c < TotalPsySubjectCount; c++){
+                if((enrollArr[i].course.getCode()).equals(itCourse[c].getCode())){
+                    ITStudentCount[c]++;
+                }
+            }
+            for(int l = 0 ; l < TotalPsySubjectCount; l++){
+                if((enrollArr[i].course.getCode()).equals(langCourse[l].getCode())){
+                    LangStudentCount[l]++;
+                }
+            }
         }
-        System.out.println("2. IT");
-        for (int x = 0; x < IT.getNumOfItCourse(); x++) {
-            System.out.println("\n\t" + itCourse[x].getTitle() + "Course cost"  + " Number of Student" + " Total Profit");
+        double totalProfit = 0;
+        
+        for(int z = 0 ; z < TotalPsySubjectCount; z++){
+            PsyProfit[z] = (psyCourse[z].getFee() * PsyStudentCount[z]);
+            totalProfit += PsyProfit[z];
+           
         }
-        System.out.println("3. Language");
-        for (int x = 0; x < Language.getNumOfLangCourse(); x++) {
-            System.out.println("\n\t" + langCourse[x].getTitle() + "Course cost" + " Number of Student" + " Total Profit");
+        for(int c = 0 ; c < TotalITSubjectCount; c++){
+            ITProfit[c] = (itCourse[c].getFee() * ITStudentCount[c]);
+            totalProfit += ITProfit[c];
+            
         }
+        for(int l = 0 ; l < TotalLangSubjectCount; l++){
+            LangProfit[l] = (langCourse[l].getFee() * LangStudentCount[l]);
+            totalProfit += LangProfit[l];
+            
+        }
+
+        System.out.println("=====================================================================================================================================================================");
+        Font.print(Font.ANSI_YELLOW, "1. Psychology");
+        System.out.printf("%40s %15s %20s %11s\n" , "Course Name", "Course Fee" , " Number of Student" , " Profit");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+
+        
+        for (int x = 0; x < Psychology.getPsyCount(); x++) {
+            System.out.printf("%40s %15s %13s %11s" , psyCourse[x].getTitle(), psyCourse[x].getFee() , PsyStudentCount[x] , "" );
+            System.out.printf("%.2f", PsyProfit[x]);
+            System.out.println();
+        }
+        Font.print(Font.ANSI_YELLOW, "2. IT");
+        System.out.printf("%40s %15s %20s %11s\n" , "Course Name", "Course Fee" , " Number of Student" , " Profit");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+
+        for (int x = 0; x < IT.getItCount(); x++) {
+            System.out.printf("%40s %15s %13s %11s" , itCourse[x].getTitle(), itCourse[x].getFee() , ITStudentCount[x] , "" );
+            System.out.printf("%.2f", ITProfit[x]);
+            System.out.println();
+        }
+        Font.print(Font.ANSI_YELLOW, "3. Language");
+        System.out.printf("%40s %15s %20s %11s\n" , "Course Name", "Course Fee" , " Number of Student" , " Profit");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+
+        for (int x = 0; x < Language.getLangCount(); x++) {
+            System.out.printf("%40s %15s %13s %11s" , langCourse[x].getTitle(), langCourse[x].getFee() , LangStudentCount[x] , "" );
+            System.out.printf("%.2f", LangProfit[x]);
+            System.out.println();        }
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("Total Profit:                                                                 RM %.2f\n", totalProfit);
         System.out.println("=====================================================================================================================================================================");
     }
+
 
     // Exception for handling invalid username or password
     private static class InvalidException extends Exception {
@@ -1145,7 +1247,7 @@ public class Tuition {
         private final String errorMsg;
 
         InvalidException() {
-            this.errorMsg = "Invalid Password or Username, please try again!\n";
+            this.errorMsg = "                          Invalid Password or Username, please try again!\n";
         }
 
         public String getErrorMsg() {
@@ -1153,4 +1255,6 @@ public class Tuition {
         }
     }
 
+    
 }
+
