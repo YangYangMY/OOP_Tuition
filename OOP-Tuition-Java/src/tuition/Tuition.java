@@ -951,17 +951,16 @@ public class Tuition {
 
                 Font.print(Font.CYAN_BOLD_BRIGHT, "Report");
                 System.out.println("----------------");
-                System.out.println("1. Course Report");
-                System.out.println("2. Student Report");
-                System.out.println("3. Tutor Report");
-                System.out.println("4. Enrollment Report");
-                System.out.println("5. Summary Report");
-                System.out.println("6. Back");
+                System.out.println("1. Student Report");
+                System.out.println("2. Tutor Report");
+                System.out.println("3. Enrollment Report");
+                System.out.println("4. Summary Report");
+                System.out.println("5. Back");
                 System.out.print("Enter Choice: ");
                 userChoice = input.nextInt();
-                if (userChoice < 1 || userChoice > 6) {
+                if (userChoice < 1 || userChoice > 5) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "Only (1-6) are allowed!");
+                    Font.print(Font.ANSI_RED, "Only (1-5) are allowed!");
                 }
             } catch (Exception e) {
                 Screen.clear();
@@ -973,61 +972,34 @@ public class Tuition {
             switch (userChoice) {
                 case 1:
                     Screen.clear();
-                    Font.print(Font.ANSI_BLUE, "Course Report");
-                    CourseReport(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
-                    break;
-                case 2:
-                    Screen.clear();
                     Font.print(Font.ANSI_BLUE, "Student Report");
                     StudentReport(stuArray);
                     break;
-                case 3:
+                case 2:
                     Screen.clear();
                     Font.print(Font.ANSI_BLUE, "Tutor Report");
                     TutorReport(tutArray);
                     break;
-                case 4:
+                case 3:
                     Screen.clear();
                     Font.print(Font.ANSI_BLUE, "Enrollment Report");
                     EnrollmentReport(enrollArr);
                     break;
-                case 5:
+                case 4:
                     Screen.clear();
                     Font.print(Font.ANSI_BLUE, "Summary Report");
                     SummaryReport(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
                     break;
-                case 6:
+                case 5:
                     Screen.clear();
             }
-        } while (userChoice != 6);
-    }
-
-    public static void CourseReport(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
-        System.out.println("=====================================================================================================================================================================");
-        System.out.printf("%12s %19s %15s %6s %17s", "Course Code", "Course Name", "Subject Name", "Tutor Name", "Course Cost");
-        System.out.println();
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("1. Psychology");
-        for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
-            System.out.println("\n\t" + psyCourse[x].getTitle()  + "Course cost" + " Number of Student" + " Total Profit");
-        }
-        System.out.println("2. IT");
-        for (int x = 0; x < IT.getNumOfItCourse(); x++) {
-            System.out.println("\n\t" + itCourse[x].getTitle() + "  Tutor Name " + " Number of Student" + " Total Profit");
-        }
-        System.out.println("3. Language");
-        for (int x = 0; x < Language.getNumOfLangCourse(); x++) {
-            System.out.println("\n\t" + langCourse[x].getTitle() + "  Tutor Name " + " Number of Student" + " Total Profit");
-        }
-
-        System.out.println("=====================================================================================================================================================================");
-
+        } while (userChoice != 5);
     }
 
 
     public static void StudentReport(People[] stuArray) {
         System.out.println("=========================================================================================================================================================================");
-        System.out.printf("%12s %19s %15s %6s %17s %23s %22s %12s", "Student ID", "Name", "Age", "Sex", "Phone Number", "Email", "Description", "Balance");
+        System.out.printf("%12s %19s %15s %6s %17s %23s %22s %12s", "Student ID", "Name", "Age", "Sex", "Phone Number", "Email", "Description", "Balance", "Course Name");
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Student.getStuCount(); i++) {
