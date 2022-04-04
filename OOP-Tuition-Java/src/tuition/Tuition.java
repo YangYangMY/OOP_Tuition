@@ -1,6 +1,7 @@
 package tuition;
 
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.Formatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,12 +96,13 @@ public class Tuition {
             }
              switch (taskChoice) {
                     case 1:
-                        addCourse(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse);
+                        addCourse(psy, it, lang, psyCourse, itCourse, langCourse);
                         break;
                     case 2:
                         modifyCourse(psyCourse, itCourse, langCourse);
                         break;
                     case 3:
+                        deleteCourse(psyCourse, itCourse, langCourse);
                         break;
                     case 4:
                         addPeople(stuArray);
@@ -127,7 +129,7 @@ public class Tuition {
                             case 1:
                                 System.out.println("\n==========\nPSYCHOLOGY\n==========");
                                 System.out.println(psy.toString());
-                                for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
+                                for (int x = 0; x < Psychology.getPsyCount(); x++) {
                                     System.out.println((x+1) + ".");
                                     System.out.println(psyCourse[x]);
                                 }
@@ -136,7 +138,7 @@ public class Tuition {
                             case 2:
                                 System.out.println("\n======================\nINFORMATION TECHNOLOGY\n======================");
                                 System.out.println(it.toString());
-                                for (int y = 0; y < IT.getNumOfItCourse(); y++) {
+                                for (int y = 0; y < IT.getItCount(); y++) {
                                     System.out.println((y+1) + ".");
                                     System.out.println(itCourse[y]);
                                 }
@@ -145,7 +147,7 @@ public class Tuition {
                             case 3:
                                 System.out.println("\n========\nLANGUAGE\n========");
                                 System.out.println(lang.toString());
-                                for (int z = 0; z < Language.getNumOfLangCourse(); z++) {
+                                for (int z = 0; z < Language.getLangCount(); z++) {
                                     System.out.println((z+1) + ".");
                                     System.out.println(langCourse[z]);
                                 }
@@ -184,7 +186,7 @@ public class Tuition {
         return courseChoice;
     }
 
-    public static void addCourse(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+    public static void addCourse(Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
         int courseChoice = chooseCourse();
 
         if(courseChoice == 1){
@@ -522,21 +524,21 @@ public class Tuition {
         System.out.print("\nEnter course code to modify: ");
         String code = input.nextLine();
 
-        for (int x = 0; x < Psychology.getNumOfPsyCourse(); x++) {
+        for (int x = 0; x < Psychology.getPsyCount(); x++) {
             if ((psyCourse[x].getCode()).equals(code)) {
                 isValid = true;
                 modifyPsyCourse(psyCourse, psyCourse[x]);
             }
         }
 
-        for (int y = 0; y < IT.getNumOfItCourse(); y++) {
+        for (int y = 0; y < IT.getItCount(); y++) {
             if ((itCourse[y].getCode()).equals(code)) {
                 isValid = true;
                 modifyitCourse(itCourse, itCourse[y]);
             }
         }
 
-        for (int z = 0; z < Language.getNumOfLangCourse(); z++) {
+        for (int z = 0; z < Language.getLangCount(); z++) {
             if ((langCourse[z].getCode()).equals(code)) {
                 isValid = true;
                 modifyLangCourse(itCourse, langCourse[z]);
@@ -544,8 +546,83 @@ public class Tuition {
         }
 
         if(isValid == false){
-            System.out.print("\nThis course code does not exist. Please try again!");
-            modifyCourse(psyCourse, itCourse, langCourse);
+            System.out.print("The course code does not exist.\n");
+        }
+    }
+
+    public static void deleteCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+        Scanner input = new Scanner(System.in);
+        boolean isCodeExist = false;
+        
+        System.out.print("Enter course code to delete: ");
+        String code = input.nextLine();
+
+        for (int x = 0; x < ((Psychology) psyCourse[0]).getPsyCount(); x++) {
+            if ((psyCourse[x].getCode()).equals(code)) {
+                isCodeExist = true;
+                Psychology.reducePsyCount();;
+                Course[] newPsyCourse = new Psychology[((Psychology) psyCourse[0]).getPsyCount()];
+                int count = Psychology.getPsyCount();
+                newPsyCourse = psyCourse;
+
+                int a = 0;
+                for (int i = 0; i < count + 1; i++) {
+                    if (!(psyCourse[i].getCode()).equals(code)) {
+                        newPsyCourse[a] = psyCourse[i];
+                        a++;
+                    }
+                }
+
+                psyCourse[((Psychology) psyCourse[0]).getPsyCount() + 1] = null;
+
+                System.out.println("The course " + code + " has been deleted.");
+            }
+        }
+
+        for(int y = 0; y < ((IT)itCourse[0]).getItCount(); y++){
+            if((itCourse[y].getCode()).equals(code)){
+                isCodeExist = true;
+                IT.reduceItCount();
+                Course[] newItCourse = new IT[((IT) itCourse[0]).getItCount()];
+                int count = IT.getItCount();
+                newItCourse = itCourse;
+
+                int a = 0;
+                for (int i = 0; i < count + 1; i++) {
+                    if (!(itCourse[i].getCode()).equals(code)) {
+                        newItCourse[a] = itCourse[i];
+                        a++;
+                    }
+                }
+
+                itCourse[((IT) itCourse[0]).getItCount() + 1] = null;
+                System.out.println("The course " + code + " has been deleted.");
+            }
+        }
+
+        for(int z = 0; z < ((Language)langCourse[0]).getLangCount(); z++){
+            if((langCourse[z].getCode()).equals(code)){
+                isCodeExist = true;
+                Language.reduceLangCount();
+                Course[] newLangCourse = new Language[((Language) langCourse[0]).getLangCount()];
+                int count = Language.getLangCount();
+                newLangCourse = langCourse;
+
+                int a = 0;
+                for (int i = 0; i < count + 1; i++) {
+                    if (!(langCourse[i].getCode()).equals(code)) {
+                        newLangCourse[a] = langCourse[i];
+                        a++;
+                    }
+                }
+
+                langCourse[((Language) langCourse[0]).getLangCount() + 1] = null;
+                System.out.println("The course " + code + " has been deleted.");
+            }
+        }
+
+        if(isCodeExist == false){
+            System.out.println("The course code does not exist.");
         }
     }
 
