@@ -1,10 +1,13 @@
 package tuition;
 
 import java.util.Scanner;
+import java.text.BreakIterator;
 import java.util.Arrays;
 import java.util.Formatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import tuition.Tutor.Major;
 
 public class Tuition {
 
@@ -62,9 +65,11 @@ public class Tuition {
                     Enroll[] enrollArr = new Enroll[200];
                     dummyScript.enrollment(enrollArr, stuArray, psyCourse, itCourse, langCourse);
 
+                    Register[] regArr = new Register[30];
+                    dummyScript.registration(regArr, tutArray, psyCourse, itCourse, langCourse);
                     //Enter menu with all objects made
                     Screen.clear();
-                    menu(stuArray, tutArray, Psychology, IT, Language, psyCourse, itCourse, langCourse, enrollArr);
+                    menu(stuArray, tutArray, Psychology, IT, Language, psyCourse, itCourse, langCourse, enrollArr, regArr);
                 }
 
             } catch (InvalidException e) {
@@ -100,7 +105,7 @@ public class Tuition {
         }
     }
 
-    public static void menu(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse, Enroll[] enrollArr) {
+    public static void menu(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse, Enroll[] enrollArr, Register[] regArr) {
         Scanner input = new Scanner(System.in);
 
         int taskChoice = 0;
@@ -208,10 +213,19 @@ public class Tuition {
                     }
                     break;
                 case 13:
+                    // Register tutor
+                    Screen.clear();
+                    regTutor(regArr, tutArray, psyCourse, itCourse, langCourse);
+                    break;
+                case 14:
+                    // Remove Register
+                    Screen.clear();
+                    break;
+                case 15:
                     Screen.clear();
                     report(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse, enrollArr);
                     break;
-                case 14:
+                case 16:
                     Screen.clear();
                     Font.print(Font.ANSI_YELLOW,"                                                          __ __ ");
                     Font.print(Font.ANSI_YELLOW,"                _____ _           _      __ __           |  |  |");
@@ -220,7 +234,7 @@ public class Tuition {
                     Font.print(Font.ANSI_YELLOW,"                 |_| |_|_|__,|_|_|_,_|    |_| |___|___|  |__|__|");
                     break;
             }
-        } while (taskChoice != 14);
+        } while (taskChoice != 16);
     }
 
     public static void displayMenu() {
@@ -237,9 +251,11 @@ public class Tuition {
         Font.print(Font.ANSI_YELLOW, "\t\t\t\t   7. Add Tutor\n\t\t\t\t   8. Modify Tutor\n\t\t\t\t   9. Remove Tutor");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tEnroll");
         Font.print(Font.ANSI_YELLOW, "\t\t\t\t   10. Add Enroll\n\t\t\t\t   11. Remove Enroll\n\t\t\t\t   12. Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tRegister");
+        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   13. Register Tutor\n\t\t\t\t   14. Remove Register");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tReport");
-        Font.print(Font.ANSI_YELLOW, "\t\t\t\t     13. Report");
-        Font.print(Font.ANSI_YELLOW, "\n\t\t\t\t      14. Exit");
+        Font.print(Font.ANSI_YELLOW, "\t\t\t\t     15. Report");
+        Font.print(Font.ANSI_YELLOW, "\n\t\t\t\t      16. Exit");
         System.out.print( "\n\t\t\t\tSelect task to perform: ");
     }
 
@@ -1125,6 +1141,133 @@ public class Tuition {
         try{System.in.read();}
         catch(Exception e){}
         Screen.clear();
+    }
+
+    public static void regTutor(Register[] regArr, People[] tutArray, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+        Scanner input = new Scanner(System.in);
+        Course regCourse = null;
+        boolean isCodeExist = false;
+        boolean isTutorExist = false;
+        boolean isRegSuccess  = false;
+
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tRegister Tutor");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+        System.out.print("                                   Enter Course Code: ");
+        String courseCode = input.nextLine();
+
+        for(int x = 0; x < Psychology.getPsyCount(); x++){
+            if((psyCourse[x].getCode()).equals(courseCode)){
+                isCodeExist = true;
+                regCourse = psyCourse[x];
+            }
+        }
+
+        for(int y = 0; y < IT.getItCount(); y++){
+            if((itCourse[y].getCode()).equals(courseCode)){
+                isCodeExist = true;
+                regCourse = itCourse[y];
+            }
+        }
+
+        for(int z = 0; z < Language.getLangCount(); z++){
+            if((langCourse[z].getCode()).equals(courseCode)){
+                isCodeExist = true;
+                regCourse = langCourse[z];
+            }
+        }
+        
+        if(isCodeExist == false){
+            Font.print(Font.ANSI_RED, "\n                                The Course Code Does Not Exist");
+        }else{
+            System.out.print("                                   Enter Tutor ID: ");
+            String tutorID = input.nextLine();
+            //Validate TutorID
+            for (int x = 0; x < Tutor.getTutorCount(); x++){
+                if ((((Tutor) tutArray[x]).getTutorID()).equals(tutorID)){
+                    //Examine Tutor Major
+                    isTutorExist = true;
+                    isRegSuccess  = validateRegister(regArr, tutArray, regCourse, tutorID);
+                }
+            }
+        }
+
+        if(isCodeExist == true && isTutorExist == false){
+            Font.print(Font.ANSI_RED, "\n                                   The Tutor Does Not Exist");
+        }
+
+        //Testing
+        if(isRegSuccess  == true){
+            for(int i = 0; i < Register.getRegNo(); i++){
+                System.out.println(regArr[i].toString());
+            }
+        }
+
+    }
+
+    public static boolean isDuplicateRegister(Register[] regArr, People[] tutArray, Course course, People tutor){
+        boolean isDuplicate = false;
+
+        for(int i = 0; i < Register.getRegNo(); i++){
+            if(regArr[i].getCourse() == course && regArr[i].getTutor() == tutor){
+                isDuplicate = true;
+                System.out.println("\n                Course: " + (regArr[i].getCourse()).getTitle() + "\tTutor: " + (regArr[i].getTutor()).getName() + "\n");
+            }
+        }
+        return isDuplicate;
+    }
+
+
+    public static boolean validateRegister(Register[] regArr, People[] tutArray, Course course, String tutorID){
+        People tutor = null;
+        boolean tutorMajor = false;
+        boolean isDuplicate = true;
+        boolean isSuccess = false;
+
+        for (int x = 0; x < Tutor.getTutorCount(); x++) {
+            if ((((Tutor) tutArray[x]).getTutorID()).equals(tutorID)) {
+                if (course instanceof Psychology && ((Tutor)tutArray[x]).getMajor() == Major.PSY) {
+                    //PSY
+                    tutorMajor = true;
+                    tutor = tutArray[x];
+                } else if (course instanceof IT && ((Tutor)tutArray[x]).getMajor() == Major.IT) {
+                    //IT
+                    tutorMajor = true;
+                    tutor = tutArray[x];
+                } else if(course instanceof Language && ((Tutor)tutArray[x]).getMajor() == Major.LANG) {
+                    //LAN
+                    tutorMajor = true;
+                    tutor = tutArray[x];  
+                }
+            }
+        }
+
+        if (tutorMajor == true) {
+            isDuplicate = isDuplicateRegister(regArr, tutArray, course, tutor);
+            if(isDuplicate == false){
+                regArr[Register.getRegNo()] = new Register((Tutor) tutor, course);
+                System.out.println("\n                                   Register Successfully!");
+                isSuccess = true;
+            }else{
+                Font.print(Font.ANSI_RED, "\n                                  Registeration Duplicated");
+            }
+        }else{
+            Font.print(Font.ANSI_RED, "\n                Tutor's major does not match with the course.");
+        }
+
+        return isSuccess;
+        
+    }
+
+    public static boolean validateReg(Register[] regArr, People[] tutArray, Course course, People tutor){
+        boolean isDuplicate = true;
+
+        for(int i = 0; i < Register.getRegNo(); i++){
+            if(! (regArr[i].getCourse() == course && regArr[i].getTutor() == tutor)){
+                isDuplicate = false;
+            }
+        }
+
+        return isDuplicate;
     }
 
     private static boolean isWord(String name) {

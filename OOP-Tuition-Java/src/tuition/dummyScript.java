@@ -226,4 +226,18 @@ public class dummyScript {
         enrollArr[98] = new Enroll((Student) stuArray[23], itCourse[1]);
         enrollArr[99] = new Enroll((Student) stuArray[15], psyCourse[2]);
     }
+
+    public static void registration(Register[] regArr, People[] tutArray, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+        //Psychology
+        regArr[0] = new Register((Tutor)tutArray[1], psyCourse[0]);
+        regArr[1] = new Register((Tutor)tutArray[14], psyCourse[1]);
+        regArr[2] = new Register((Tutor)tutArray[17], psyCourse[2]);
+        //IT
+        regArr[3] = new Register((Tutor)tutArray[0], itCourse[0]);
+        regArr[4] = new Register((Tutor)tutArray[16], itCourse[1]);
+        regArr[5] = new Register((Tutor)tutArray[10], itCourse[1]);
+        //Language
+        regArr[6] = new Register((Tutor)tutArray[6], langCourse[1]);
+        regArr[7] = new Register((Tutor)tutArray[13], langCourse[2]);
+    }
 }
