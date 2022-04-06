@@ -242,21 +242,15 @@ public class Tuition {
         Font.print(Font.ANSI_YELLOW,"             |_   _|_   _|  |     |_   _|_ _|_| |_|_|___ ___   |     |___ ___| |_ ___ ___ ");
         Font.print(Font.ANSI_YELLOW,"               | |   | | |  |__     | | | | | |  _| | . |   |  |   --| -_|   |  _| -_|  _|");
         Font.print(Font.ANSI_YELLOW,"               |_|   |_| |_____|    |_| |___|_|_| |_|___|_|_|  |_____|___|_|_|_| |___|_|  ");
-        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tCourse");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\tCourse\t\t\t\t\tEnroll");
                 
-        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   1. Add course\n\t\t\t\t   2. Modify course\n\t\t\t\t   3. Remove course");
-        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tStudent");
-        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   4. Add Student\n\t\t\t\t   5. Modify Student\n\t\t\t\t   6. Remove Student");
-        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tTutor");
-        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   7. Add Tutor\n\t\t\t\t   8. Modify Tutor\n\t\t\t\t   9. Remove Tutor");
-        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tEnroll");
-        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   10. Add Enroll\n\t\t\t\t   11. Remove Enroll\n\t\t\t\t   12. Course");
-        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tRegister");
-        Font.print(Font.ANSI_YELLOW, "\t\t\t\t   13. Register Tutor\n\t\t\t\t   14. Remove Register");
-        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tReport");
-        Font.print(Font.ANSI_YELLOW, "\t\t\t\t     15. Report");
-        Font.print(Font.ANSI_YELLOW, "\n\t\t\t\t      16. Exit");
-        System.out.print( "\n\t\t\t\tSelect task to perform: ");
+        Font.print(Font.ANSI_YELLOW, "\t\t   1. Add course\t\t\t   10. Add Enroll\n\t\t   2. Modify course\t\t\t   11. Remove Enroll\n\t\t   3. Remove course\t\t\t   12. Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\tStudent\t\t\t\t\tRegister");
+        Font.print(Font.ANSI_YELLOW, "\t\t   4. Add Student\t\t\t   13. Register Tutor\n\t\t   5. Modify Student\t\t\t   14. Remove Register\n\t\t   6. Remove Student");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\tTutor\t\t\t\t\tReport");
+        Font.print(Font.ANSI_YELLOW, "\t\t   7. Add Tutor\t\t\t\t   15. Report\n\t\t   8. Modify Tutor\n\t\t   9. Remove Tutor");
+        Font.print(Font.ANSI_YELLOW, "\n\n\t\t\t\t            16. Exit");
+        System.out.print( "\n\t\t\t\t     Select task to perform: ");
     }
 
     public static int chooseCourse() {
