@@ -145,7 +145,7 @@ public class Tuition {
                     modifyPeople(stuArray);
                     break;
                 case 6:
-                    deletePeople(stuArray, enrollArr);
+                    deletePeople(stuArray, enrollArr, regArr);
                     break;
                 case 7:
                     addPeople(tutArray);
@@ -154,7 +154,7 @@ public class Tuition {
                     modifyPeople(tutArray);
                     break;
                 case 9:
-                    deletePeople(tutArray, enrollArr);
+                    deletePeople(tutArray, enrollArr, regArr);
                     break;
                 case 10:
                     //add enroll
@@ -1118,7 +1118,7 @@ public class Tuition {
         Screen.clear();
     }
 
-    public static void deletePeople(People[] peopleArr, Enroll[] enrollArr) {
+    public static void deletePeople(People[] peopleArr, Enroll[] enrollArr, Register[] regArr) {
         Scanner input = new Scanner(System.in);
         boolean peopleExist = false;
         int tempI = 0;
@@ -1155,13 +1155,11 @@ public class Tuition {
         if (peopleExist) {
             if (peopleArr[0] instanceof Student) {
                 ((Student) peopleArr[0]).reduceStuCount();
-                People[] clonePeople = new Student[((Student) peopleArr[0]).getStuCount()];
-                int tempCount = Student.getStuCount();
-                clonePeople = peopleArr;
+                People[] clonePeople = peopleArr;
 
                 int a = 0;
                 // Move Entire student array to a temp array except the chosen delete id
-                for (int i = 0; i < tempCount + 1; i++) {
+                for (int i = 0; i < Student.getStuCount() + 1; i++) { //50
                     if (!((Student) peopleArr[i]).getStuID().equals(id)) {
                         clonePeople[a] = peopleArr[i];
                         a++;
@@ -1172,9 +1170,8 @@ public class Tuition {
                 Font.print(Font.ANSI_YELLOW,"\n                             The Student ID " + id + " has been deleted\n");
             } else {
                 ((Tutor) peopleArr[0]).reduceTutorCount();
-                People[] tempPeople = new Tutor[((Tutor) peopleArr[0]).getTutorCount()];
                 int tempCount = Tutor.getTutorCount();
-                tempPeople = peopleArr;
+                People[] tempPeople = peopleArr;
 
                 int a = 0;
                 // Move Entire tutor array to a temp array except the chosen delete id
@@ -1185,6 +1182,7 @@ public class Tuition {
                     }
                 }
                 tempPeople[((Tutor) peopleArr[0]).getTutorCount()] = null;
+                CheckRegistrationTutor(id, regArr);
                 Font.print(Font.ANSI_YELLOW,"\n                              The Tutor ID "  + id + " has been deleted\n");
             }
         } else {
@@ -1195,6 +1193,32 @@ public class Tuition {
         catch(Exception e){}
         Screen.clear();
     }
+
+    public static void CheckRegistrationTutor(String id, Register[] regArr){
+        Register[] tempArr = regArr;
+        int a = 0;
+        int count = 0;
+
+        for(int i = 0; i < Register.getRegNo(); i++){
+            if(!(regArr[i].getTutID().equals(id))){
+                    tempArr[a] = regArr[i];
+                    a++;
+
+                }
+                else{
+                    count++;
+                }
+        }
+        for (int i = 0; i < count ; i++){
+            Register.reduceRegNo();
+            regArr[Register.getRegNo()] = null;
+        }
+
+    }
+
+
+
+
 
     public static void regTutor(Register[] regArr, People[] tutArray, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
         Scanner input = new Scanner(System.in);
