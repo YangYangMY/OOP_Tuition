@@ -14,7 +14,12 @@ class People {
     }
     
     public People() {
-    }   
+        this.name = "";
+        this.age = 0;
+        this.sex = Sex.M;
+        this.phoneNum = "";
+        this.email = "";
+    }    
 
     public People(String name, int age, char sexChar, String phoneNum, String email) {
         this.name = name;
