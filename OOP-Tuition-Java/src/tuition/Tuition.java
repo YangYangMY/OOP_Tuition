@@ -116,12 +116,12 @@ public class Tuition {
                 taskChoice = input.nextInt();
                 if (taskChoice < 1 || taskChoice > 14) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "                            Only (1-14) is allowed, please try again!\n");
+                    Font.print(Font.ANSI_RED, "                            Only (1-16) is allowed, please try again!\n");
                 }
 
             } catch (Exception e) {
                 Screen.clear();
-                Font.print(Font.ANSI_RED, "                            Only (1-14) is allowed, please try again!\n");
+                Font.print(Font.ANSI_RED, "                            Only (1-16) is allowed, please try again!\n");
                 input.next();
             }
             switch (taskChoice) {
@@ -721,7 +721,7 @@ public class Tuition {
 
     public static void addPeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
-        String name, phoneNum, email, description;
+        String name = "", phoneNum, email, description;
         char sex;
         int age;
         double balance;
@@ -736,7 +736,7 @@ public class Tuition {
             Screen.clear();
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Student");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-            name = NameInputValidate();
+            name += NameInputValidate();
             age = AgeInputValidate();
             sex = SexInputValidate();
             phoneNum = PhoneInputValidate();
@@ -771,7 +771,7 @@ public class Tuition {
             valid = true;
             System.out.print("                                   Enter name: ");
             name = input.nextLine();
-            if (isWord(name)) {
+            if (name.matches("(?i)[a-z]([- ',.a-z]{0,23}[a-z])?")) {
                 valid = true;
             } else {
                 Font.print(Font.ANSI_RED, "\n                                      Invalid Input!!");
@@ -796,7 +796,7 @@ public class Tuition {
             try {
                 System.out.print("                                   Enter age: ");
                 age = input.nextInt();
-                if (age >= 0 && age <= 150) {
+                if (age >= 18 && age <= 80) {
                     valid = true;
                 } else {
                     Font.print(Font.ANSI_RED, "\n                                   Age is not valid!");
@@ -834,8 +834,6 @@ public class Tuition {
             if (sex != 'm' && sex != 'f' && sex != 'M' && sex != 'F') {
                 Font.print(Font.ANSI_RED, "\n                                Only (m,f,M,F) are allowed!");
                 valid = false;
-            } else {
-                valid = true;
             }
             if (Character.isLowerCase(sex)) {
                 sex = Character.toUpperCase(sex);
@@ -952,7 +950,7 @@ public class Tuition {
             valid = true;
             System.out.print("                                   Enter level (Doctorate, BachelorDegree, MasterDegree): ");
             level = input.nextLine();
-            if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")) {
+            if (!level.equals("Doctorate") && !level.equals("BachelorDegree") && !level.equals("MasterDegree")) {
                 valid = false;
                 Font.print(Font.ANSI_RED, "                            Only Doctorate, BachelorDegree, MasterDegree are allowed!");
             } else {
@@ -1287,7 +1285,7 @@ public class Tuition {
                 userChoice = input.nextInt();
                 if (userChoice < 1 || userChoice > 6) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "Only (1-5) are allowed!");
+                    Font.print(Font.ANSI_RED, "Only (1-6) are allowed!");
                 }
             } catch (Exception e) {
                 Screen.clear();
@@ -1335,7 +1333,8 @@ public class Tuition {
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Student.getStuCount(); i++) {
-            System.out.printf("%9s %30s %6s %6s %19s %30s %12s %13s", ((Student) stuArray[i]).getStuID(), stuArray[i].getName(), stuArray[i].getAge(), stuArray[i].getSex(), stuArray[i].getPhoneNum(), stuArray[i].getEmail(), ((Student) stuArray[i]).getDescription(), ((Student) stuArray[i]).getBalance());
+            System.out.printf("%9s %30s %6s %6s %19s %30s %12s %7s", ((Student) stuArray[i]).getStuID(), stuArray[i].getName(), stuArray[i].getAge(), stuArray[i].getSex(), stuArray[i].getPhoneNum(), stuArray[i].getEmail(), ((Student) stuArray[i]).getDescription(), "");
+            System.out.printf("%.2f", ((Student) stuArray[i]).getBalance());
             System.out.println();
         }
         System.out.println("=========================================================================================================================================================================");
