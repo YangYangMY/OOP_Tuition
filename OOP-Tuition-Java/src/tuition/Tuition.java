@@ -1442,12 +1442,13 @@ public class Tuition {
                 System.out.println("3. Student Enrollment Report");
                 System.out.println("4. Tutor Registration Report");
                 System.out.println("5. Summary Report");
-                System.out.println("6. Back");
+                System.out.println("6. Platinum Member Listing");
+                System.out.println("7. Back");
                 System.out.print("Enter Choice: ");
                 userChoice = input.nextInt();
-                if (userChoice < 1 || userChoice > 6) {
+                if (userChoice < 1 || userChoice > 7) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "Only (1-6) are allowed!");
+                    Font.print(Font.ANSI_RED, "Only (1-7) are allowed!");
                 }
             } catch (Exception e) {
                 Screen.clear();
@@ -1484,8 +1485,14 @@ public class Tuition {
                     break;
                 case 6:
                     Screen.clear();
+                    Font.print(Font.ANSI_BLUE, "                                                              Platinum Member Listing");
+                    PlatMemListing(stuArray, enrollArr);
+                    break;
+                case 7:
+                    Screen.clear();
+                    break;
             }
-        } while (userChoice != 6);
+        } while (userChoice != 7);
     }
 
 
@@ -1625,7 +1632,14 @@ public class Tuition {
         System.out.println("=====================================================================================================================================================================");
     }
 
-
+    public static void PlatMemListing(People[] stuArray, Enroll[] enrollArr){
+        for(int i =0; i < Student.getStuNum(); i++){
+            if(((Student) stuArray[i]).numOfTakenCourse(enrollArr)){
+                System.out.println(stuArray[i]);
+            }
+        }
+    }
+    
     // Exception for handling invalid username or password
     private static class InvalidException extends Exception {
 

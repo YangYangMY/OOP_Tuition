@@ -1,6 +1,6 @@
 package tuition;
 
-class Student extends People {
+class Student extends People implements CourseTaken{
     private static int stuNum;
     private String stuID;
     private String description;
@@ -75,4 +75,19 @@ class Student extends People {
         String message = super.toString() + ", ID: " + stuID + ", Description: " + description + ", Balance: " + balance; 
         return message;
   }
+
+    @Override
+    public boolean numOfTakenCourse(Enroll[] enrollArr) {
+        int enrollNum = 0;
+        for(int i = 0; i < Enroll.getEnrollNum(); i++){
+            if((enrollArr[i].student.stuID).equals(this.stuID)){
+                enrollNum++;
+            }
+        }
+        if(enrollNum > PlatinumMemberEnroll){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
