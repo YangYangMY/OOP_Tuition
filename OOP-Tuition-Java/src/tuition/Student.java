@@ -8,6 +8,12 @@ class Student extends People {
     private static int StuCount;
     
     public Student(){
+        super();
+        this.stuNum++;
+        this.StuCount++;
+        this.stuID = "W" + stuNum;
+        this.description = "";
+        this.balance = 0;
     }
     
     public Student(String name, int age, char sex, String phoneNum, String email, String description, double balance) {
