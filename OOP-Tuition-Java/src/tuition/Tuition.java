@@ -131,10 +131,12 @@ public class Tuition {
                     addCourse(psy, it, lang, psyCourse, itCourse, langCourse, courseChoice);
                     break;
                 case 2:
+                    Screen.clear();
                     modifyCourse(psyCourse, itCourse, langCourse);
                     break;
                 case 3:
-                    deleteCourse(psyCourse, itCourse, langCourse);
+                    Screen.clear();
+                    deleteCourse(psyCourse, itCourse, langCourse, regArr, enrollArr);
                     break;
                 case 4:
                     addPeople(stuArray);
@@ -644,7 +646,7 @@ public class Tuition {
         }
     }
 
-    public static void deleteCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+    public static void deleteCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse, Register[] regArr, Enroll[] enrollArr){
         Scanner input = new Scanner(System.in);
         boolean isCodeExist = false;
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Course");
@@ -669,8 +671,8 @@ public class Tuition {
                 }
 
                 psyCourse[((Psychology) psyCourse[0]).getPsyCount() + 1] = null;
-
-                System.out.println("The course " + code + " has been deleted.");
+                deleteRegAndEnrollCourse(regArr, enrollArr, code);
+                System.out.println("                                The course " + code + " has been deleted.");
             }
         }
 
@@ -691,7 +693,8 @@ public class Tuition {
                 }
 
                 itCourse[((IT) itCourse[0]).getItCount() + 1] = null;
-                System.out.println("The course " + code + " has been deleted.");
+                deleteRegAndEnrollCourse(regArr, enrollArr, code);
+                System.out.println("                                The course " + code + " has been deleted.");
             }
         }
 
@@ -712,14 +715,67 @@ public class Tuition {
                 }
 
                 langCourse[((Language) langCourse[0]).getLangCount() + 1] = null;
-                System.out.println("The course " + code + " has been deleted.");
+                deleteRegAndEnrollCourse(regArr, enrollArr, code);
+                System.out.println("                                The course " + code + " has been deleted.");
             }
         }
 
         if(isCodeExist == false){
-            Font.print(Font.ANSI_RED, "                            The course code does not exist.");
+            Font.print(Font.ANSI_RED, "                                The course code does not exist.");
         }
+    }
+
+    public static void deleteRegFunc(Register[] regArr, int arrIndex){
+        Register.reduceRegNo();
+        Register[] newRegArr = regArr;
+
+        System.arraycopy(regArr, 0, newRegArr, 0, arrIndex);
+        System.arraycopy(regArr, arrIndex + 1, newRegArr, arrIndex, Register.getRegNo() - arrIndex);
+    }
+
+    public static void deleteEnrollFunc(Enroll[] enrollArr, int arrIndex){
+        Enroll.setEnrollNum(Enroll.getEnrollNum() - 1);
+        Enroll[] newEnrollArr = enrollArr;
+
+        System.arraycopy(enrollArr, 0, newEnrollArr, 0, arrIndex);
+        System.arraycopy(enrollArr, arrIndex + 1, newEnrollArr, arrIndex, Enroll.getEnrollNum() - arrIndex);
+    }
+
+
+    public static void deleteRegAndEnrollCourse(Register[] regArr, Enroll[] enrollArr, String courseCode){
+        int regDeleteCount = 0;
+        int enrollDeleteCount = 0;
+
+        for(int x = 0; x < Register.getRegNo(); x++){
+            if(((regArr[x].getCourse()).getCode()).equals(courseCode)){
+                regDeleteCount++;
+            }
+            
+            if((enrollArr[x].getCourse()).getCode().equals(courseCode)){
+                enrollDeleteCount++;
+            }
         }
+
+        if(regDeleteCount > 0){
+            for(int y = 0; y < regDeleteCount; y++){
+                for(int z = 0; z < Register.getRegNo(); z++){
+                    if(((regArr[z].getCourse()).getCode()).equals(courseCode)){
+                        deleteRegFunc(regArr, z);
+                    }
+                }
+            }
+        }
+
+        if(enrollDeleteCount > 0){
+            for(int i = 0; i < enrollDeleteCount; i++){
+                for(int j = 0; j < Enroll.getEnrollNum(); j++){
+                    if((enrollArr[j].getCourse()).getCode().equals(courseCode)){
+                        deleteEnrollFunc(enrollArr, j);
+                    }
+                }
+            }
+        }
+    }
 
     public static void addPeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
@@ -1129,7 +1185,7 @@ public class Tuition {
                     }
                 }
                 tempPeople[((Tutor) peopleArr[0]).getTutorCount()] = null;
-                Font.print(Font.ANSI_YELLOW,"\n                              The Tutor ID"  + id + " has been deleted\n");
+                Font.print(Font.ANSI_YELLOW,"\n                              The Tutor ID "  + id + " has been deleted\n");
             }
         } else {
             Font.print(Font.ANSI_RED, "\n                                   The ID doesn't exist");
@@ -1320,7 +1376,7 @@ public class Tuition {
             //Validate Course Code
             isCourseExist = validateCourseCode(psyCourse, itCourse, langCourse, courseCode);
         }else{
-            Font.print(Font.ANSI_RED, "\n                                The Tutor Does Not Exist.");
+            Font.print(Font.ANSI_RED, "\n                                  The Tutor Does Not Exist.");
         }
 
         if(isTutorReg == true && isTutorExist == true && isCourseExist == true){
@@ -1334,7 +1390,7 @@ public class Tuition {
                     System.arraycopy(regArr, i + 1, newRegArr, i, Register.getRegNo() - i);
 
                     isDelete = true;
-                    System.out.println("\n                                   Remove Successfully!");
+                    System.out.println("\n                                     Remove Successfully!");
                 }
             }
         } 
@@ -1346,11 +1402,6 @@ public class Tuition {
         if(isDelete == false && isTutorReg == true && isTutorExist == true && isCourseExist == true){
             Font.print(Font.ANSI_RED, "\n                            The tutor does not register in this course.");
         }
-    }
-
-
-    private static boolean isWord(String name) {
-        return Pattern.matches("[a-zA-Z]+", name);
     }
 
     public static void report(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse, Enroll[] enrollArr, Register[] regArr) {

@@ -59,8 +59,9 @@ public class Register {
     public String toString(){
         String output = "";
 
-        output += "Course code: " + course.getCode() + "\t\tCourse title: " + course.getTitle()
-                + "\nTutor ID: " + tutor.getTutorID() + "\t\tTutor name: " + tutor.getName() + "\n";
+        output += "\nTutor name: " + tutor.getName()
+                + "\nCourse code: " + course.getCode() 
+                + "\t\t\tCourse title: " + course.getTitle() + "\n";
 
                 return output;
     }
