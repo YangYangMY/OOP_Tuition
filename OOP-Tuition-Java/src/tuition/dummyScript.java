@@ -230,14 +230,22 @@ public class dummyScript {
     public static void registration(Register[] regArr, People[] tutArray, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
         //Psychology
         regArr[0] = new Register((Tutor)tutArray[1], psyCourse[0]);
-        regArr[1] = new Register((Tutor)tutArray[14], psyCourse[1]);
-        regArr[2] = new Register((Tutor)tutArray[17], psyCourse[2]);
+        regArr[1] = new Register((Tutor)tutArray[4], psyCourse[0]);
+        regArr[2] = new Register((Tutor)tutArray[14], psyCourse[1]);
+        regArr[3] = new Register((Tutor)tutArray[3], psyCourse[2]);
+        regArr[4] = new Register((Tutor)tutArray[17], psyCourse[2]);
         //IT
-        regArr[3] = new Register((Tutor)tutArray[0], itCourse[0]);
-        regArr[4] = new Register((Tutor)tutArray[16], itCourse[1]);
-        regArr[5] = new Register((Tutor)tutArray[10], itCourse[1]);
+        regArr[5] = new Register((Tutor)tutArray[0], itCourse[0]);
+        regArr[6] = new Register((Tutor)tutArray[8], itCourse[0]);
+        regArr[7] = new Register((Tutor)tutArray[16], itCourse[1]);
+        regArr[8] = new Register((Tutor)tutArray[10], itCourse[1]);
+        regArr[9] = new Register((Tutor)tutArray[10], itCourse[2]);
+        regArr[10] = new Register((Tutor)tutArray[9], itCourse[2]);
         //Language
-        regArr[6] = new Register((Tutor)tutArray[6], langCourse[1]);
-        regArr[7] = new Register((Tutor)tutArray[13], langCourse[2]);
+        regArr[11] = new Register((Tutor)tutArray[19], langCourse[0]);
+        regArr[12] = new Register((Tutor)tutArray[15], langCourse[0]);
+        regArr[13] = new Register((Tutor)tutArray[7], langCourse[1]);
+        regArr[14] = new Register((Tutor)tutArray[6], langCourse[1]);
+        regArr[15] = new Register((Tutor)tutArray[13], langCourse[2]);
     }
 }

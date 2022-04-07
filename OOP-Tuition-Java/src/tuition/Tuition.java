@@ -116,12 +116,12 @@ public class Tuition {
                 taskChoice = input.nextInt();
                 if (taskChoice < 1 || taskChoice > 14) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "                            Only (1-14) is allowed, please try again!\n");
+                    Font.print(Font.ANSI_RED, "                            Only (1-16) is allowed, please try again!\n");
                 }
 
             } catch (Exception e) {
                 Screen.clear();
-                Font.print(Font.ANSI_RED, "                            Only (1-14) is allowed, please try again!\n");
+                Font.print(Font.ANSI_RED, "                            Only (1-16) is allowed, please try again!\n");
                 input.next();
             }
             switch (taskChoice) {
@@ -220,6 +220,7 @@ public class Tuition {
                 case 14:
                     // Remove Register
                     Screen.clear();
+                    removeRegister(regArr, tutArray, psyCourse, itCourse, langCourse);
                     break;
                 case 15:
                     Screen.clear();
@@ -259,7 +260,7 @@ public class Tuition {
         do{
             try{
                 Scanner input = new Scanner(System.in);
-                Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Course");
+                Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tCourses");
                 Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
                 Font.print(Font.ANSI_YELLOW,"\n\t\t\t\t1. Psychology\n\t\t\t\t2. Information Technology\n\t\t\t\t3. Language\n\t\t\t\t4. Back to menu");
                 System.out.print("\n\t\t\t\tEnter a course: ");
@@ -646,14 +647,15 @@ public class Tuition {
     public static void deleteCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse){
         Scanner input = new Scanner(System.in);
         boolean isCodeExist = false;
-        
-        System.out.print("                                   Enter course code to delete: ");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+        System.out.print("                                   Enter Course Code: ");
         String code = input.nextLine();
 
         for (int x = 0; x < ((Psychology) psyCourse[0]).getPsyCount(); x++) {
             if ((psyCourse[x].getCode()).equals(code)) {
                 isCodeExist = true;
-                Psychology.reducePsyCount();;
+                Psychology.reducePsyCount();
                 Course[] newPsyCourse = new Psychology[((Psychology) psyCourse[0]).getPsyCount()];
                 int count = Psychology.getPsyCount();
                 newPsyCourse = psyCourse;
@@ -1188,14 +1190,6 @@ public class Tuition {
         if(isCodeExist == true && isTutorExist == false){
             Font.print(Font.ANSI_RED, "\n                                   The Tutor Does Not Exist");
         }
-
-        //Testing
-        if(isRegSuccess  == true){
-            for(int i = 0; i < Register.getRegNo(); i++){
-                System.out.println(regArr[i].toString());
-            }
-        }
-
     }
 
     public static boolean isDuplicateRegister(Register[] regArr, People[] tutArray, Course course, People tutor){
@@ -1263,6 +1257,96 @@ public class Tuition {
 
         return isDuplicate;
     }
+
+    public static boolean validateCourseCode(Course[] psyCourse, Course[] itCourse, Course[] langCourse, String courseCode){
+        boolean isExist = false;
+
+        for(int x = 0; x < Psychology.getPsyCount(); x++){
+            if((psyCourse[x].getCode()).equals(courseCode)){
+                isExist = true;
+            }
+        }
+
+        for(int y = 0; y < IT.getItCount(); y++){
+            if((itCourse[y].getCode()).equals(courseCode)){
+                isExist = true;
+            }
+        }
+
+        for(int z = 0; z < Language.getLangCount(); z++){
+            if((langCourse[z].getCode()).equals(courseCode)){
+                isExist = true;
+            }
+        }
+
+        return isExist;
+    }
+
+    public static void removeRegister(Register[] regArr, People[] tutArray, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
+        Scanner input = new Scanner(System.in);
+        boolean isTutorExist = false;
+        boolean isCourseExist = false;
+        boolean isTutorReg = false;
+        boolean isDelete = false;
+        String courseCode = "";
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tRemove Register");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+        System.out.print("                                   Enter Tutor ID: ");
+        String tutorId = input.nextLine();
+
+        //Validate Tutor
+        for (int x = 0; x < Tutor.getTutorCount(); x++){
+            if ((((Tutor) tutArray[x]).getTutorID()).equals(tutorId)){
+                isTutorExist = true;
+            }
+        }
+
+        //Show every course that the tutor registered if tutor exist 
+        if(isTutorExist == true){
+            for(int i = 0; i < Register.getRegNo(); i++){
+                if((regArr[i].getTutor().getTutorID()).equals(tutorId)){
+                    System.out.println(regArr[i]);
+                    isTutorReg = true;
+                }
+            }
+        }
+
+        if(isTutorReg == false && isTutorExist == true){
+            Font.print(Font.ANSI_RED, "\n                        The tutor has not registered any courses yet.");
+        }else if(isTutorReg == true && isTutorExist == true){
+            System.out.print("                                   Enter Course Code: ");
+            courseCode = input.nextLine();
+            //Validate Course Code
+            isCourseExist = validateCourseCode(psyCourse, itCourse, langCourse, courseCode);
+        }else{
+            Font.print(Font.ANSI_RED, "\n                                The Tutor Does Not Exist.");
+        }
+
+        if(isTutorReg == true && isTutorExist == true && isCourseExist == true){
+            for (int i = 0; i < Register.getRegNo(); i++) {
+                if (((regArr[i].getTutor()).getTutorID()).equals(tutorId) && ((regArr[i].getCourse()).getCode()).equals(courseCode)) {
+                    Register.reduceRegNo();
+                    int regIndex = i;
+                    Register[] newRegArr = regArr;
+
+                    System.arraycopy(regArr, 0, newRegArr, 0, regIndex);
+                    System.arraycopy(regArr, i + 1, newRegArr, i, Register.getRegNo() - i);
+
+                    isDelete = true;
+                    System.out.println("\n                                   Remove Successfully!");
+                }
+            }
+        } 
+
+        if(isDelete == false && isTutorReg == true && isTutorExist == true && isCourseExist == false){
+            Font.print(Font.ANSI_RED, "\n                                  The Course Does Not Exist.");
+        }
+
+        if(isDelete == false && isTutorReg == true && isTutorExist == true && isCourseExist == true){
+            Font.print(Font.ANSI_RED, "\n                            The tutor does not register in this course.");
+        }
+    }
+
 
     private static boolean isWord(String name) {
         return Pattern.matches("[a-zA-Z]+", name);

@@ -12,7 +12,7 @@ public class Register {
     public Register(Tutor tutor, Course course){
         this.tutor = tutor;
         this.course = course;
-        Register.regNo++;
+        Register.regNo++;  
     }
 
     public static int getRegNo(){
@@ -35,12 +35,16 @@ public class Register {
         this.course = course;
     }
 
+    public static void reduceRegNo(){
+        Register.regNo--;
+    }
+
     @Override
     public String toString(){
         String output = "";
 
-        output += "Course title: " + course.getTitle()
-                + "\nTutor(s): " + tutor.getName() + "\n";
+        output += "Course code: " + course.getCode() + "\t\tCourse title: " + course.getTitle()
+                + "\nTutor ID: " + tutor.getTutorID() + "\t\tTutor name: " + tutor.getName() + "\n";
 
                 return output;
     }
