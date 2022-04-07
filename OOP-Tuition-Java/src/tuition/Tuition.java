@@ -1633,11 +1633,19 @@ public class Tuition {
     }
 
     public static void PlatMemListing(People[] stuArray, Enroll[] enrollArr){
-        for(int i =0; i < Student.getStuNum(); i++){
-            if(((Student) stuArray[i]).numOfTakenCourse(enrollArr)){
-                System.out.println(stuArray[i]);
+        System.out.println("=========================================================================================================================================================================");
+        System.out.printf("%12s %19s %15s %6s %17s %23s %22s %12s", "Student ID", "Name", "Age", "Sex", "Phone Number", "Email", "Description", "Balance", "Course Name");
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+        
+        for (int i = 0; i < Student.getStuCount(); i++) {
+            if (((Student) stuArray[i]).numOfTakenCourse(enrollArr)) {
+                System.out.printf("%9s %30s %6s %6s %19s %30s %12s %7s", ((Student) stuArray[i]).getStuID(), stuArray[i].getName(), stuArray[i].getAge(), stuArray[i].getSex(), stuArray[i].getPhoneNum(), stuArray[i].getEmail(), ((Student) stuArray[i]).getDescription(), "");
+                System.out.printf("%.2f", ((Student) stuArray[i]).getBalance());
+                System.out.println();
             }
         }
+        System.out.println("=========================================================================================================================================================================");
     }
     
     // Exception for handling invalid username or password
