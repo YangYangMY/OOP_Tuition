@@ -15,6 +15,22 @@ public class Register {
         Register.regNo++;  
     }
 
+    public String getTutID(){
+        return tutor.getTutorID();
+    }
+
+    public String getTutName(){
+        return tutor.getName();
+    }
+
+    public String getCourseID(){
+        return course.getCode();
+    }
+
+    public String getCourseName(){
+        return course.getTitle();
+    }
+
     public static int getRegNo(){
         return regNo;
     }

@@ -224,7 +224,7 @@ public class Tuition {
                     break;
                 case 15:
                     Screen.clear();
-                    report(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse, enrollArr);
+                    report(stuArray, tutArray, psy, it, lang, psyCourse, itCourse, langCourse, enrollArr, regArr);
                     break;
                 case 16:
                     Screen.clear();
@@ -723,7 +723,7 @@ public class Tuition {
 
     public static void addPeople(People[] peopleArr) {
         Scanner input = new Scanner(System.in);
-        String name, phoneNum, email, description;
+        String name = "", phoneNum, email, description;
         char sex;
         int age;
         double balance;
@@ -738,7 +738,7 @@ public class Tuition {
             Screen.clear();
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Student");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-            name = NameInputValidate();
+            name += NameInputValidate();
             age = AgeInputValidate();
             sex = SexInputValidate();
             phoneNum = PhoneInputValidate();
@@ -746,8 +746,11 @@ public class Tuition {
             System.out.print("                                   Enter description: ");
             description = input.nextLine();
             balance = BalanceInputValidate();
-            peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
-        } else {
+            if(description == ""){
+                peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, balance);
+            } else {
+                peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
+            }        } else {
             //Input and Validation
             Screen.clear();
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Tutor");
@@ -773,7 +776,7 @@ public class Tuition {
             valid = true;
             System.out.print("                                   Enter name: ");
             name = input.nextLine();
-            if (isWord(name)) {
+            if (name.matches("(?i)[a-z]([- ',.a-z]{0,23}[a-z])?")) {
                 valid = true;
             } else {
                 Font.print(Font.ANSI_RED, "\n                                      Invalid Input!!");
@@ -798,7 +801,7 @@ public class Tuition {
             try {
                 System.out.print("                                   Enter age: ");
                 age = input.nextInt();
-                if (age >= 0 && age <= 150) {
+                if (age >= 18 && age <= 80) {
                     valid = true;
                 } else {
                     Font.print(Font.ANSI_RED, "\n                                   Age is not valid!");
@@ -836,8 +839,6 @@ public class Tuition {
             if (sex != 'm' && sex != 'f' && sex != 'M' && sex != 'F') {
                 Font.print(Font.ANSI_RED, "\n                                Only (m,f,M,F) are allowed!");
                 valid = false;
-            } else {
-                valid = true;
             }
             if (Character.isLowerCase(sex)) {
                 sex = Character.toUpperCase(sex);
@@ -954,7 +955,7 @@ public class Tuition {
             valid = true;
             System.out.print("                                   Enter level (Doctorate, BachelorDegree, MasterDegree): ");
             level = input.nextLine();
-            if (!level.equals("Doctorate") && !level.equals("BacherlorDegree") && !level.equals("MasterDegree")) {
+            if (!level.equals("Doctorate") && !level.equals("BachelorDegree") && !level.equals("MasterDegree")) {
                 valid = false;
                 Font.print(Font.ANSI_RED, "                            Only Doctorate, BachelorDegree, MasterDegree are allowed!");
             } else {
@@ -1352,7 +1353,7 @@ public class Tuition {
         return Pattern.matches("[a-zA-Z]+", name);
     }
 
-    public static void report(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse, Enroll[] enrollArr) {
+    public static void report(People[] stuArray, People[] tutArray, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse, Enroll[] enrollArr, Register[] regArr) {
         int userChoice;
         Scanner input = new Scanner(System.in);
 
@@ -1363,14 +1364,15 @@ public class Tuition {
                 System.out.println("----------------");
                 System.out.println("1. Student Report");
                 System.out.println("2. Tutor Report");
-                System.out.println("3. Enrollment Report");
-                System.out.println("4. Summary Report");
-                System.out.println("5. Back");
+                System.out.println("3. Student Enrollment Report");
+                System.out.println("4. Tutor Registration Report");
+                System.out.println("5. Summary Report");
+                System.out.println("6. Back");
                 System.out.print("Enter Choice: ");
                 userChoice = input.nextInt();
-                if (userChoice < 1 || userChoice > 5) {
+                if (userChoice < 1 || userChoice > 6) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "Only (1-5) are allowed!");
+                    Font.print(Font.ANSI_RED, "Only (1-6) are allowed!");
                 }
             } catch (Exception e) {
                 Screen.clear();
@@ -1397,13 +1399,18 @@ public class Tuition {
                     break;
                 case 4:
                     Screen.clear();
-                    Font.print(Font.ANSI_BLUE, "                                                              Summary Report");
-                    SummaryReport(enrollArr, psy, it, lang, psyCourse, itCourse, langCourse);
+                    Font.print(Font.ANSI_BLUE, "                                                              Tutor Registration Report");
+                    RegistrationReport(regArr,tutArray);
                     break;
                 case 5:
                     Screen.clear();
+                    Font.print(Font.ANSI_BLUE, "                                                              Summary Report");
+                    SummaryReport(enrollArr, psy, it, lang, psyCourse, itCourse, langCourse);
+                    break;
+                case 6:
+                    Screen.clear();
             }
-        } while (userChoice != 5);
+        } while (userChoice != 6);
     }
 
 
@@ -1413,7 +1420,8 @@ public class Tuition {
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Student.getStuCount(); i++) {
-            System.out.printf("%9s %30s %6s %6s %19s %30s %12s %13s", ((Student) stuArray[i]).getStuID(), stuArray[i].getName(), stuArray[i].getAge(), stuArray[i].getSex(), stuArray[i].getPhoneNum(), stuArray[i].getEmail(), ((Student) stuArray[i]).getDescription(), ((Student) stuArray[i]).getBalance());
+            System.out.printf("%9s %30s %6s %6s %19s %30s %12s %7s", ((Student) stuArray[i]).getStuID(), stuArray[i].getName(), stuArray[i].getAge(), stuArray[i].getSex(), stuArray[i].getPhoneNum(), stuArray[i].getEmail(), ((Student) stuArray[i]).getDescription(), "");
+            System.out.printf("%.2f", ((Student) stuArray[i]).getBalance());
             System.out.println();
         }
         System.out.println("=========================================================================================================================================================================");
@@ -1425,7 +1433,7 @@ public class Tuition {
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Tutor.getTutorCount(); i++) {
-            System.out.printf("%8s %30s %9s %5s %17s %33s %9s %19s", ((Tutor) tutArray[i]).getTutorID(), tutArray[i].getName(), tutArray[i].getAge(), tutArray[i].getSex(), tutArray[i].getPhoneNum(), tutArray[i].getEmail(), ((Tutor) tutArray[i]).getMajor(), ((Tutor) tutArray[i]).getLevelName());
+            System.out.printf("%8s %30s %9s %5s %17s %33s %9s %19s", ((Tutor) tutArray[i]).getTutorID(), tutArray[i].getName(), tutArray[i].getAge(), tutArray[i].getSex(), tutArray[i].getPhoneNum(), tutArray[i].getEmail(), ((Tutor) tutArray[i]).getMajor(), ((Tutor) tutArray[i]).getLevel());
             System.out.println();
         }
         System.out.println("=========================================================================================================================================================================");
@@ -1442,13 +1450,23 @@ public class Tuition {
                     System.out.printf(" %9s %28s %14s %40s", enrollArr[z].student.getStuID() , enrollArr[z].student.getName() , enrollArr[z].course.getCode() , enrollArr[z].course.getTitle());
                     System.out.println();
                 }
-            
         }
     }
         System.out.println("=========================================================================================================================================================================");
 }
     
+    public static void RegistrationReport(Register[] regArr, People[] tutArray){
+        System.out.println("=========================================================================================================================================================================");
+        System.out.printf("%12s %19s %22s %30s", "Tutor ID", "Name", "Course ID", "Course Name");
+        System.out.println();
+        for (int i = 0; i < Register.getRegNo(); i++) {
+                System.out.printf(" %9s %28s %14s %40s", regArr[i].getTutID() , regArr[i].getTutName() , regArr[i].getCourseID() , regArr[i].getCourseName());
+                System.out.println();
+        }
+    
+        System.out.println("=========================================================================================================================================================================");
 
+    }
     
     public static void SummaryReport(Enroll[] enrollArr, Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
         // Calculate number of student for each subject

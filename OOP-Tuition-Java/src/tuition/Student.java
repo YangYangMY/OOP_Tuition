@@ -9,11 +9,11 @@ class Student extends People {
     
     public Student(){
         super();
-        this.stuID = null;
-        this.description = null;
-        this.balance = 0.0;
         this.stuNum++;
         this.StuCount++;
+        this.stuID = "W" + stuNum;
+        this.description = "";
+        this.balance = 0;
     }
     
     public Student(String name, int age, char sex, String phoneNum, String email, String description, double balance) {
@@ -22,6 +22,15 @@ class Student extends People {
         this.StuCount++;
         this.stuID = "W" + stuNum;
         this.description = description;
+        this.balance = balance;
+    }
+    
+    public Student(String name, int age, char sex, String phoneNum, String email, double balance) {
+        super(name, age, sex, phoneNum, email);
+        this.stuNum++;
+        this.StuCount++;
+        this.stuID = "W" + stuNum;
+        this.description = "";
         this.balance = balance;
     }
 
@@ -61,6 +70,7 @@ class Student extends People {
         this.balance = balance;
     }
     
+    @Override
     public String toString() {        
         String message = super.toString() + ", ID: " + stuID + ", Description: " + description + ", Balance: " + balance; 
         return message;
