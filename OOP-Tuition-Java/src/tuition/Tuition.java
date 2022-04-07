@@ -744,8 +744,11 @@ public class Tuition {
             System.out.print("                                   Enter description: ");
             description = input.nextLine();
             balance = BalanceInputValidate();
-            peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
-        } else {
+            if(description == ""){
+                peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, balance);
+            } else {
+                peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
+            }        } else {
             //Input and Validation
             Screen.clear();
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Tutor");
