@@ -20,13 +20,13 @@ public class enrollFunction {
         
         for (int i = 0; i < Student.getStuCount(); i++) {
             if ((((Student) stuArray[i]).getStuID()).equals(id)) {
-                Font.print(Font.ANSI_RED, "\n                                      Student Exist");
                 studentExist = true;
                 tempI = i;
             }
         }
         
         if (studentExist) {
+            System.out.println("Enrollment History");
             for (int i = 0; i < Enroll.getEnrollNum(); i++) {
                 if (id.equals(enrollArr[i].student.getStuID())) {
                     System.out.println(enrollArr[i]);
@@ -36,21 +36,18 @@ public class enrollFunction {
             String id2 = input.nextLine();
             for (int i = 0; i < Psychology.getNumOfPsyCourse(); i++) {
                 if ((((Psychology) psyCourse[i]).getCode()).equals(id2)) {
-                    Font.print(Font.ANSI_RED, "\n                                      Psy Subject Exist");
                     subjectExist = true;
                     tempCourse = psyCourse[i];
                 }
             }
             for (int i = 0; i < IT.getNumOfItCourse(); i++) {
                 if ((((IT) itCourse[i]).getCode()).equals(id2)) {
-                    Font.print(Font.ANSI_RED, "\n                                      IT Subject Exist");
                     subjectExist = true;
                     tempCourse = itCourse[i];
                 }
             }
             for (int i = 0; i < Language.getNumOfLangCourse(); i++) {
                 if ((((Language) langCourse[i]).getCode()).equals(id2)) {
-                    Font.print(Font.ANSI_RED, "\n                                      Lang Subject Exist");
                     subjectExist = true;
                     tempCourse = langCourse[i];
                 }
@@ -93,7 +90,8 @@ public class enrollFunction {
         boolean stuEnrollExist = false;
         System.out.print("                                   Enter Student ID: ");
         String id = input.nextLine();
-
+        Screen.clear();
+        System.out.println("Enrollment History");
         for (int i = 0; i < Enroll.getEnrollNum(); i++) {
             if (id.equals(enrollArr[i].student.getStuID())) {
                 System.out.println(enrollArr[i]);
