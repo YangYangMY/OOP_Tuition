@@ -1741,12 +1741,13 @@ public class Tuition {
                 System.out.println("3. Student Enrollment Report");
                 System.out.println("4. Tutor Registration Report");
                 System.out.println("5. Summary Report");
-                System.out.println("6. Back");
+                System.out.println("6. Platinum Member Listing");
+                System.out.println("7. Back");
                 System.out.print("Enter Choice: ");
                 userChoice = input.nextInt();
-                if (userChoice < 1 || userChoice > 6) {
+                if (userChoice < 1 || userChoice > 7) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "Only (1-6) are allowed!");
+                    Font.print(Font.ANSI_RED, "Only (1-7) are allowed!");
                 }
             } catch (Exception e) {
                 Screen.clear();
@@ -1783,8 +1784,14 @@ public class Tuition {
                     break;
                 case 6:
                     Screen.clear();
+                    Font.print(Font.ANSI_BLUE, "                                                              Platinum Member Listing");
+                    PlatMemListing(stuArray, enrollArr);
+                    break;
+                case 7:
+                    Screen.clear();
+                    break;
             }
-        } while (userChoice != 6);
+        } while (userChoice != 7);
     }
 
 
@@ -1924,7 +1931,22 @@ public class Tuition {
         System.out.println("=====================================================================================================================================================================");
     }
 
-
+    public static void PlatMemListing(People[] stuArray, Enroll[] enrollArr){
+        System.out.println("=========================================================================================================================================================================");
+        System.out.printf("%12s %19s %15s %6s %17s %23s %22s %12s", "Student ID", "Name", "Age", "Sex", "Phone Number", "Email", "Description", "Balance", "Course Name");
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+        
+        for (int i = 0; i < Student.getStuCount(); i++) {
+            if (((Student) stuArray[i]).numOfTakenCourse(enrollArr)) {
+                System.out.printf("%9s %30s %6s %6s %19s %30s %12s %7s", ((Student) stuArray[i]).getStuID(), stuArray[i].getName(), stuArray[i].getAge(), stuArray[i].getSex(), stuArray[i].getPhoneNum(), stuArray[i].getEmail(), ((Student) stuArray[i]).getDescription(), "");
+                System.out.printf("%.2f", ((Student) stuArray[i]).getBalance());
+                System.out.println();
+            }
+        }
+        System.out.println("=========================================================================================================================================================================");
+    }
+    
     // Exception for handling invalid username or password
     private static class InvalidException extends Exception {
 

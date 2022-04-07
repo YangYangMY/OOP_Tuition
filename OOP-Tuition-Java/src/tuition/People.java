@@ -1,19 +1,19 @@
 package tuition;
 
-class People {
-    private String name;
-    private int age;
-    private char sexChar;
-    private Sex sex;
-    private String phoneNum;
-    private String email;
+abstract class People {
+    protected String name;
+    protected int age;
+    protected char sexChar;
+    protected Sex sex;
+    protected String phoneNum;
+    protected String email;
     
     enum Sex{
         M,
         F
     }
     
-    public People() {
+    protected People() {
         this.name = "";
         this.age = 0;
         this.sex = Sex.M;
@@ -21,7 +21,7 @@ class People {
         this.email = "";
     }    
 
-    public People(String name, int age, char sexChar, String phoneNum, String email) {
+    protected People(String name, int age, char sexChar, String phoneNum, String email) {
         this.name = name;
         this.age = age;
         switch(sexChar){
