@@ -8,12 +8,6 @@ class Student extends People {
     private static int StuCount;
     
     public Student(){
-        super();
-        this.stuID = null;
-        this.description = null;
-        this.balance = 0.0;
-        this.stuNum++;
-        this.StuCount++;
     }
     
     public Student(String name, int age, char sex, String phoneNum, String email, String description, double balance) {
@@ -22,6 +16,15 @@ class Student extends People {
         this.StuCount++;
         this.stuID = "W" + stuNum;
         this.description = description;
+        this.balance = balance;
+    }
+    
+    public Student(String name, int age, char sex, String phoneNum, String email, double balance) {
+        super(name, age, sex, phoneNum, email);
+        this.stuNum++;
+        this.StuCount++;
+        this.stuID = "W" + stuNum;
+        this.description = "";
         this.balance = balance;
     }
 
