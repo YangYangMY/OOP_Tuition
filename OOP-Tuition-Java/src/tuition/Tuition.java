@@ -744,11 +744,7 @@ public class Tuition {
             System.out.print("                                   Enter description: ");
             description = input.nextLine();
             balance = BalanceInputValidate();
-            if(description == ""){
-                peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, balance);
-            } else {
-                peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
-            }
+            peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
         } else {
             //Input and Validation
             Screen.clear();
@@ -1350,7 +1346,7 @@ public class Tuition {
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Tutor.getTutorCount(); i++) {
-            System.out.printf("%8s %30s %9s %5s %17s %33s %9s %19s", ((Tutor) tutArray[i]).getTutorID(), tutArray[i].getName(), tutArray[i].getAge(), tutArray[i].getSex(), tutArray[i].getPhoneNum(), tutArray[i].getEmail(), ((Tutor) tutArray[i]).getMajor(), ((Tutor) tutArray[i]).getLevelName());
+            System.out.printf("%8s %30s %9s %5s %17s %33s %9s %19s", ((Tutor) tutArray[i]).getTutorID(), tutArray[i].getName(), tutArray[i].getAge(), tutArray[i].getSex(), tutArray[i].getPhoneNum(), tutArray[i].getEmail(), ((Tutor) tutArray[i]).getMajor(), ((Tutor) tutArray[i]).getLevel());
             System.out.println();
         }
         System.out.println("=========================================================================================================================================================================");

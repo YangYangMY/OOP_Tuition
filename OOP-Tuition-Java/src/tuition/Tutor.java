@@ -69,7 +69,7 @@ public class Tutor extends People{
         }
     }
     
-    public Level getLevelName(){
+    public Level getLevel(){
         return this.level;
     }
     
