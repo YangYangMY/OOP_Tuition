@@ -64,6 +64,7 @@ class Student extends People {
         this.balance = balance;
     }
     
+    @Override
     public String toString() {        
         String message = super.toString() + ", ID: " + stuID + ", Description: " + description + ", Balance: " + balance; 
         return message;
