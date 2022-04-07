@@ -23,7 +23,7 @@ public class Tuition {
 
         //Start Login
         Screen.clear();
-        Font.print(Font.ANSI_YELLOW,"           _____ _____ __       _____     _ _   _            _____         _           ");
+        Font.print(Font.ANSI_YELLOW,"            _____ _____ __       _____     _ _   _            _____         _           ");
         Font.print(Font.ANSI_YELLOW,"           |_   _|_   _|  |     |_   _|_ _|_| |_|_|___ ___   |     |___ ___| |_ ___ ___ ");
         Font.print(Font.ANSI_YELLOW,"             | |   | | |  |__     | | | | | |  _| | . |   |  |   --| -_|   |  _| -_|  _|");
         Font.print(Font.ANSI_YELLOW,"             |_|   |_| |_____|    |_| |___|_|_| |_|___|_|_|  |_____|___|_|_|_| |___|_|  ");
@@ -287,62 +287,219 @@ public class Tuition {
     public static void addCourse(Course psy, Course it, Course lang, Course[] psyCourse, Course[] itCourse, Course[] langCourse, int courseChoice){
 
         if (courseChoice == 1) {
-            addPsyCourse(psyCourse);
+            addPsyCourse(psyCourse, itCourse, langCourse);
         } else if (courseChoice == 2) {
-            addItCourse(itCourse);
+            addItCourse(psyCourse, itCourse, langCourse);
         } else if (courseChoice == 3) {
-            addLangCourse(langCourse);
+            addLangCourse(psyCourse, itCourse, langCourse);
         } else {
             Screen.clear();
         }
 
     }
 
-    public static void addPsyCourse(Course[] psyCourse) {
+    public static boolean validateCode(Course[] psyCourse, Course[] itCourse, Course[] langCourse, String courseCode){
+        boolean isPsyCodeExist = false;
+        boolean isItCodeExist = false;
+        boolean isLangCodeExist = false;
+        boolean isValid = false;
+
+        for (int x = 0; x < Psychology.getPsyCount(); x++) {
+            
+            if ((psyCourse[x].getCode()).equals(courseCode)) {
+                isPsyCodeExist = true;
+            }
+        }
+
+        if(isPsyCodeExist == false){
+                for(int y = 0; y < IT.getItCount(); y++){
+                    
+                    if((itCourse[y].getCode()).equals(courseCode)){
+                        isItCodeExist = true;
+                    }
+                }
+        }
+
+        if(isPsyCodeExist == false && isItCodeExist == false){
+                for(int z = 0; z < Language.getLangCount(); z++){
+                    if((langCourse[z].getCode()).equals(courseCode)){
+                        isLangCodeExist = true;
+                    }
+                }
+        }
+
+        if(isPsyCodeExist == false && isItCodeExist == false && isLangCodeExist == false){
+            isValid = true;
+        }
+
+        return isValid;
+
+    }
+
+    public static boolean validateTitle(Course[] psyCourse, Course[] itCourse, Course[] langCourse, String courseTitle){
+        boolean isPsyTitleExist = false;
+        boolean isItTitleExist = false;
+        boolean isLangTitleExist = false;
+        boolean isValid = false;
+
+        for (int x = 0; x < Psychology.getPsyCount(); x++) {
+
+            if ((psyCourse[x].getTitle()).equals(courseTitle)) {
+                isPsyTitleExist = true;
+            }
+        }
+
+        if(isPsyTitleExist == false){
+                for(int y = 0; y < IT.getItCount(); y++){
+                    
+                    if((itCourse[y].getTitle()).equals(courseTitle)){
+                        isItTitleExist = true;
+                    }
+                }
+        }
+
+        if(isPsyTitleExist == false && isItTitleExist == false){
+                for(int z = 0; z < Language.getLangCount(); z++){
+                    if((langCourse[z].getTitle()).equals(courseTitle)){
+                        isLangTitleExist = true;
+                    }
+                }
+        }
+
+        if(isPsyTitleExist == false && isItTitleExist == false && isLangTitleExist == false){
+            isValid = true;
+        }
+
+        return isValid;
+    }
+
+    public static double validateCourseFee(){
+        boolean isValidFee = true;
+        double courseFee;
         Scanner input = new Scanner(System.in);
+
+        do{
+            System.out.print("\n                            Enter course fee: ");
+            courseFee = input.nextDouble();
+
+            if(courseFee <= 0){
+                Font.print(Font.ANSI_RED, "\n                      Course Fee cannot be less than or equal to RM 0!");
+                isValidFee = false;
+            }else{
+                isValidFee = true;
+            }
+
+        }while(!isValidFee);
+
+        return courseFee;
+    }
+
+    public static int validateLimit(){
+        boolean isValidLimit = true;
+        int courseLimit;
+        Scanner input = new Scanner(System.in);
+
+        do{
+            System.out.print("\n                            Enter enrollment limit: ");
+            courseLimit = input.nextInt();
+
+            if(courseLimit <= 0){
+                Font.print(Font.ANSI_RED, "\n                      Enrollment limit cannot be less than or equal to 0!");
+                isValidLimit = false;
+            }else{
+                isValidLimit = true;
+            }
+
+        }while(!isValidLimit);
+
+        return courseLimit;
+
+    }
+
+    public static void addPsyCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
+        Scanner input = new Scanner(System.in);
+        boolean isCodeValid = true;
+        boolean isTitleValid = true;
         String code, title, details, description, type, skillLearned;
         double fee;
         int capacity;
 
-        System.out.print("Enter course code: ");
-        code = input.nextLine();
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Psychology Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
-        System.out.print("Enter course title: ");
-        title = input.nextLine();
+        do{
+            System.out.println("                            Enter course code: ");
+            code = input.nextLine();
+            isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
+            if(isCodeValid == false){
+                Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
+            }
+            
+        }while(isCodeValid == false);
 
-        System.out.print("Enter course details: ");
+        do{
+            System.out.print("\n                            Enter course title: ");
+            title = input.nextLine();
+            isTitleValid =  validateTitle(psyCourse, itCourse, langCourse, title);
+            if(isTitleValid == false){
+                Font.print(Font.ANSI_RED, "\n                       Course Title \"" + title + "\" existed.");
+            }
+            
+        }while(isTitleValid == false);
+
+        System.out.print("\n                            Enter course details: ");
         details = input.nextLine();
 
-        System.out.print("Enter course description: ");
+        System.out.print("\n                            Enter course description: ");
         description = input.nextLine();
 
-        System.out.print("Enter course fee: ");
-        fee = input.nextDouble();
+        fee = validateCourseFee();
 
-        System.out.print("Enter enrollment limit: ");
-        capacity = input.nextInt();
-        input.nextLine();
+        capacity = validateLimit();
 
-        System.out.print("Enter psychology type: ");
+        System.out.print("\n                            Enter psychology type: ");
         type = input.nextLine();
 
-        System.out.print("Enter skill(s) learned: ");
+        System.out.print("\n                            Enter skill(s) learned: ");
         skillLearned = input.nextLine();
 
         psyCourse[(Psychology.getNumOfPsyCourse())] = new Psychology(code, title, details, description, fee, capacity, type, skillLearned);
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Added!");
+        System.out.println("\n                             Press enter to continue...");
+        input.nextLine();
+        Screen.clear();
     }
 
-    public static void addItCourse(Course[] itCourse) {
+    public static void addItCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
         Scanner input = new Scanner(System.in);
+        boolean isCodeValid = true;
+        boolean isTitleValid = true;
         String code, title, details, description, preRequisite, language;
         double fee;
         int capacity;
 
-        System.out.print("Enter course code: ");
-        code = input.nextLine();
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd IT Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
-        System.out.print("Enter course title: ");
-        title = input.nextLine();
+        do{
+            System.out.println("                            Enter course code: ");
+            code = input.nextLine();
+            isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
+            if(isCodeValid == false){
+                Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
+            }
+            
+        }while(isCodeValid == false);
+
+        do{
+            System.out.print("\n                            Enter course title: ");
+            title = input.nextLine();
+            isTitleValid =  validateTitle(psyCourse, itCourse, langCourse, title);
+            if(isTitleValid == false){
+                Font.print(Font.ANSI_RED, "\n                       Course Title \"" + title + "\" existed.");
+            }
+            
+        }while(isTitleValid == false);
 
         System.out.print("Enter course details: ");
         details = input.nextLine();
@@ -350,66 +507,92 @@ public class Tuition {
         System.out.print("Enter course description: ");
         description = input.nextLine();
 
-        System.out.print("Enter course fee: ");
-        fee = input.nextDouble();
+        fee = validateCourseFee();
+        
+        capacity = validateLimit();
 
-        System.out.print("Enter enrollment limit: ");
-        capacity = input.nextInt();
-        input.nextLine();
-
-        System.out.print("Enter Pre-Requisite course: ");
+        System.out.print("\n                            Enter Pre-Requisite course: ");
         preRequisite = input.nextLine();
 
-        System.out.print("Enter programming language used: ");
+        System.out.print("\n                            Enter programming language used: ");
         language = input.nextLine();
 
         itCourse[(IT.getNumOfItCourse())] = new IT(code, title, details, description, fee, capacity, preRequisite, language);
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Added!");
+        System.out.println("\n                             Press enter to continue...");
+        input.nextLine();
+        Screen.clear();
     }
 
-    public static void addLangCourse(Course[] langCourse) {
+    public static void addLangCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
         Scanner input = new Scanner(System.in);
+        boolean isCodeValid = true;
+        boolean isTitleValid = true;
         String code, title, details, description, language, system;
         double fee;
         int capacity;
 
-        System.out.print("Enter course code: ");
-        code = input.nextLine();
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Language Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
-        System.out.print("Enter course title: ");
-        title = input.nextLine();
+        do{
+            System.out.println("                            Enter course code: ");
+            code = input.nextLine();
+            isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
+            if(isCodeValid == false){
+                Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
+            }
+            
+        }while(isCodeValid == false);
 
-        System.out.print("Enter course details: ");
+        do{
+            System.out.print("\n                            Enter course title: ");
+            title = input.nextLine();
+            isTitleValid =  validateTitle(psyCourse, itCourse, langCourse, title);
+            if(isTitleValid == false){
+                Font.print(Font.ANSI_RED, "\n                       Course Title \"" + title + "\" existed.");
+            }
+            
+        }while(isTitleValid == false);
+
+        System.out.print("\n                            Enter course details: ");
         details = input.nextLine();
 
-        System.out.print("Enter course description: ");
+        System.out.print("\n                            Enter course description: ");
         description = input.nextLine();
 
-        System.out.print("Enter course fee: ");
-        fee = input.nextDouble();
+        fee = validateCourseFee();
+        
+        capacity = validateLimit();
 
-        System.out.print("Enter enrollment limit: ");
-        capacity = input.nextInt();
-        input.nextLine();
-
-        System.out.print("Enter language of the course: ");
+        System.out.print("\n                            Enter language of the course: ");
         language = input.nextLine();
 
-        System.out.print("Enter examination system: ");
+        System.out.print("\n                            Enter examination system: ");
         system = input.nextLine();
 
         langCourse[(Language.getNumOfLangCourse())] = new Language(code, title, details, description, fee, capacity, language, system);
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Added!");
+        System.out.println("\n                             Press enter to continue...");
+        input.nextLine();
+        Screen.clear();
     }
 
-    public static void modifyPsyCourse(Course[] psyCourse, Course modifyCourse) {
+    public static void modifyPsyCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse, Course modifyCourse) {
+        Screen.clear();
         Scanner input = new Scanner(System.in);
         int psyModifyChoice = 0;
+        boolean isCodeValid = true;
+        boolean isTitleValid = true;
         boolean isValid = false;
+        String code, title;
 
-        System.out.println("\n==========\nPSYCHOLOGY\n==========");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Psychology Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
         do {
             System.out.print(
-                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Course Fee\n\t6. Psychology type\n\t7. Skill(s) learned\nChoose what to modify: ");
+                    "\n\t\t\t1. Course code\n\t\t\t2. Course Title\n\t\t\t3. Course Details\n\t\t\t4. Course Description\n\t\t\t5. Course Fee\n\t\t\t6. Psychology type\n\t\t\t7. Skill(s) learned\n\n\t\t\t\tChoose what to modify: ");
             psyModifyChoice = input.nextInt();
             input.nextLine();
 
@@ -423,65 +606,88 @@ public class Tuition {
         switch (psyModifyChoice) {
             case 1:
                 // Modify course code
-                System.out.print("Enter new course code: ");
-                String courseCode = input.nextLine();
-                modifyCourse.setCode(courseCode);
+                do{
+                    System.out.println("                            Enter course code: ");
+                    code = input.nextLine();
+                    isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
+                    if(isCodeValid == false){
+                        Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
+                    }
+                    
+                }while(isCodeValid == false);
+                modifyCourse.setCode(code);
                 break;
 
             case 2:
                 // Modify course title
-                System.out.print("Enter new course title: ");
-                String courseTitle = input.nextLine();
-                modifyCourse.setTitle(courseTitle);
+                do{
+                    System.out.print("\n                            Enter course title: ");
+                    title = input.nextLine();
+                    isTitleValid =  validateTitle(psyCourse, itCourse, langCourse, title);
+                    if(isTitleValid == false){
+                        Font.print(Font.ANSI_RED, "\n                          Course Title \"" + title + "\" existed.");
+                    }
+                    
+                }while(isTitleValid == false);
+                modifyCourse.setTitle(title);
                 break;
 
             case 3:
                 // Modify course details
-                System.out.print("Enter new course details: ");
+                System.out.print("\n                            Enter new course details: ");
                 String courseDetails = input.nextLine();
                 modifyCourse.setDetails(courseDetails);
                 break;
 
             case 4:
                 // Modyfy course description
-                System.out.print("Enter new course description: ");
+                System.out.print("\n                            Enter new course description: ");
                 String courseDescription = input.nextLine();
                 modifyCourse.setDescription(courseDescription);
                 break;
 
             case 5:
                 // Modyfy course fee
-                System.out.print("Enter new course fee: ");
-                double fee = input.nextDouble();
+                System.out.print("\n                            Enter new course fee: ");
+                double fee = validateCourseFee();
                 modifyCourse.setFee(fee);
                 break;
 
             case 6:
                 // Modify type
-                System.out.print("Enter new psychology type: ");
+                System.out.print("\n                            Enter new psychology type: ");
                 String type = input.nextLine();
                 ((Psychology) modifyCourse).setType(type);
                 break;
 
             case 7:
                 // Modify skill learned
-                System.out.print("Enter new skill(s) learned: ");
+                System.out.print("\n                            Enter new skill(s) learned: ");
                 String skillLearned = input.nextLine();
                 ((Psychology) modifyCourse).setSkillLearned(skillLearned);
                 break;
         }
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
+        System.out.println("\n                             Press enter to continue...");
+        input.nextLine();
+        Screen.clear();
     }
 
-    public static void modifyitCourse(Course[] itCourse, Course modifyCourse) {
+    public static void modifyitCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse, Course modifyCourse) {
+        Screen.clear();
         Scanner input = new Scanner(System.in);
-
-        System.out.println("\n======================\nINFORMATION TECHNOLOGY\n======================");
         int itModifyChoice = 0;
+        boolean isCodeValid = true;
+        boolean isTitleValid = true;
         boolean isValid = false;
+        String code, title;
+        
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify IT Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
         do {
             System.out.print(
-                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Course Fee\n\t6. Pre-Requisite\n\t7. Programming Language\nChoose what to modify: ");
+                    "\n\t\t\t1. Course code\n\t\t\t2. Course Title\n\t\t\t3. Course Details\n\t\t\t4. Course Description\n\t\t\t5. Course Fee\n\t\t\t6. Pre-Requisite\n\t\t\t7. Programming Language\n\n\t\t\t\tChoose what to modify: ");
             itModifyChoice = input.nextInt();
             input.nextLine();
 
@@ -495,63 +701,89 @@ public class Tuition {
         switch (itModifyChoice) {
             case 1:
                 // Modify course code
-                System.out.print("Enter new course code: ");
-                String courseCode = input.nextLine();
-                modifyCourse.setCode(courseCode);
+                do{
+                    System.out.println("                            Enter course code: ");
+                    code = input.nextLine();
+                    isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
+                    if(isCodeValid == false){
+                        Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
+                    }
+                    
+                }while(isCodeValid == false);
+                modifyCourse.setCode(code);
                 break;
 
             case 2:
                 // Modify course title
-                System.out.print("Enter new course title: ");
-                String courseTitle = input.nextLine();
-                modifyCourse.setTitle(courseTitle);
+                do{
+                    System.out.print("\n                            Enter course title: ");
+                    title = input.nextLine();
+                    isTitleValid =  validateTitle(psyCourse, itCourse, langCourse, title);
+                    if(isTitleValid == false){
+                        Font.print(Font.ANSI_RED, "\n                          Course Title \"" + title + "\" existed.");
+                    }
+                    
+                }while(isTitleValid == false);
+                modifyCourse.setTitle(title);
                 break;
 
             case 3:
                 // Modify course details
-                System.out.print("Enter new course details: ");
+                System.out.print("\n                            Enter new course details: ");
                 String courseDetails = input.nextLine();
                 modifyCourse.setDetails(courseDetails);
                 break;
 
             case 4:
                 // Modyfy course description
-                System.out.print("Enter new course description: ");
+                System.out.print("\n                            Enter new course description: ");
                 String courseDescription = input.nextLine();
                 modifyCourse.setDescription(courseDescription);
                 break;
 
             case 5:
                 // Modyfy course fee
-                System.out.print("Enter new course fee: ");
-                double fee = input.nextDouble();
+                System.out.print("\n                            Enter new course fee: ");
+                double fee = validateCourseFee();
                 modifyCourse.setFee(fee);
                 break;
 
             case 6:
                 // Modify pre-requisite
-                System.out.print("Enter new Pre-Requisite: ");
+                System.out.print("\n                            Enter new Pre-Requisite: ");
                 String preRequisite = input.nextLine();
                 ((IT) modifyCourse).setPreRequisite(preRequisite);
                 break;
 
             case 7:
                 // Modify programming language
-                System.out.print("Enter new programming language: ");
+                System.out.print("\n                            Enter new programming language: ");
                 String programmingLanguage = input.nextLine();
                 ((IT) modifyCourse).setProgrammingLanguage(programmingLanguage);
                 break;
         }
+
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
+        System.out.println("\n                             Press enter to continue...");
+        input.nextLine();
+        Screen.clear();
     }
 
-    public static void modifyLangCourse(Course[] itCourse, Course modifyCourse) {
+    public static void modifyLangCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse, Course modifyCourse) {
+        Screen.clear();
         Scanner input = new Scanner(System.in);
-        System.out.println("\n========\nLANGUAGE\n========");
         int langModifyChoice = 0;
+        boolean isCodeValid = true;
+        boolean isTitleValid = true;
         boolean isValid = false;
+        String code, title;
+
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\tModify Language Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+
         do {
             System.out.print(
-                    "\t1. Course code\n\t2. Course Title\n\t3. Course Details\n\t4. Course Description\n\t5. Course Fee\n\t6. Language\n\t7. System\nChoose what to modify: ");
+                    "\n\t\t\t1. Course code\n\t\t\t2. Course Title\n\t\t\t3. Course Details\n\t\t\t4. Course Description\n\t\t\t5. Course Fee\n\t\t\t6. Language\n\t\t\t7. System\n\n\t\t\t\tChoose what to modify: ");
             langModifyChoice = input.nextInt();
             input.nextLine();
 
@@ -565,84 +797,108 @@ public class Tuition {
         switch (langModifyChoice) {
             case 1:
                 // Modify course code
-                System.out.print("Enter new course code: ");
-                String courseCode = input.nextLine();
-                modifyCourse.setCode(courseCode);
+                do{
+                    System.out.println("                            Enter course code: ");
+                    code = input.nextLine();
+                    isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
+                    if(isCodeValid == false){
+                        Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
+                    }
+                    
+                }while(isCodeValid == false);
+                modifyCourse.setCode(code);
                 break;
 
             case 2:
                 // Modify course title
-                System.out.print("Enter new course title: ");
-                String courseTitle = input.nextLine();
-                modifyCourse.setTitle(courseTitle);
+                do{
+                    System.out.print("\n                            Enter course title: ");
+                    title = input.nextLine();
+                    isTitleValid =  validateTitle(psyCourse, itCourse, langCourse, title);
+                    if(isTitleValid == false){
+                        Font.print(Font.ANSI_RED, "\n                          Course Title \"" + title + "\" existed.");
+                    }
+                    
+                }while(isTitleValid == false);
+                modifyCourse.setTitle(title);
                 break;
 
             case 3:
                 // Modify course details
-                System.out.print("Enter new course details: ");
+                System.out.print("\n                            Enter new course details: ");
                 String courseDetails = input.nextLine();
                 modifyCourse.setDetails(courseDetails);
                 break;
 
             case 4:
                 // Modyfy course description
-                System.out.print("Enter new course description: ");
+                System.out.print("\n                            Enter new course description: ");
                 String courseDescription = input.nextLine();
                 modifyCourse.setDescription(courseDescription);
                 break;
 
             case 5:
                 // Modyfy course fee
-                System.out.print("Enter new course fee: ");
-                double fee = input.nextDouble();
+                System.out.print("\n                            Enter new course fee: ");
+                double fee = validateCourseFee();
                 modifyCourse.setFee(fee);
                 break;
 
             case 6:
                 // Modify language
-                System.out.print("Enter new language: ");
+                System.out.print("\n                            Enter new language: ");
                 String language = input.nextLine();
                 ((Language) modifyCourse).setLanguage(language);
                 break;
 
             case 7:
                 // Modify system
-                System.out.print("Enter new examination system: ");
+                System.out.print("\n                            Enter new examination system: ");
                 String system = input.nextLine();
                 ((Language) modifyCourse).setSystem(system);
                 break;
         }
+
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
+        System.out.println("\n                             Press enter to continue...");
+        input.nextLine();
+        Screen.clear();
     }
 
     public static void modifyCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse) {
         Scanner input = new Scanner(System.in);
         boolean isValid = false;
 
-        System.out.print("\nEnter course code to modify: ");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+        System.out.println("                                   Enter ID to modify: ");
         String code = input.nextLine();
 
         for (int x = 0; x < Psychology.getPsyCount(); x++) {
             if ((psyCourse[x].getCode()).equals(code)) {
                 isValid = true;
-                modifyPsyCourse(psyCourse, psyCourse[x]);
+                modifyPsyCourse(psyCourse, itCourse, langCourse, psyCourse[x]);
             }
         }
 
         for (int y = 0; y < IT.getItCount(); y++) {
             if ((itCourse[y].getCode()).equals(code)) {
                 isValid = true;
-                modifyitCourse(itCourse, itCourse[y]);
+                modifyitCourse(psyCourse, itCourse, langCourse, itCourse[y]);
             }
         }
 
         for (int z = 0; z < Language.getLangCount(); z++) {
             if ((langCourse[z].getCode()).equals(code)) {
                 isValid = true;
-                modifyLangCourse(itCourse, langCourse[z]);
+                modifyLangCourse(psyCourse, itCourse, langCourse, langCourse[z]);
             }
         }
-        if(isValid == false){
-            Font.print(Font.ANSI_RED, "                            The course code does not exist.\n");
+        if (isValid == false) {
+            Font.print(Font.ANSI_RED, "\n                            The course code does not exist.");
+            System.out.println("\n                             Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }
     }
 
@@ -651,7 +907,7 @@ public class Tuition {
         boolean isCodeExist = false;
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Course");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-        System.out.print("                                   Enter Course Code: ");
+        System.out.println("                                   Enter Course Code: ");
         String code = input.nextLine();
 
         for (int x = 0; x < ((Psychology) psyCourse[0]).getPsyCount(); x++) {
@@ -672,7 +928,10 @@ public class Tuition {
 
                 psyCourse[((Psychology) psyCourse[0]).getPsyCount() + 1] = null;
                 deleteRegAndEnrollCourse(regArr, enrollArr, code);
-                System.out.println("                                The course " + code + " has been deleted.");
+                Font.print(Font.ANSI_YELLOW,"\n                                The course " + code + " has been deleted.");
+                System.out.println("\n                             Press enter to continue...");
+                input.nextLine();
+                Screen.clear();
             }
         }
 
@@ -694,7 +953,10 @@ public class Tuition {
 
                 itCourse[((IT) itCourse[0]).getItCount() + 1] = null;
                 deleteRegAndEnrollCourse(regArr, enrollArr, code);
-                System.out.println("                                The course " + code + " has been deleted.");
+                Font.print(Font.ANSI_YELLOW,"\n                                The course " + code + " has been deleted.");
+                System.out.println("\n                             Press enter to continue...");
+                input.nextLine();
+                Screen.clear();
             }
         }
 
@@ -716,12 +978,18 @@ public class Tuition {
 
                 langCourse[((Language) langCourse[0]).getLangCount() + 1] = null;
                 deleteRegAndEnrollCourse(regArr, enrollArr, code);
-                System.out.println("                                The course " + code + " has been deleted.");
+                Font.print(Font.ANSI_YELLOW,"\n                                The course " + code + " has been deleted.");
+                System.out.println("\n                             Press enter to continue...");
+                input.nextLine();
+                Screen.clear();
             }
         }
 
         if(isCodeExist == false){
-            Font.print(Font.ANSI_RED, "                                The course code does not exist.");
+            Font.print(Font.ANSI_RED, "\n                                The course code does not exist.");
+            System.out.println("\n                             Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }
     }
 
@@ -799,7 +1067,7 @@ public class Tuition {
             sex = SexInputValidate();
             phoneNum = PhoneInputValidate();
             email = EmailInputValidate();
-            System.out.print("                                   Enter description: ");
+            System.out.print("\n                                   Enter description: ");
             description = input.nextLine();
             balance = BalanceInputValidate();
             if(description == ""){
@@ -830,7 +1098,7 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("                                   Enter name: ");
+            System.out.println("                                   Enter name: ");
             name = input.nextLine();
             if (name.matches("(?i)[a-z]([- ',.a-z]{0,23}[a-z])?")) {
                 valid = true;
@@ -855,7 +1123,7 @@ public class Tuition {
         do {
             valid = true;
             try {
-                System.out.print("                                   Enter age: ");
+                System.out.print("\n                                   Enter age: ");
                 age = input.nextInt();
                 if (age >= 18 && age <= 80) {
                     valid = true;
@@ -883,7 +1151,7 @@ public class Tuition {
         do {
             valid = true;
 
-            System.out.print("                                   Enter sex: ");
+            System.out.print("\n                                   Enter sex: ");
             stringSex = input.nextLine();
             if (stringSex.length() == 1) {
                 valid = true;
@@ -912,7 +1180,7 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("                                   Enter phone number(+6017-725 5766): ");
+            System.out.print("\n                                   Enter phone number(+6017-725 5766): ");
             phoneNum = input.nextLine();
             if (PhoneIsValid(phoneNum)) {
                 valid = true;
@@ -937,7 +1205,7 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("                                   Enter email: ");
+            System.out.print("\n                                   Enter email: ");
             email = input.nextLine();
             if (EmailisValid(email)) {
                 valid = true;
@@ -963,7 +1231,7 @@ public class Tuition {
         do {
             try {
                 valid = true;
-                System.out.print("                                   Enter balance: ");
+                System.out.print("\n                                   Enter balance: ");
                 balance = input.nextDouble();
                 if (balance > 0) {
                     valid = true;
@@ -988,7 +1256,7 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("                                   Enter major (IT, PSY, LANG): ");
+            System.out.print("\n                                   Enter major (IT, PSY, LANG): ");
             major = input.nextLine();
             if (!major.equals("IT") && !major.equals("PSY") && !major.equals("LANG")) {
                 valid = false;
@@ -1009,7 +1277,7 @@ public class Tuition {
 
         do {
             valid = true;
-            System.out.print("                                   Enter level (Doctorate, BachelorDegree, MasterDegree): ");
+            System.out.print("\n                                   Enter level (Doctorate, BachelorDegree, MasterDegree): ");
             level = input.nextLine();
             if (!level.equals("Doctorate") && !level.equals("BachelorDegree") && !level.equals("MasterDegree")) {
                 valid = false;
@@ -1031,7 +1299,7 @@ public class Tuition {
         if (peopleArr[0] instanceof Student) {
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Student");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-            System.out.print("                                   Enter ID to modify: ");
+            System.out.println("                                   Enter ID to modify: ");
             String id = input.nextLine();
             for (int i = 0; i < Student.getStuCount(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
@@ -1042,7 +1310,7 @@ public class Tuition {
         } else {
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Tutor");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-            System.out.print("                                   Enter ID to modify: ");
+            System.out.println("                                   Enter ID to modify: ");
             String id = input.nextLine();
             for (int i = 0; i < Tutor.getTutorCount(); i++) {
                 if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
@@ -1091,7 +1359,7 @@ public class Tuition {
                     break;
                 case 6:
                     if (peopleArr[0] instanceof Student) {
-                        System.out.print("                               Enter new description: ");
+                        System.out.print("\n                               Enter new description: ");
                         String newDescription = input.nextLine();
                         ((Student) peopleArr[tempI]).setDescription(newDescription);
                         break;
@@ -1131,7 +1399,7 @@ public class Tuition {
         if (peopleArr[0] instanceof Student) {
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Student");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-            System.out.print("                                   Enter ID to delete: ");
+            System.out.print("\n                                   Enter ID to delete: ");
             id = input.nextLine();
             for (int i = 0; i < Student.getStuCount(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
@@ -1142,7 +1410,7 @@ public class Tuition {
         } else {
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Tutor");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-            System.out.print("                                   Enter ID to delete: ");
+            System.out.print("\n                                   Enter ID to delete: ");
             id = input.nextLine();
             for (int i = 0; i < Tutor.getTutorCount(); i++) {
                 if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
@@ -1229,7 +1497,7 @@ public class Tuition {
 
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tRegister Tutor");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
-        System.out.print("                                   Enter Course Code: ");
+        System.out.println("                                   Enter Course Code: ");
         String courseCode = input.nextLine();
 
         for(int x = 0; x < Psychology.getPsyCount(); x++){
@@ -1255,8 +1523,11 @@ public class Tuition {
         
         if(isCodeExist == false){
             Font.print(Font.ANSI_RED, "\n                                The Course Code Does Not Exist");
+            System.out.println("\n                                  Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }else{
-            System.out.print("                                   Enter Tutor ID: ");
+            System.out.println("\n                                   Enter Tutor ID: ");
             String tutorID = input.nextLine();
             //Validate TutorID
             for (int x = 0; x < Tutor.getTutorCount(); x++){
@@ -1270,6 +1541,9 @@ public class Tuition {
 
         if(isCodeExist == true && isTutorExist == false){
             Font.print(Font.ANSI_RED, "\n                                   The Tutor Does Not Exist");
+            System.out.println("\n                                  Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }
     }
 
@@ -1287,6 +1561,7 @@ public class Tuition {
 
 
     public static boolean validateRegister(Register[] regArr, People[] tutArray, Course course, String tutorID){
+        Scanner input = new Scanner(System.in);
         People tutor = null;
         boolean tutorMajor = false;
         boolean isDuplicate = true;
@@ -1314,13 +1589,22 @@ public class Tuition {
             isDuplicate = isDuplicateRegister(regArr, tutArray, course, tutor);
             if(isDuplicate == false){
                 regArr[Register.getRegNo()] = new Register((Tutor) tutor, course);
-                System.out.println("\n                                   Register Successfully!");
+                Font.print(Font.ANSI_YELLOW,"\n                                   Register Successfully!");
+                System.out.println("\n                             Press enter to continue...");
+                input.nextLine();
+                Screen.clear();
                 isSuccess = true;
             }else{
-                Font.print(Font.ANSI_RED, "\n                                  Registeration Duplicated");
+                Font.print(Font.ANSI_RED, "\n                                  Registeration Duplicated!");
+                System.out.println("\n                             Press enter to continue...");
+                input.nextLine();
+                Screen.clear();
             }
         }else{
-            Font.print(Font.ANSI_RED, "\n                Tutor's major does not match with the course.");
+            Font.print(Font.ANSI_RED, "\n                             Tutor's major does not match with the course.");
+            System.out.println("\n                                  Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }
 
         return isSuccess;
@@ -1386,7 +1670,7 @@ public class Tuition {
         if(isTutorExist == true){
             for(int i = 0; i < Register.getRegNo(); i++){
                 if((regArr[i].getTutor().getTutorID()).equals(tutorId)){
-                    System.out.println(regArr[i]);
+                    System.out.print(regArr[i]);
                     isTutorReg = true;
                 }
             }
@@ -1394,13 +1678,19 @@ public class Tuition {
 
         if(isTutorReg == false && isTutorExist == true){
             Font.print(Font.ANSI_RED, "\n                        The tutor has not registered any courses yet.");
+            System.out.println("\n                             Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }else if(isTutorReg == true && isTutorExist == true){
-            System.out.print("                                   Enter Course Code: ");
+            System.out.println("                                   Enter Course Code: ");
             courseCode = input.nextLine();
             //Validate Course Code
             isCourseExist = validateCourseCode(psyCourse, itCourse, langCourse, courseCode);
         }else{
             Font.print(Font.ANSI_RED, "\n                                  The Tutor Does Not Exist.");
+            System.out.println("\n                             Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }
 
         if(isTutorReg == true && isTutorExist == true && isCourseExist == true){
@@ -1414,17 +1704,26 @@ public class Tuition {
                     System.arraycopy(regArr, i + 1, newRegArr, i, Register.getRegNo() - i);
 
                     isDelete = true;
-                    System.out.println("\n                                     Remove Successfully!");
+                    Font.print(Font.ANSI_YELLOW,"\n                                     Remove Successfully!");
+                    System.out.println("\n                             Press enter to continue...");
+                    input.nextLine();
+                    Screen.clear();
                 }
             }
         } 
 
         if(isDelete == false && isTutorReg == true && isTutorExist == true && isCourseExist == false){
             Font.print(Font.ANSI_RED, "\n                                  The Course Does Not Exist.");
+            System.out.println("\n                             Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }
 
         if(isDelete == false && isTutorReg == true && isTutorExist == true && isCourseExist == true){
             Font.print(Font.ANSI_RED, "\n                            The tutor does not register in this course.");
+            System.out.println("\n                             Press enter to continue...");
+            input.nextLine();
+            Screen.clear();
         }
     }
 
