@@ -593,6 +593,34 @@ public class Tuition {
         Screen.clear();
     }
 
+    public static double validateNewCourseFee(){
+        boolean isValidFee = true;
+        double courseFee = 0;
+        Scanner input = new Scanner(System.in);
+
+        do{
+            try{
+                System.out.print("\n                            Enter new course fee: ");
+                courseFee = input.nextDouble();
+    
+                if(courseFee <= 0){
+                    Font.print(Font.ANSI_RED, "\n                      Course Fee cannot be less than or equal to RM 0!");
+                    isValidFee = false;
+                }else{
+                    isValidFee = true;
+                }
+            } catch (Exception e){
+                Font.print(Font.ANSI_RED, "\n                            Only Numbers are allowed!");
+                isValidFee = false;
+                input.next();
+            }
+
+
+        }while(!isValidFee);
+
+        return courseFee;
+    }
+
     public static void modifyPsyCourse(Course[] psyCourse, Course[] itCourse, Course[] langCourse, Course modifyCourse) {
         Screen.clear();
         Scanner input = new Scanner(System.in);
@@ -659,8 +687,7 @@ public class Tuition {
 
             case 4:
                 // Modyfy course fee
-                System.out.print("\n                            Enter new course fee: ");
-                double fee = validateCourseFee();
+                double fee = validateNewCourseFee();
                 modifyCourse.setFee(fee);
                 Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
@@ -754,8 +781,7 @@ public class Tuition {
 
             case 4:
                 // Modyfy course fee
-                System.out.print("\n                            Enter new course fee: ");
-                double fee = validateCourseFee();
+                double fee = validateNewCourseFee();
                 modifyCourse.setFee(fee);
                 Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
@@ -847,8 +873,7 @@ public class Tuition {
 
             case 4:
                 // Modyfy course fee
-                System.out.print("\n                            Enter new course fee: ");
-                double fee = validateCourseFee();
+                double fee = validateNewCourseFee();
                 modifyCourse.setFee(fee);
                 Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
@@ -1587,10 +1612,6 @@ public class Tuition {
         }
 
     }
-
-
-
-
 
     public static void regTutor(Register[] regArr, People[] tutArray, Course[] psyCourse, Course[] itCourse, Course[] langCourse){
         Scanner input = new Scanner(System.in);
