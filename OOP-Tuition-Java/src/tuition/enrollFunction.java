@@ -67,7 +67,7 @@ public class enrollFunction {
                     if((((Student)stuArray[tempI]).getBalance()) > tempCourse.getFee()){
                         ((Student)stuArray[tempI]).setBalance(((Student)stuArray[tempI]).getBalance() - tempCourse.getFee());
                         enrollArr[Enroll.getEnrollNum()] = new Enroll((Student)stuArray[tempI], tempCourse);
-                        Font.print(Font.ANSI_RED, "\n                                      Enroll Successful");
+                        Font.print(Font.ANSI_YELLOW, "\n                                      Enroll Successful");
                     } else {
                         Font.print(Font.ANSI_RED, "\n                                      Insufficient Balance");
                     }
@@ -115,7 +115,7 @@ public class enrollFunction {
             }
             if(match){
                 deleteEnrollFunction(enrollArr, arrayToDelete);
-                Font.print(Font.ANSI_RED, "\n                                      Enrollment deleted");
+                Font.print(Font.ANSI_YELLOW, "\n                                      Enrollment deleted");
             } else {
                 Font.print(Font.ANSI_RED, "\n                                      No enrollment found.");
             }
