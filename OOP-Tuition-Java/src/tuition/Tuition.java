@@ -1805,6 +1805,7 @@ public class Tuition {
 
         //Show every course that the tutor registered if tutor exist 
         if(isTutorExist == true){
+            System.out.println("Registration History");
             for(int i = 0; i < Register.getRegNo(); i++){
                 if((regArr[i].getTutor().getTutorID()).equals(tutorId)){
                     System.out.print(regArr[i]);
@@ -1819,7 +1820,7 @@ public class Tuition {
             input.nextLine();
             Screen.clear();
         }else if(isTutorReg == true && isTutorExist == true){
-            System.out.print("                                   Enter Course Code: ");
+            System.out.print("\n                                   Enter Course Code: ");
             courseCode = input.nextLine();
             //Validate Course Code
             isCourseExist = validateCourseCode(psyCourse, itCourse, langCourse, courseCode);
