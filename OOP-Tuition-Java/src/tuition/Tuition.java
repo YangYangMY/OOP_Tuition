@@ -1384,6 +1384,7 @@ public class Tuition {
                         if(modifyChoice < 1 || modifyChoice > 8){
                             Screen.clear();
                             Font.print(Font.ANSI_RED, "\n                                   Only (1-8) are allowed!");
+                            valid = false;
                         }
                     } else {           
                         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Tutor");
@@ -1884,7 +1885,7 @@ public class Tuition {
                 userChoice = input.nextInt();
                 if (userChoice < 1 || userChoice > 7) {
                     Screen.clear();
-                    Font.print(Font.ANSI_RED, "Only (1-7) are allowed!");
+                    Font.print(Font.ANSI_RED, "\n                                  Only (1-7) are allowed!");
                 }
             } catch (Exception e) {
                 Screen.clear();
