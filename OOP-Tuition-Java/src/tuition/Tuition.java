@@ -515,10 +515,10 @@ public class Tuition {
             
         }while(isTitleValid == false);
 
-        System.out.print("Enter course details: ");
+        System.out.print("\n                       Enter course details: ");
         details = input.nextLine();
 
-        System.out.print("Enter course description: ");
+        System.out.print("\n                       Enter course description: ");
         description = input.nextLine();
 
         fee = validateCourseFee();
