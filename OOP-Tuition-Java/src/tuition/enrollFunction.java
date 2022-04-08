@@ -88,9 +88,10 @@ public class enrollFunction {
     
     public static void deleteEnroll(Enroll[] enrollArr){
         boolean stuEnrollExist = false;
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tDelete Enroll");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
         System.out.print("                                   Enter Student ID: ");
         String id = input.nextLine();
-        Screen.clear();
         System.out.println("Enrollment History");
         for (int i = 0; i < Enroll.getEnrollNum(); i++) {
             if (id.equals(enrollArr[i].student.getStuID())) {
