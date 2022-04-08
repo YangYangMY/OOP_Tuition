@@ -112,6 +112,7 @@ public class Tuition {
         
         do {
             try {
+                taskChoice = 0;
                 displayMenu();
                 taskChoice = input.nextInt();
                 if (taskChoice < 1 || taskChoice > 17) {
@@ -596,43 +597,36 @@ public class Tuition {
         Screen.clear();
         Scanner input = new Scanner(System.in);
         int psyModifyChoice = 0;
-        boolean isCodeValid = true;
         boolean isTitleValid = true;
         boolean isValid = false;
-        String code, title;
+        String title;
 
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Psychology Course");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
         do {
-            System.out.print(
-                    "\n\t\t\t1. Course code\n\t\t\t2. Course Title\n\t\t\t3. Course Details\n\t\t\t4. Course Description\n\t\t\t5. Course Fee\n\t\t\t6. Psychology type\n\t\t\t7. Skill(s) learned\n\n\t\t\t\tChoose what to modify: ");
-            psyModifyChoice = input.nextInt();
-            input.nextLine();
-
-            if (psyModifyChoice >= 1 && psyModifyChoice <= 7) {
+            try {
                 isValid = true;
-            } else {
+                System.out.print(
+                        "\n\t\t\t1. Course Title\n\t\t\t2. Course Details\n\t\t\t3. Course Description\n\t\t\t4. Course Fee\n\t\t\t5. Psychology type\n\t\t\t6. Skill(s) learned\n\t\t\t7. Back to menu\n\n\t\t\t\tChoose what to modify: ");
+                psyModifyChoice = input.nextInt();
+                input.nextLine();
+
+                if (psyModifyChoice < 1 || psyModifyChoice > 7) {
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
+                    isValid = false;
+                }
+            }catch(Exception e){
+                Screen.clear();
+                isValid = false;
                 Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
+                input.nextLine();
             }
         } while (isValid == false);
 
         switch (psyModifyChoice) {
             case 1:
-                // Modify course code
-                do{
-                    System.out.print("                            Enter course code: ");
-                    code = input.nextLine();
-                    isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
-                    if(isCodeValid == false){
-                        Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
-                    }
-                    
-                }while(isCodeValid == false);
-                modifyCourse.setCode(code);
-                break;
-
-            case 2:
                 // Modify course title
                 do{
                     System.out.print("\n                            Enter course title: ");
@@ -644,44 +638,51 @@ public class Tuition {
                     
                 }while(isTitleValid == false);
                 modifyCourse.setTitle(title);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 3:
+            case 2:
                 // Modify course details
                 System.out.print("\n                            Enter new course details: ");
                 String courseDetails = input.nextLine();
                 modifyCourse.setDetails(courseDetails);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 4:
+            case 3:
                 // Modyfy course description
                 System.out.print("\n                            Enter new course description: ");
                 String courseDescription = input.nextLine();
                 modifyCourse.setDescription(courseDescription);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 5:
+            case 4:
                 // Modyfy course fee
                 System.out.print("\n                            Enter new course fee: ");
                 double fee = validateCourseFee();
                 modifyCourse.setFee(fee);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 6:
+            case 5:
                 // Modify type
                 System.out.print("\n                            Enter new psychology type: ");
                 String type = input.nextLine();
                 ((Psychology) modifyCourse).setType(type);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 7:
+            case 6:
                 // Modify skill learned
                 System.out.print("\n                            Enter new skill(s) learned: ");
                 String skillLearned = input.nextLine();
                 ((Psychology) modifyCourse).setSkillLearned(skillLearned);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
+
         }
-        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
+        
         System.out.print("\n                             Press enter to continue...");
         input.nextLine();
         Screen.clear();
@@ -691,43 +692,36 @@ public class Tuition {
         Screen.clear();
         Scanner input = new Scanner(System.in);
         int itModifyChoice = 0;
-        boolean isCodeValid = true;
         boolean isTitleValid = true;
         boolean isValid = false;
-        String code, title;
+        String title;
         
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify IT Course");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
         do {
-            System.out.print(
-                    "\n\t\t\t1. Course code\n\t\t\t2. Course Title\n\t\t\t3. Course Details\n\t\t\t4. Course Description\n\t\t\t5. Course Fee\n\t\t\t6. Pre-Requisite\n\t\t\t7. Programming Language\n\n\t\t\t\tChoose what to modify: ");
+            try {
+                isValid = true;
+                System.out.print(
+                    "\n\t\t\t1. Course Title\n\t\t\t2. Course Details\n\t\t\t3. Course Description\n\t\t\t4. Course Fee\n\t\t\t5. Pre-Requisite\n\t\t\t6. Programming Language\n\t\t\t7. Back to menu\n\n\t\t\t\tChoose what to modify: ");
             itModifyChoice = input.nextInt();
             input.nextLine();
 
-            if (itModifyChoice >= 1 && itModifyChoice <= 7) {
-                isValid = true;
-            } else {
+                if (itModifyChoice < 1 || itModifyChoice > 7) {
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
+                    isValid = false;
+                }
+            }catch(Exception e){
+                Screen.clear();
+                isValid = false;
                 Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
+                input.nextLine();
             }
         } while (isValid == false);
 
         switch (itModifyChoice) {
             case 1:
-                // Modify course code
-                do{
-                    System.out.print("                            Enter course code: ");
-                    code = input.nextLine();
-                    isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
-                    if(isCodeValid == false){
-                        Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
-                    }
-                    
-                }while(isCodeValid == false);
-                modifyCourse.setCode(code);
-                break;
-
-            case 2:
                 // Modify course title
                 do{
                     System.out.print("\n                            Enter course title: ");
@@ -739,45 +733,50 @@ public class Tuition {
                     
                 }while(isTitleValid == false);
                 modifyCourse.setTitle(title);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 3:
+            case 2:
                 // Modify course details
                 System.out.print("\n                            Enter new course details: ");
                 String courseDetails = input.nextLine();
                 modifyCourse.setDetails(courseDetails);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 4:
+            case 3:
                 // Modyfy course description
                 System.out.print("\n                            Enter new course description: ");
                 String courseDescription = input.nextLine();
                 modifyCourse.setDescription(courseDescription);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 5:
+            case 4:
                 // Modyfy course fee
                 System.out.print("\n                            Enter new course fee: ");
                 double fee = validateCourseFee();
                 modifyCourse.setFee(fee);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 6:
+            case 5:
                 // Modify pre-requisite
                 System.out.print("\n                            Enter new Pre-Requisite: ");
                 String preRequisite = input.nextLine();
                 ((IT) modifyCourse).setPreRequisite(preRequisite);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 7:
+            case 6:
                 // Modify programming language
                 System.out.print("\n                            Enter new programming language: ");
                 String programmingLanguage = input.nextLine();
                 ((IT) modifyCourse).setProgrammingLanguage(programmingLanguage);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
         }
 
-        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
         System.out.print("\n                             Press enter to continue...");
         input.nextLine();
         Screen.clear();
@@ -787,43 +786,35 @@ public class Tuition {
         Screen.clear();
         Scanner input = new Scanner(System.in);
         int langModifyChoice = 0;
-        boolean isCodeValid = true;
         boolean isTitleValid = true;
         boolean isValid = false;
-        String code, title;
+        String title;
 
         Font.print(Font.ANSI_BLUE, "\n\t\t\t\tModify Language Course");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
         do {
-            System.out.print(
-                    "\n\t\t\t1. Course code\n\t\t\t2. Course Title\n\t\t\t3. Course Details\n\t\t\t4. Course Description\n\t\t\t5. Course Fee\n\t\t\t6. Language\n\t\t\t7. System\n\n\t\t\t\tChoose what to modify: ");
+            try {
+                isValid = true;
+                System.out.print(
+                    "\n\t\t\t1. Course Title\n\t\t\t2. Course Details\n\t\t\t3. Course Description\n\t\t\t4. Course Fee\n\t\t\t5. Language\n\t\t\t6. System\n\t\t\t7. Back to menu\n\n\t\t\t\tChoose what to modify: ");
             langModifyChoice = input.nextInt();
             input.nextLine();
 
-            if (langModifyChoice >= 1 && langModifyChoice <= 7) {
-                isValid = true;
-            } else {
+                if (langModifyChoice < 1 || langModifyChoice > 7) {
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
+                    isValid = false;
+                }
+            }catch(Exception e){
+                Screen.clear();
                 Font.print(Font.ANSI_RED, "                            Only (1-7) is allowed. Please try again!");
+                input.nextLine();
             }
         } while (isValid == false);
 
         switch (langModifyChoice) {
             case 1:
-                // Modify course code
-                do{
-                    System.out.print("                            Enter course code: ");
-                    code = input.nextLine();
-                    isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
-                    if(isCodeValid == false){
-                        Font.print(Font.ANSI_RED, "\n                            Course Code " + code + " existed.");
-                    }
-                    
-                }while(isCodeValid == false);
-                modifyCourse.setCode(code);
-                break;
-
-            case 2:
                 // Modify course title
                 do{
                     System.out.print("\n                            Enter course title: ");
@@ -835,45 +826,51 @@ public class Tuition {
                     
                 }while(isTitleValid == false);
                 modifyCourse.setTitle(title);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 3:
+            case 2:
                 // Modify course details
                 System.out.print("\n                            Enter new course details: ");
                 String courseDetails = input.nextLine();
                 modifyCourse.setDetails(courseDetails);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 4:
+            case 3:
                 // Modyfy course description
                 System.out.print("\n                            Enter new course description: ");
                 String courseDescription = input.nextLine();
                 modifyCourse.setDescription(courseDescription);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 5:
+            case 4:
                 // Modyfy course fee
                 System.out.print("\n                            Enter new course fee: ");
                 double fee = validateCourseFee();
                 modifyCourse.setFee(fee);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 6:
+            case 5:
                 // Modify language
                 System.out.print("\n                            Enter new language: ");
                 String language = input.nextLine();
                 ((Language) modifyCourse).setLanguage(language);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
 
-            case 7:
+            case 6:
                 // Modify system
                 System.out.print("\n                            Enter new examination system: ");
                 String system = input.nextLine();
                 ((Language) modifyCourse).setSystem(system);
+                Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                 break;
         }
 
-        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
+        
         System.out.print("\n                             Press enter to continue...");
         input.nextLine();
         Screen.clear();
@@ -1308,13 +1305,13 @@ public class Tuition {
         boolean peopleExist = false;
         int tempI = 0;
         Screen.clear();
-
+        String id;
 
         if (peopleArr[0] instanceof Student) {
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Student");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
             System.out.print("                                   Enter ID to modify: ");
-            String id = input.nextLine();
+            id = input.nextLine();
             for (int i = 0; i < Student.getStuCount(); i++) {
                 if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
                     peopleExist = true;
@@ -1325,7 +1322,7 @@ public class Tuition {
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Tutor");
             Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
             System.out.print("                                   Enter ID to modify: ");
-            String id = input.nextLine();
+            id = input.nextLine();
             for (int i = 0; i < Tutor.getTutorCount(); i++) {
                 if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
                     peopleExist = true;
@@ -1335,19 +1332,59 @@ public class Tuition {
         }
 
         if (peopleExist) {
-            String message;
-            if (peopleArr[0] instanceof Student) {
-                message = " \n                                      Select to modify\n                                1. Name\n                                2. Age\n                                3. Sex\n                                4. Phone Number\n                                5. Email\n                                6. Description\n                                7. Balance";
-            } else {                                
-                message = "\n                                      Select to modify\n                                1. Name\n                                2. Age\n                                3. Sex\n                                4. Phone Number\n                                5. Email\n                                6. Level";
-            }
-            System.out.println(message);
-            System.out.print("\n                                Choose your option: ");
-            String stringModifyChoice = input.nextLine();
-            int modifyChoice = Integer.parseInt(stringModifyChoice);
-            if(modifyChoice < 1 || modifyChoice > 7){
-                Font.print(Font.ANSI_RED, "\n                                      Invalid Input");
-            }
+            Screen.clear();
+            boolean valid = true;
+            int modifyChoice = 0;
+
+            do{
+                try{
+                    modifyChoice = 0;
+                    valid = true;
+                    String message;
+                    if (peopleArr[0] instanceof Student) {
+                        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Student");
+                        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+                        for (int i = 0; i < Student.getStuCount(); i++) {
+                            if ((((Student) peopleArr[i]).getStuID()).equals(id)) {
+                                System.out.println(peopleArr[i]);
+                            }
+                        }
+                        message = " \n                                      Select to modify\n                                1. Name\n                                2. Age\n                                3. Sex\n                                4. Phone Number\n                                5. Email\n                                6. Description\n                                7. Balance\n                                8.Back";
+                        System.out.println(message);
+                        System.out.print("\n                                Choose your option: ");
+                        modifyChoice = input.nextInt();
+                        if(modifyChoice < 1 || modifyChoice > 8){
+                            Screen.clear();
+                            Font.print(Font.ANSI_RED, "\n                                   Only (1-8) are allowed!");
+                        }
+                    } else {           
+                        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Tutor");
+                        Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+                        for (int i = 0; i < Tutor.getTutorCount(); i++) {
+                            if ((((Tutor) peopleArr[i]).getTutorID()).equals(id)) {
+                                System.out.println(peopleArr[i]);
+                            }
+                        }                 
+                        message = "\n                                      Select to modify\n                                1. Name\n                                2. Age\n                                3. Sex\n                                4. Phone Number\n                                5. Email\n                                6. Level\n                                7. Back";
+                        System.out.println(message);
+                        System.out.print("\n                                Choose your option: ");
+                        modifyChoice = input.nextInt();
+                        if(modifyChoice < 1 || modifyChoice > 7){
+                            Screen.clear();
+                            Font.print(Font.ANSI_RED, "\n                                   Only (1-7) are allowed!");
+                            valid = false;
+                        }
+                    }
+
+                } catch (Exception e){
+                    valid = false;
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED, "\n                                        Invalid Input");
+                    input.next();
+                }
+
+            } while (!valid);
+
 
 
             switch (modifyChoice) {
@@ -1384,20 +1421,73 @@ public class Tuition {
                     }
                 case 7:
                     if (peopleArr[0] instanceof Student) {
-                        double newBalance = BalanceInputValidate();
-                        ((Student) peopleArr[tempI]).setBalance(newBalance);
+                        balanceModify(peopleArr, tempI, id);
                         break;
-                    } else {
-                        Font.print(Font.ANSI_RED, "\n                                      Invalid Input");
                     }
+                }
             }
-        } else {
+        else {
             Font.print(Font.ANSI_RED, "\n                                      The ID doesn't exist");
         }
-        System.out.print("\n                                 Press enter to continue...");
+        System.out.println("\n                                 Press enter to continue...");
         try{System.in.read();}
         catch(Exception e){}
         Screen.clear();
+    }
+
+    public static void balanceModify(People[] stuArray, int tempI, String id){
+        Screen.clear();
+        Scanner input = new Scanner(System.in);
+        boolean valid = true;
+        int balance = 0;
+
+
+        do{
+            try{
+                valid = true;
+                Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tModify Student");
+                Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
+                for (int i = 0; i < Student.getStuCount(); i++) {
+                    if ((((Student) stuArray[i]).getStuID()).equals(id)) {
+                        System.out.println(stuArray[i]);
+                    }
+                }
+        
+                String message = "\n                                      Select to modify\n                                1. Add Balance\n                                2. Set Balance\n                                3. Subtract Balance\n                                4. Back to Menu\n";
+                System.out.print(message + "\n                                Choose your option: ");
+                balance = input.nextInt();
+                if (balance < 1 || balance > 4){
+                    Screen.clear();
+                    Font.print(Font.ANSI_RED, "\n                                   Only (1-4) are allowed!");
+                    valid = false;
+
+                }    
+            }catch (Exception e){
+                valid = false;
+                Screen.clear();
+                Font.print(Font.ANSI_RED, "\n                                        Invalid Input");
+                input.next();
+            }
+    
+        } while(!valid);
+
+        double newBalance = BalanceInputValidate();
+                
+        switch(balance){
+            case 1:
+                ((Student) stuArray[tempI]).setBalance((((Student) stuArray[tempI]).getBalance()) + newBalance);
+                System.out.println("\n                                Balance Updated");
+                break;
+            case 2:
+                ((Student) stuArray[tempI]).setBalance(newBalance);
+                System.out.println("\n                                Balance Updated");
+                break;
+            case 3:
+                ((Student) stuArray[tempI]).setBalance((((Student) stuArray[tempI]).getBalance()) - newBalance);
+                System.out.println("\n                                Balance Updated");
+                break;
+        }
+
     }
 
     public static void deletePeople(People[] peopleArr, Enroll[] enrollArr, Register[] regArr) {
