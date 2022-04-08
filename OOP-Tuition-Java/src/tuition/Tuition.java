@@ -1054,7 +1054,9 @@ public class Tuition {
             if(((regArr[x].getCourse()).getCode()).equals(courseCode)){
                 regDeleteCount++;
             }
-            
+        }
+
+        for(int x = 0; x < Enroll.getEnrollNum(); x++){
             if((enrollArr[x].getCourse()).getCode().equals(courseCode)){
                 enrollDeleteCount++;
             }
