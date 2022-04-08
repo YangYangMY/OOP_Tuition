@@ -1419,37 +1419,45 @@ public class Tuition {
                 case 1:
                     String newName = NameInputValidate();
                     peopleArr[tempI].setName(newName);
+                    Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                     break;
                 case 2:
                     int newAge = AgeInputValidate();
                     peopleArr[tempI].setAge(newAge);
+                    Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                     break;
                 case 3:
                     char newSex = SexInputValidate();
                     peopleArr[tempI].setSex(newSex);
+                    Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                     break;
                 case 4:
                     String newNumber = PhoneInputValidate();
                     peopleArr[tempI].setPhoneNum(newNumber);
+                    Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                     break;
                 case 5:
                     String newEmail = EmailInputValidate();
                     peopleArr[tempI].setEmail(newEmail);
+                    Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                     break;
                 case 6:
                     if (peopleArr[0] instanceof Student) {
                         System.out.print("\n                               Enter new description: ");
                         String newDescription = input.nextLine();
                         ((Student) peopleArr[tempI]).setDescription(newDescription);
+                        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                         break;
                     } else {
                         String newLevel = LevelInputValidate();
                         ((Tutor) peopleArr[tempI]).setLevel(((Tutor) peopleArr[tempI]).getLevel(newLevel));
+                        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                         break;
                     }
                 case 7:
                     if (peopleArr[0] instanceof Student) {
                         balanceModify(peopleArr, tempI, id);
+                        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
                         break;
                     }
                 }
@@ -1457,7 +1465,7 @@ public class Tuition {
         else {
             Font.print(Font.ANSI_RED, "\n                                      The ID doesn't exist");
         }
-        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
+
         System.out.println("\n                                 Press enter to continue...");
         try{System.in.read();}
         catch(Exception e){}
