@@ -1457,6 +1457,7 @@ public class Tuition {
         else {
             Font.print(Font.ANSI_RED, "\n                                      The ID doesn't exist");
         }
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Modified!");
         System.out.println("\n                                 Press enter to continue...");
         try{System.in.read();}
         catch(Exception e){}
