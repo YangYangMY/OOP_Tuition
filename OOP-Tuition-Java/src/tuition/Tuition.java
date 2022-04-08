@@ -248,7 +248,7 @@ public class Tuition {
         Font.print(Font.ANSI_YELLOW,"               |_|   |_| |_____|    |_| |___|_|_| |_|___|_|_|  |_____|___|_|_|_| |___|_|  ");
         Font.print(Font.ANSI_BLUE, "\n\t\t\tCourse\t\t\t\t\tEnroll");
                 
-        Font.print(Font.ANSI_YELLOW, "\t\t   1. Add course\t\t\t   10. Add Enroll\n\t\t   2. Modify course\t\t\t   11. Remove Enroll\n\t\t   3. Remove course\t\t\t   12. Course");
+        Font.print(Font.ANSI_YELLOW, "\t\t   1. Add course\t\t\t   10. Add Enroll\n\t\t   2. Modify course\t\t\t   11. Remove Enroll\n\t\t   3. Remove course\t\t\t   12. Course Listing");
         Font.print(Font.ANSI_BLUE, "\n\t\t\tStudent\t\t\t\t\tRegister");
         Font.print(Font.ANSI_YELLOW, "\t\t   4. Add Student\t\t\t   13. Register Tutor\n\t\t   5. Modify Student\t\t\t   14. Remove Register\n\t\t   6. Remove Student");
         Font.print(Font.ANSI_BLUE, "\n\t\t\tTutor\t\t\t\t\tReport");
