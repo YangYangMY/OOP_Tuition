@@ -28,7 +28,7 @@ public class enrollFunction {
         if (studentExist) {
             System.out.println("Enrollment History");
             for (int i = 0; i < Enroll.getEnrollNum(); i++) {
-                if (id.equals(enrollArr[i].student.getStuID())) {
+                if (id.equals(enrollArr[i].getStudent().getStuID())) {
                     System.out.println(enrollArr[i]);
                 }
             }
@@ -94,7 +94,7 @@ public class enrollFunction {
         String id = input.nextLine();
         System.out.println("Enrollment History");
         for (int i = 0; i < Enroll.getEnrollNum(); i++) {
-            if (id.equals(enrollArr[i].student.getStuID())) {
+            if (id.equals(enrollArr[i].getStudent().getStuID())) {
                 System.out.println(enrollArr[i]);
                 stuEnrollExist = true;
             }
@@ -107,8 +107,8 @@ public class enrollFunction {
             boolean match = false;
             int arrayToDelete = 0;
             for (int i = 0; i < Enroll.getEnrollNum(); i++) {
-                if (id.equals(enrollArr[i].student.getStuID())) {
-                    if(id2.equals(enrollArr[i].course.getCode())){
+                if (id.equals(enrollArr[i].getStudent().getStuID())) {
+                    if(id2.equals(enrollArr[i].getCourse().getCode())){
                         arrayToDelete = i;
                         match = true;
                     } 
@@ -142,14 +142,14 @@ public class enrollFunction {
     public static void deleteStuEnroll(Enroll[] enrollArr, People[] stuArray, String id) {
         int timesToExecute = 0;
         for(int i = 0; i < Enroll.getEnrollNum(); i++){
-            if((enrollArr[i].student.getStuID()).equals(id)){
+            if((enrollArr[i].getStudent().getStuID()).equals(id)){
                 timesToExecute++;
             }
         }
         
         for (int j = 0; j < timesToExecute; j++) {
             for (int i = 0; i < Enroll.getEnrollNum(); i++) {
-                if ((enrollArr[i].student.getStuID()).equals(id)) {
+                if ((enrollArr[i].getStudent().getStuID()).equals(id)) {
                     deleteEnrollFunction(enrollArr, i);
                 }
             }

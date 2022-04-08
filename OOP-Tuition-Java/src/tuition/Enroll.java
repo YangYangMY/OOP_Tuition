@@ -38,7 +38,7 @@ public class Enroll {
         Enroll.enrollNum = enrollNum;
     }
     
-    @Override
+    @Override 
     public String toString() {
         return "StudentID: " + student.getStuID() + ", StudentName: " + student.getName() + ", Course: " + course.getCode() + ", Course Name: " + course.getTitle();
     }

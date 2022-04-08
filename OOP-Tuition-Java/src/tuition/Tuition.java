@@ -1112,7 +1112,8 @@ public class Tuition {
                 peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, balance);
             } else {
                 peopleArr[((Student) peopleArr[0]).getStuCount()] = new Student(name, age, sex, phoneNum, email, description, balance);
-            }        } else {
+            }        
+        } else {
             //Input and Validation
             Screen.clear();
             Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Tutor");
@@ -1968,8 +1969,8 @@ public class Tuition {
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < Enroll.getEnrollNum(); i++) {
             for(int z = 0; z <Enroll.getEnrollNum(); z++){
-                if(enrollArr[z].student.getStuID().equals("W" + i)){
-                    System.out.printf(" %9s %28s %14s %40s", enrollArr[z].student.getStuID() , enrollArr[z].student.getName() , enrollArr[z].course.getCode() , enrollArr[z].course.getTitle());
+                if(enrollArr[z].getStudent().getStuID().equals("W" + i)){
+                    System.out.printf(" %9s %28s %14s %40s", enrollArr[z].getStudent().getStuID() , enrollArr[z].getStudent().getName() , enrollArr[z].getCourse().getCode() , enrollArr[z].getCourse().getTitle());
                     System.out.println();
                 }
         }
@@ -2006,17 +2007,17 @@ public class Tuition {
 
         for(int i = 0; i < Enroll.getEnrollNum(); i++) {
             for(int z = 0 ; z < TotalPsySubjectCount; z++){
-                if((enrollArr[i].course.getCode()).equals(psyCourse[z].getCode())){
+                if((enrollArr[i].getCourse().getCode()).equals(psyCourse[z].getCode())){
                     PsyStudentCount[z]++;
                }
             }
             for(int c = 0 ; c < TotalPsySubjectCount; c++){
-                if((enrollArr[i].course.getCode()).equals(itCourse[c].getCode())){
+                if((enrollArr[i].getCourse().getCode()).equals(itCourse[c].getCode())){
                     ITStudentCount[c]++;
                 }
             }
             for(int l = 0 ; l < TotalPsySubjectCount; l++){
-                if((enrollArr[i].course.getCode()).equals(langCourse[l].getCode())){
+                if((enrollArr[i].getCourse().getCode()).equals(langCourse[l].getCode())){
                     LangStudentCount[l]++;
                 }
             }

@@ -74,13 +74,13 @@ class Student extends People implements CourseTaken{
     public String toString() {        
         String message = super.toString() + ", ID: " + stuID + ", Description: " + description + ", Balance: " + balance; 
         return message;
-  }
+    }
 
     @Override
     public boolean numOfTakenCourse(Enroll[] enrollArr) {
         int enrollNum = 0;
         for(int i = 0; i < Enroll.getEnrollNum(); i++){
-            if((enrollArr[i].student.stuID).equals(this.stuID)){
+            if((enrollArr[i].getStudent().stuID).equals(this.stuID)){
                 enrollNum++;
             }
         }
