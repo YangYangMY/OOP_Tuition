@@ -1,8 +1,8 @@
 package tuition;
 
 public class Enroll {
-    Student student;
-    Course course;
+    private Student student;
+    private Course course;
     private static int enrollNum;
 
     public Enroll(){
