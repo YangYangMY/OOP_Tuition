@@ -18,16 +18,8 @@ public class Enroll {
         return student;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
     public Course getCourse() {
         return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 
     public static int getEnrollNum() {
@@ -44,10 +36,3 @@ public class Enroll {
     }
 
 }
-
-//Print All Output
-/*
-for (int i = 0; i < Enroll.getEnrollNum(); i++) {
-    System.out.println(enrollArr[i]);
-}
-*/
