@@ -3,7 +3,7 @@ package tuition;
 public class Enroll {
     Student student;
     Course course;
-    static int enrollNum;
+    private static int enrollNum;
 
     public Enroll(){
     }
