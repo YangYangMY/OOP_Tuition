@@ -1122,9 +1122,12 @@ public class Tuition {
             email = EmailInputValidate();
             String major = MajorInputValidate();
             String level = LevelInputValidate();
-            Screen.clear();
             peopleArr[((Tutor) peopleArr[0]).getTutorCount()] = new Tutor(name, age, sex, phoneNum, email, ((Tutor) peopleArr[0]).getMajor(major), ((Tutor) peopleArr[0]).getLevel(level));
         }
+        Font.print(Font.ANSI_YELLOW,"\n                                 Successfully Added!");
+        System.out.print("\n                             Press enter to continue...");
+        input.nextLine();
+        Screen.clear();
     }
 
     public static String NameInputValidate() {
