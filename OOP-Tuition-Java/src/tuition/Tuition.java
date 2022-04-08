@@ -115,7 +115,7 @@ public class Tuition {
                 taskChoice = 0;
                 displayMenu();
                 taskChoice = input.nextInt();
-                if (taskChoice < 1 || taskChoice > 17) {
+                if (taskChoice < 1 || taskChoice > 16) {
                     Screen.clear();
                     Font.print(Font.ANSI_RED, "                            Only (1-16) is allowed, please try again!\n");
                 }
