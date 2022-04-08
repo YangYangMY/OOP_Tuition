@@ -375,19 +375,26 @@ public class Tuition {
 
     public static double validateCourseFee(){
         boolean isValidFee = true;
-        double courseFee;
+        double courseFee = 0;
         Scanner input = new Scanner(System.in);
 
         do{
-            System.out.print("\n                            Enter course fee: ");
-            courseFee = input.nextDouble();
-
-            if(courseFee <= 0){
-                Font.print(Font.ANSI_RED, "\n                      Course Fee cannot be less than or equal to RM 0!");
+            try{
+                System.out.print("\n                            Enter course fee: ");
+                courseFee = input.nextDouble();
+    
+                if(courseFee <= 0){
+                    Font.print(Font.ANSI_RED, "\n                      Course Fee cannot be less than or equal to RM 0!");
+                    isValidFee = false;
+                }else{
+                    isValidFee = true;
+                }
+            } catch (Exception e){
+                Font.print(Font.ANSI_RED, "\n                            Only Numbers are allowed!");
                 isValidFee = false;
-            }else{
-                isValidFee = true;
+                input.next();
             }
+
 
         }while(!isValidFee);
 
@@ -396,19 +403,26 @@ public class Tuition {
 
     public static int validateLimit(){
         boolean isValidLimit = true;
-        int courseLimit;
+        int courseLimit = 0;
         Scanner input = new Scanner(System.in);
 
         do{
-            System.out.print("\n                            Enter enrollment limit: ");
-            courseLimit = input.nextInt();
-
-            if(courseLimit <= 0){
-                Font.print(Font.ANSI_RED, "\n                      Enrollment limit cannot be less than or equal to 0!");
+            try{
+                System.out.print("\n                            Enter enrollment limit: ");
+                courseLimit = input.nextInt();
+    
+                if(courseLimit <= 0){
+                    Font.print(Font.ANSI_RED, "\n                      Enrollment limit cannot be less than or equal to 0!");
+                    isValidLimit = false;
+                }else{
+                    isValidLimit = true;
+                }
+            }catch (Exception e){
+                Font.print(Font.ANSI_RED, "\n                            Only Numbers are allowed!");
                 isValidLimit = false;
-            }else{
-                isValidLimit = true;
+                input.next();
             }
+
 
         }while(!isValidLimit);
 
@@ -424,11 +438,11 @@ public class Tuition {
         double fee;
         int capacity;
 
-        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t\tAdd Psychology Course");
+        Font.print(Font.ANSI_BLUE, "\n\t\t\t\t   Add Psychology Course");
         Font.print(Font.ANSI_BLUE, "\n\t\t\t===============================================");
 
         do{
-            System.out.println("                            Enter course code: ");
+            System.out.print("                            Enter course code: ");
             code = input.nextLine();
             isCodeValid =  validateCode(psyCourse, itCourse, langCourse, code);
             if(isCodeValid == false){
