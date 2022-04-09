@@ -66,13 +66,25 @@ public class Course {
     public void setFee(double fee) {
         this.fee = fee;
     }
+
+    public String courseInfo(){
+        String output = "";
+
+        output += "\nDetails: " + this.details + "\n" + 
+                  "\nDescription: " + this.description + "\n";
+
+        return output;
+    }
+
     //Methods
     @Override
     public String toString() {
         String output = "";
 
-        output += "\nDetails: " + this.details + 
-        "\nDescription: " + this.description + "\n";
+        output += "Course Title: " + this.getTitle()
+                + "\nCourse Code: " + this.getCode()
+                + "\nCourse Details: " + this.getDetails()
+                + "\nCourse Description: " + this.getDescription();
 
         return output;
     }

@@ -174,7 +174,7 @@ public class Tuition {
                     switch (courseChoice1) {
                         case 1:
                             System.out.println("\n==========\nPSYCHOLOGY\n==========");
-                            System.out.println(psy.toString());
+                            System.out.println(psy.courseInfo());
                             for (int x = 0; x < Psychology.getPsyCount(); x++) {
                                 System.out.println((x + 1) + ".");
                                 System.out.println(psyCourse[x]);
@@ -187,7 +187,7 @@ public class Tuition {
 
                         case 2:
                             System.out.println("\n======================\nINFORMATION TECHNOLOGY\n======================");
-                            System.out.println(it.toString());
+                            System.out.println(it.courseInfo());
                             for (int y = 0; y < IT.getItCount(); y++) {
                                 System.out.println((y + 1) + ".");
                                 System.out.println(itCourse[y]);
@@ -200,7 +200,7 @@ public class Tuition {
 
                         case 3:
                             System.out.println("\n========\nLANGUAGE\n========");
-                            System.out.println(lang.toString());
+                            System.out.println(lang.courseInfo());
                             for (int z = 0; z < Language.getLangCount(); z++) {
                                 System.out.println((z + 1) + ".");
                                 System.out.println(langCourse[z]);
