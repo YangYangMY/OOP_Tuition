@@ -84,7 +84,8 @@ public class Course {
         output += "Course Title: " + this.getTitle()
                 + "\nCourse Code: " + this.getCode()
                 + "\nCourse Details: " + this.getDetails()
-                + "\nCourse Description: " + this.getDescription();
+                + "\nCourse Description: " + this.getDescription()
+                + "\nCourse Fee: RM" + String.format("%.2f", this.getFee());
 
         return output;
     }

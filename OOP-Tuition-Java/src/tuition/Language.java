@@ -65,7 +65,6 @@ public class Language extends Course {
         String output = "";
 
         output += super.toString()
-                + "\nCourse Fee: RM" + String.format("%.2f", getFee())
                 + "\nLanguage: " + this.language
                 + "\nExam System: " + this.system
                 + "\nEnrollment Limit : " + this.getCapacity() + " students\n";

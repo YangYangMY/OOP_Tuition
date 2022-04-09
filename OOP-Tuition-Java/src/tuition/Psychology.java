@@ -65,7 +65,6 @@ public class Psychology extends Course {
         String output = "";
 
         output += super.toString() 
-                + "\nCourse Fee: RM" + String.format("%.2f", getFee())
                 + "\nType: " + this.type
                 + "\nSkill(s) Learned: " + this.skillLearned
                 + "\nEnrollment Limit : " + this.getCapacity() + " students\n";

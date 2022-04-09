@@ -66,7 +66,6 @@ public class IT extends Course {
         String output = "";
 
         output += super.toString()
-                + "\nCourse Fee: RM" + String.format("%.2f", getFee())
                 + "\nPre-requisite: " + this.preRequisite
                 + "\nProgramming Language(s): " + this.programmingLanguage
                 + "\nEnrollment Limit : " + this.getCapacity() + " students\n";
