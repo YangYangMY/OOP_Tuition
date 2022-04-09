@@ -55,6 +55,9 @@ public class Tutor extends People{
         Tutor.tutorCount--;
     }
 
+    public Major getMajor() {
+        return major;
+    }
 
     public Major getMajor(String major){
         switch(major){
@@ -96,9 +99,7 @@ public class Tutor extends People{
         return tutorNum;
     }
     
-    public Major getMajor() {
-        return major;
-    }
+
 
     public void setMajor(Major major) {
         this.major = major;
@@ -109,6 +110,7 @@ public class Tutor extends People{
         this.level = level;
     }
     
+    @Override
     public String toString(){
        String message = super.toString() + ", TutorID: " + tutorID + ", Major: " + major + ", Level: " + level;           
        return message;
